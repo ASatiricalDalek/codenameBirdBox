@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+#daemonpid
+supervisord.pid
+
 # Distribution / packaging
 .Python
 build/
