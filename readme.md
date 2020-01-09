@@ -18,7 +18,7 @@ This is the repository for codenameBirdBox. More details to come shortly.
 
 5. Paul Albrecht
 
-   ***
+***
 
    ## BirdBox Links
 
