@@ -1,6 +1,8 @@
 # The Bird Guys
 
 > Senior Capstone Project
+>
+> codenameBirdBox@gmail.com
 
 This is the repository for codenameBirdBox. More details to come shortly.
 
