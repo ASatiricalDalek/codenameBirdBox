@@ -1,0 +1,22 @@
+{% extends "foundation.html" %}
+
+{% block content %}
+    <div id="welcome">
+        <h1>Welcome to Codename: Bird Box</h1>
+        <form method="post">
+            <p>
+                {{ form.username.label }}
+                <br>
+                {{ form.password(size=32) }}
+                <br>
+                {{ form.password.label }}
+                <br>
+                {{ form.password(size=32) }}
+                <br>
+                {{ form.remember.label }}{{ form.remember }}
+                <br>
+                {{ form.signInBtn }}
+            </p>
+        </form>
+    </div>
+{% endblock %}

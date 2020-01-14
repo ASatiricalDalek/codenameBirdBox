@@ -1,9 +1,12 @@
 from app import app
+from flask import render_template
+from app import forms
 
-
-@app.route('/')
-def hello_world():
-    return 'Hello World! bitch'
+# TODO: Figure out why puttng methods in the decorator breaks Docker container
+@app.route('/', METHODS=['GET', 'POST'])
+def startPage():
+    login = forms.signIn()
+    return render_template('login.html', form=login)
 
 
 # if __name__ == '__main__':
