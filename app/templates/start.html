@@ -1,0 +1,11 @@
+{% extends "foundation.html" %}
+
+{% block content %}
+<div>
+    {% if current_user.is_authenticated %}
+        <p>Hello {{current_user.username}}</p>
+    {% else %}
+        <p>Welcome to Codename: BirdBox</p>
+    {% endif %}
+</div>
+{% endblock %}

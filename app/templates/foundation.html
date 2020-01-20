@@ -6,6 +6,14 @@
 </head>
 <body>
     <div id="topMenu">
+        {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Log In</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">Log Out</a>
+            <!-- dynamically generate the view bird url based on the current user -->
+            <a href="{{ url_for('birdView', username=current_user.username) }}">View Bird</a>
+        {% endif %}
         <a href="{{ url_for('startPage') }}">Home</a>
     </div>
     <!-- Get messages passed with flask's "flash" function -->

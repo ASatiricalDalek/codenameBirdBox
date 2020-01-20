@@ -1,0 +1,35 @@
+{% extends 'foundation.html' %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}
+                <br>
+                {{ form.username(size=32) }}
+                <br>
+                {% for error in form.username.errors %}
+                    <span class="formError">{{ error }}</span>
+                {% endfor %}
+                <br>
+                {{ form.password.label }}
+                <br>
+                {{ form.password(size=32) }}
+                <br>
+                {% for error in form.password.errors %}
+                    <span class="formError">{{ error }}</span>
+                {% endfor %}
+                <br>
+                {{ form.confPassword.label }}
+                <br>
+                {{ form.confPassword(size=32) }}
+                <br>
+                {% for error in form.confPassword.errors %}
+                    <span class="formError">{{ error }}</span>
+                {% endfor %}
+                <br>
+                <br>
+                {{ form.reg }}
+            </p>
+        </form>
+{% endblock %}
