@@ -8,6 +8,12 @@ from app.models import users
 import time
 
 
+
+# emulated camera
+# Raspberry Pi camera module (requires picamera package)
+# from camera_pi import Camera
+
+
 @app.route('/')
 def startPage():
     return render_template('start.html')
@@ -64,12 +70,14 @@ def register():
 @app.route('/view/<username>')
 @login_required
 def birdView(username):
+    # Allows authenticated user to view the stream
     usr = users.query.filter_by(username=username).first_or_404()
     return render_template('birdView.html', user=usr)    
 
 
 @app.route('/birdstream')
 def birdstream():
+    # Handles the live stream to the img element on the live stream page
     return Response(route_logic.gen(camera_pi.Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
