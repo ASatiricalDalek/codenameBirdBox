@@ -2,9 +2,10 @@ from app import app
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app import forms, db
+from app import forms, db, camera_bb
 from app.forms import register
 from app.models import users
+
 
 @app.route('/')
 def startPage():
@@ -63,6 +64,20 @@ def register():
 def birdView(username):
     usr = users.query.filter_by(username=username).first_or_404()
     return render_template('birdView.html', user=usr)
+
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+
+@app.route('/birdstream')
+def birdstream():
+    return Response(gen(Camera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 
 # if __name__ == '__main__':
