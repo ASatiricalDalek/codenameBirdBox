@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, flash, redirect, url_for, request, Response, Flask
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app import forms, db, camera_pi, base_camera, route_logic
+from app import forms, db, camera_pi, base_camera, route_logic, motor_pi
 from app.forms import register
 from app.models import users
 import time
@@ -72,7 +72,16 @@ def register():
 def birdView(username):
     # Allows authenticated user to view the stream
     usr = users.query.filter_by(username=username).first_or_404()
-    return render_template('birdView.html', user=usr)    
+    return render_template('birdView.html', user=usr)
+
+
+@app.route('/view/<username>', methods=['POST'])
+def birdView(username):
+    # Allows authenticated user to view the stream
+    run = True
+    motor_pi.spin(run)
+    usr = users.query.filter_by(username=username).first_or_404()
+    return render_template('birdView.html', user=usr)
 
 
 @app.route('/birdstream')
