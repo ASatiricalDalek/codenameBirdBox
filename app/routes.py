@@ -1,10 +1,11 @@
 from app import app
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, Response, Flask
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app import forms, db, camera_bb
+from app import forms, db, camera_pi, base_camera, route_logic
 from app.forms import register
 from app.models import users
+import time
 
 
 @app.route('/')
@@ -59,23 +60,17 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=registrationForm)
 
+
 @app.route('/view/<username>')
 @login_required
 def birdView(username):
     usr = users.query.filter_by(username=username).first_or_404()
-    return render_template('birdView.html', user=usr)
-
-
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    return render_template('birdView.html', user=usr)    
 
 
 @app.route('/birdstream')
 def birdstream():
-    return Response(gen(Camera()),
+    return Response(route_logic.gen(camera_pi.Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
