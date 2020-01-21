@@ -67,22 +67,20 @@ def register():
     return render_template('register.html', form=registrationForm)
 
 
-@app.route('/view/<username>')
+@app.route('/view/<username>', methods=['GET', 'POST'])
 @login_required
 def birdView(username):
-    # Allows authenticated user to view the stream
-    usr = users.query.filter_by(username=username).first_or_404()
-    return render_template('birdView.html', user=usr)
+    if request.method == "GET":
+        # Allows authenticated user to view the stream
+        usr = users.query.filter_by(username=username).first_or_404()
+        return render_template('birdView.html', user=usr)
+    if request.method == "POST":         
+        run = True
+        motor = motor_pi.motor()
+        motor.spin(run)
+        usr = users.query.filter_by(username=username).first_or_404()
+        return render_template('birdView.html', user=usr)
 
-
-@app.route('/view/<username>', methods=['POST'])
-@login_required
-def birdView(username):
-    # Allows authenticated user to view the stream
-    run = True
-    motor_pi.spin(run)
-    usr = users.query.filter_by(username=username).first_or_404()
-    return render_template('birdView.html', user=usr)
 
 
 @app.route('/birdstream')
