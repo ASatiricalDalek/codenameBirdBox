@@ -6,6 +6,16 @@
 
 This is the repository for codenameBirdBox. More details to come shortly.
 
+### Technologies
+Codename BirdBox is built on Python3.7 and Flask. Additional technologies include:
+* SQL Lite and SQL Alchemy for database and database connections
+* WTForms for data entry 
+* Werkzeug for password hashing and additional security
+* Raspberry Pi as a server and mechanical components 
+
+Special thanks to the [Flask Mega Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
+which was invaluable in getting our boilerplate code and basic authentication created. 
+
 ***
 
 ## Team Members
