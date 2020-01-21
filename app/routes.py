@@ -76,6 +76,7 @@ def birdView(username):
 
 
 @app.route('/view/<username>', methods=['POST'])
+@login_required
 def birdView(username):
     # Allows authenticated user to view the stream
     run = True
