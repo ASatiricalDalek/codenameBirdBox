@@ -6,6 +6,7 @@ from app import forms, db, camera_pi, base_camera, route_logic, motor_pi
 from app.forms import register
 from app.models import users
 import time
+import threading
 
 
 
@@ -76,8 +77,12 @@ def birdView(username):
         return render_template('birdView.html', user=usr)
     if request.method == "POST":         
         run = True
+        
         motor = motor_pi.motor()
-        motor.spin(run)
+        motor_thread = threading.Thread(target = motor.spin(run))
+        motor_thread.setDaemon(True)
+        motor_thread.start()
+        
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
 

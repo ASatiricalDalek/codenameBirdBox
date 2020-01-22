@@ -9,7 +9,7 @@ class motor:
             servoPIN = 17
             GPIO.setmode(GPIO.BCM)
             GPIO.setup(servoPIN, GPIO.OUT)
-            t_end = time.time() + 10 * 1  # Execute for (30s*1m) from time script ececutes then stop
+            t_end = time.time() + 2 * 1  # Execute for (30s*1m) from time script ececutes then stop
             p = GPIO.PWM(servoPIN, 10)  # GPIO 17 for PWM with 10Hz
             GPIO.setwarnings(False)
 
