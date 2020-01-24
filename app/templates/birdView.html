@@ -1,6 +1,17 @@
 {% extends 'foundation.html' %}
 
 {% block content %}
+<head>
+    <script type="text/javascript">
+        var sec = 0;
+        function pad ( val ) { return val > 9 ? val : "0" + val; }
+        setInterval( function(){
+            document.getElementById("seconds").innerHTML=pad(++sec%60);
+            document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
+        }, 1000);
+    </script>
+</head>
+<body>
     <h1>Welcome {{ user.username }}</h1>
     <h2>Enjoy your beautiful bird</h2>
     <br>
@@ -8,9 +19,20 @@
     <br>
     <br>
 
-    <form actions="" method="post">
-        <input type="submit" id ="feed" name="feed" value="Feed">
-    </form>
+        <form actions="" method="post">
+            <input type="submit" id ="feed" name="feed" value="Feed">
+        </form>
 
+<div class="block" style="text-align: center;>
+<div>
+</div>
+<span id="count"></span>
+<br>
+<span id="minutes"></span>:<span id="seconds"></span>
+<br>
+<label>&nbsptotal time watching.</label>  
+</div>
+
+</body>
 {% endblock %}
 

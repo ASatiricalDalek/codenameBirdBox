@@ -76,13 +76,7 @@ def birdView(username):
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
     if request.method == "POST":         
-        run = True
-        
-        motor = motor_pi.motor()
-        motor_thread = threading.Thread(target = motor.spin(run))
-        motor_thread.setDaemon(True)
-        motor_thread.start()
-        
+        route_logic.instant_feed(motor_pi.motor(), run = True)
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
 
