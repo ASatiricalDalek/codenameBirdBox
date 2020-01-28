@@ -89,23 +89,11 @@ def birdstream():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-@app.route('/test')
-def index():
-    return render_template('test.html')
-
-
-@app.route('/_add_numbers')
-def add_numbers():
-    a = request.args.get('a', 0, type=int)
-    b = request.args.get('b', 0, type=int)
-    return jsonify(result=a + b)
-
-
 @app.route('/_feed')
 def toFeed():
-    a = request.args.get('a', 0, type=str)
+    #a = request.args.get('a', 0, type=str)
     route_logic.instant_feed(motor_pi.motor(), run=True)
-    return jsonify(result=a)
+    return ()
 
 
 # if __name__ == '__main__':
