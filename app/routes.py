@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, flash, redirect, url_for, request, Response, Flask
+from flask import render_template, flash, redirect, url_for, request, Response, Flask, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app import forms, db, camera_pi, base_camera, route_logic, motor_pi
@@ -90,6 +90,11 @@ def birdstream():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
+@app.route('/_feed')
+def add_numbers():
+    a = request.args.get('a', 0, type=int)
+    b = request.args.get('b', 0, type=int)
+    return jsonify(result=a + b)
 
 # if __name__ == '__main__':
 #     app.run(host='0.0.0.0')
