@@ -2,13 +2,25 @@
 
 {% block content %}
 <head>
-    <script type="text/javascript">
-        var sec = 0;
-        function pad ( val ) { return val > 9 ? val : "0" + val; }
-        setInterval( function(){
-            document.getElementById("seconds").innerHTML=pad(++sec%60);
-            document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
-        }, 1000);
+{#    <script type="text/javascript">#}
+{#        var sec = 0;#}
+{#        function pad ( val ) { return val > 9 ? val : "0" + val; }#}
+{#        setInterval( function(){#}
+{#            document.getElementById("seconds").innerHTML=pad(++sec%60);#}
+{#            document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));#}
+{#        }, 1000);#}
+{#    </script>#}
+    <script type=text/javascript>
+      $(function() {
+        $('a#feed').bind('click', function() {
+          $.getJSON($SCRIPT_ROOT + '/_feed', {
+            a: 'True'
+          }, function(data) {
+            $("#result").text(data.result);
+          });
+          return false;
+        });
+      });
     </script>
 </head>
 <body>
@@ -19,9 +31,7 @@
     <br>
     <br>
 
-        <form actions="" method="post">
-            <input type="submit" id ="feed" name="feed" value="Feed">
-        </form>
+<a href="#" id="feed">Feed</a>
 
 <div class="block" style="text-align: center;>
 <div>
@@ -30,7 +40,8 @@
 <br>
 <span id="minutes"></span>:<span id="seconds"></span>
 <br>
-<label>&nbsptotal time watching.</label>  
+<label>&nbsptotal time watching.</label>
+    <span id=result>?</span>
 </div>
 
 </body>
