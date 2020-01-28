@@ -10,7 +10,7 @@ class Camera(base_camera.BaseCamera):
     def frames():
         with picamera.PiCamera() as camera:
             camera.resolution = (640,480)
-            #camera.framerate = 24 
+            #camera.framerate = 24
             # let camera warm up
             time.sleep(2)
 
