@@ -2,10 +2,17 @@ from app import app
 from flask import render_template, flash, redirect, url_for, request, Response, Flask
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app import forms, db, camera_pi, base_camera, route_logic
+from app import forms, db, camera_pi, base_camera, route_logic, motor_pi
 from app.forms import register
 from app.models import users
 import time
+import threading
+
+
+
+# emulated camera
+# Raspberry Pi camera module (requires picamera package)
+# from camera_pi import Camera
 
 
 @app.route('/')
@@ -61,15 +68,23 @@ def register():
     return render_template('register.html', form=registrationForm)
 
 
-@app.route('/view/<username>')
+@app.route('/view/<username>', methods=['GET', 'POST'])
 @login_required
 def birdView(username):
-    usr = users.query.filter_by(username=username).first_or_404()
-    return render_template('birdView.html', user=usr)    
+    if request.method == "GET":
+        # Allows authenticated user to view the stream
+        usr = users.query.filter_by(username=username).first_or_404()
+        return render_template('birdView.html', user=usr)
+    if request.method == "POST":         
+        route_logic.instant_feed(motor_pi.motor(), run = True)
+        usr = users.query.filter_by(username=username).first_or_404()
+        return render_template('birdView.html', user=usr)
+
 
 
 @app.route('/birdstream')
 def birdstream():
+    # Handles the live stream to the img element on the live stream page
     return Response(route_logic.gen(camera_pi.Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
