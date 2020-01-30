@@ -9,10 +9,13 @@ import time
 import threading
 
 
-
 # emulated camera
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
+global filter
+filter = 'colorswap'
+global check
+check = False
 
 
 @app.route('/')
@@ -75,11 +78,13 @@ def birdView(username):
         # Allows authenticated user to view the stream
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
-    if request.method == "POST":         
-        route_logic.instant_feed(motor_pi.motor(), run = True)
+    if request.method == "POST":
+        global filter
+        filter = 'negative'
+        global check
+        check = True
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
-
 
 
 @app.route('/birdstream')
@@ -91,7 +96,6 @@ def birdstream():
 
 @app.route('/_feed')
 def toFeed():
-    #a = request.args.get('a', 0, type=str)
     route_logic.instant_feed(motor_pi.motor(), run=True)
     return ()
 
