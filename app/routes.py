@@ -71,9 +71,10 @@ def register():
     return render_template('register.html', form=registrationForm)
 
 
-@app.route('/view/<username>', methods=['GET', 'POST'])
+@app.route('/view/<username>', methods=['GET'])
 @login_required
 def birdView(username):
+<<<<<<< HEAD
     if request.method == "GET":
         # Allows authenticated user to view the stream
         usr = users.query.filter_by(username=username).first_or_404()
@@ -85,6 +86,11 @@ def birdView(username):
         check = True
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
+=======
+    # Allows authenticated user to view the stream
+    usr = users.query.filter_by(username=username).first_or_404()
+    return render_template('birdView.html', user=usr)
+>>>>>>> 552dccfa3f9361e450e0e09a5e0d703a79f764da
 
 
 @app.route('/birdstream')
@@ -94,8 +100,13 @@ def birdstream():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
+# Handles the jquery when pressing 'Feed' link/button on birdView.html
 @app.route('/_feed')
 def toFeed():
+<<<<<<< HEAD
+=======
+    # Call route logic to execute the motor spinning script
+>>>>>>> 552dccfa3f9361e450e0e09a5e0d703a79f764da
     route_logic.instant_feed(motor_pi.motor(), run=True)
     return ()
 
