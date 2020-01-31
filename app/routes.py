@@ -5,24 +5,23 @@ from werkzeug.urls import url_parse
 from app import forms, db, camera_pi, base_camera, route_logic, motor_pi
 from app.forms import register
 from app.models import users
-import time
-import threading
 
 
-# emulated camera
-# Raspberry Pi camera module (requires picamera package)
-# from camera_pi import Camera
+# Global variables to control the camera filter
+# and whether the thread needs to be restarted
 global filter
 filter = 'colorswap'
 global check
 check = False
 
 
+# The default page which will be rendered
 @app.route('/')
 def startPage():
     return render_template('start.html')
 
 
+# The page rendered for user login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # if a logged in user tries to view the login page, send them home
@@ -49,12 +48,14 @@ def login():
     return render_template('login.html', form=login)
 
 
+# The page rendered after the user logs out
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('startPage'))
 
 
+# The page rendered when the user registers
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -71,26 +72,28 @@ def register():
     return render_template('register.html', form=registrationForm)
 
 
+# The page rendered when the registered user clicks the view bird option
 @app.route('/view/<username>', methods=['GET'])
 @login_required
 def birdView(username):
-<<<<<<< HEAD
+
     if request.method == "GET":
         # Allows authenticated user to view the stream
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
     if request.method == "POST":
-        global filter
+        # Apply the selected filter and restart the stream
+        global filter  # Indicates we are referring the the global filter
         filter = 'negative'
-        global check
+        global check  # Indicated we are referring the the global check
         check = True
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
-=======
+
     # Allows authenticated user to view the stream
     usr = users.query.filter_by(username=username).first_or_404()
     return render_template('birdView.html', user=usr)
->>>>>>> 552dccfa3f9361e450e0e09a5e0d703a79f764da
+
 
 
 @app.route('/birdstream')
@@ -103,10 +106,7 @@ def birdstream():
 # Handles the jquery when pressing 'Feed' link/button on birdView.html
 @app.route('/_feed')
 def toFeed():
-<<<<<<< HEAD
-=======
     # Call route logic to execute the motor spinning script
->>>>>>> 552dccfa3f9361e450e0e09a5e0d703a79f764da
     route_logic.instant_feed(motor_pi.motor(), run=True)
     return ()
 
