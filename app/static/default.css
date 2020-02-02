@@ -1,1 +1,73 @@
+  button {
+  margin-left: auto;
+      margin-right: auto;
+  }
+
+
+
+  li a:hover {
+
+  }
+
+  footer {
+
+
+  }
+#signInBtn{
+    padding: 15px;
+      background-color: black;
+      color: #97fce8;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+
+  article {
+
+  }
+
+  section {
+
+  }
+
+
+  h1 {
+font-family: Arial, Helvetica, sans-serif;
+
+  }
+
+  P{
+font-family: Arial, Helvetica, sans-serif;
+  }
+
+  body {
+      background-color: darkgray;
+
+  }
+
+  #topMenu{
+  text-align: center;
+     margin-left: auto;
+    margin-right: auto;
+
+  }
+  #topMenu a{
+      padding: 15px;
+      background-color: black;
+      color: #97fce8;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+
+  }
+.container-fluid {
+     text-align: center;
+     margin-left: auto;
+    margin-right: auto;
+
+}
 
