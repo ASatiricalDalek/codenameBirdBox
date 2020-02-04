@@ -83,7 +83,7 @@ def register():
 
 
 # The page rendered when the registered user clicks the view bird option
-@app.route('/view/<username>', methods=['GET'])
+@app.route('/view/<username>', methods=['GET', 'POST'])
 @login_required
 def birdView(username):
     can_feed = route_logic.canFeed(current_user.get_id())
