@@ -142,6 +142,32 @@ def settings():
 
         attr.style = form.themes.data
 
+        if form.scheduledFeed.data == True:
+            attr.scheduleFeed = 1
+        else:
+            attr.scheduleFeed = 0
+
+        feedDays = ""
+        if form.feedDay_Monday.data:
+            feedDays = feedDays + "M"
+        if form.feedDay_Tuesday.data:
+            feedDays = feedDays + "T"
+        if form.feedDay_Wednesday.data:
+            feedDays = feedDays + "W"
+        if form.feedDay_Thursday.data:
+            feedDays = feedDays + "R"
+        if form.feedDay_Friday.data:
+            feedDays = feedDays + "F"
+        if form.feedDay_Saturday.data:
+            feedDays = feedDays + "S"
+        if form.feedDay_Sunday.data:
+            feedDays = feedDays + "U"
+
+        attr.feedDays = feedDays
+        attr.feedHour = form.feedHour.data
+        attr.feedMinute = form.feedMinute.data
+
+
         db.session.commit()
         flash("Settings updated")
         return render_template('settings.html', form=form, can_feed=can_feed, can_view=can_view)

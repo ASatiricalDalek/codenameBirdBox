@@ -1,8 +1,8 @@
-"""init
+"""fresh db
 
-Revision ID: ff5f64e1c81c
+Revision ID: 267d90547b9b
 Revises: 
-Create Date: 2020-01-20 11:36:32.123424
+Create Date: 2020-02-04 15:42:34.167028
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ff5f64e1c81c'
+revision = '267d90547b9b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -31,6 +31,10 @@ def upgrade():
     sa.Column('canFeed', sa.Integer(), nullable=True),
     sa.Column('canView', sa.Integer(), nullable=True),
     sa.Column('style', sa.String(length=32), nullable=True),
+    sa.Column('scheduleFeed', sa.Integer(), nullable=True),
+    sa.Column('feedDays', sa.Integer(), nullable=True),
+    sa.Column('feedHour', sa.Integer(), nullable=True),
+    sa.Column('feedMinute', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['userID'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

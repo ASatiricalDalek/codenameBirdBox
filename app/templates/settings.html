@@ -26,6 +26,19 @@
                 <br>
                 {{ form.themes }}
                 <br>
+                <h2>Schedule Feed Settings</h2>
+                {{ form.scheduledFeed }}{{ form.scheduledFeed.label }}
+                <br>
+                {{ form.feedDay_Monday }}{{ form.feedDay_Monday.label }}
+                {{ form.feedDay_Tuesday }}{{ form.feedDay_Tuesday.label }}
+                {{ form.feedDay_Wednesday }}{{ form.feedDay_Wednesday.label }}
+                {{ form.feedDay_Thursday }}{{ form.feedDay_Thursday.label }}
+                {{ form.feedDay_Friday }}{{ form.feedDay_Friday.label }}
+                {{ form.feedDay_Saturday }}{{ form.feedDay_Saturday.label }}
+                {{ form.feedDay_Sunday }}{{ form.feedDay_Sunday.label }}
+                <br>
+                {{ form.feedHour }}{{ form.feedMinute }}
+                <br>
                 {{ form.apply }}
             </p>
     </form>
