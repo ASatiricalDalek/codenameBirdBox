@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, flash, redirect, url_for, request, Response, Flask, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app import forms, db, camera_pi, base_camera, route_logic, motor_pi
+from app import forms, db, camera_pi, base_camera, route_logic, motor_pi, schedule_pi
 from app.forms import register
 from app.models import users
 import time
@@ -16,6 +16,8 @@ global filter
 filter = 'colorswap'
 global check
 check = False
+global minutes
+minutes = 1
 
 
 @app.route('/')
@@ -71,26 +73,26 @@ def register():
     return render_template('register.html', form=registrationForm)
 
 
-@app.route('/view/<username>', methods=['GET'])
+@app.route('/view/<username>', methods=['GET', 'POST'])
 @login_required
 def birdView(username):
-<<<<<<< HEAD
     if request.method == "GET":
         # Allows authenticated user to view the stream
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
     if request.method == "POST":
         global filter
-        filter = 'negative'
+        filter = 'cartoon'
         global check
         check = True
+        global minutes
+        minutes = 5
+        #schedule_pi.schedule_feed()
         usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr)
-=======
     # Allows authenticated user to view the stream
     usr = users.query.filter_by(username=username).first_or_404()
     return render_template('birdView.html', user=usr)
->>>>>>> 552dccfa3f9361e450e0e09a5e0d703a79f764da
 
 
 @app.route('/birdstream')
@@ -103,13 +105,10 @@ def birdstream():
 # Handles the jquery when pressing 'Feed' link/button on birdView.html
 @app.route('/_feed')
 def toFeed():
-<<<<<<< HEAD
-=======
     # Call route logic to execute the motor spinning script
->>>>>>> 552dccfa3f9361e450e0e09a5e0d703a79f764da
     route_logic.instant_feed(motor_pi.motor(), run=True)
     return ()
 
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0')
+#if __name__ == '__main__':
+     #app.run(host='0.0.0.0')
