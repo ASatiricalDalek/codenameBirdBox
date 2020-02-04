@@ -28,8 +28,14 @@ class attributes(db.Model):
     canFeed = db.Column(db.Integer)
     canView = db.Column(db.Integer)
     style = db.Column(db.String(32))
+    scheduleFeed = db.Column(db.Integer)
+    # 0 Represents Monday - 6 For Sunday
+    feedDays = db.Column(db.Integer)
+    feedHour = db.Column(db.Integer)
+    feedMinute = db.Column(db.Integer)
 
 
 @loginManager.user_loader
 def load_user(id):
     return users.query.get(int(id))
+

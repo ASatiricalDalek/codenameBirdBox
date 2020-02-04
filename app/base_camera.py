@@ -91,16 +91,16 @@ class BaseCamera(object):
     def _thread(cls):
         """Camera background thread."""
         print('Starting camera thread.')     
-        frames_iterator = cls.frames()
-        i = 0
+        frames_iterator = cls.frames()  # This references the frames function in camera_pi.py
+
         for frame in frames_iterator:
             BaseCamera.frame = frame
             BaseCamera.event.set()  # send signal to clients
             time.sleep(0)
-            #i=i+1
-            #print(i)
+
             # if there hasn't been any clients asking for frames in
-            # the last 10 seconds then stop the thread
+            # the last 10 seconds OR if the post request has set global check to True
+            # then stop the thread
             if time.time() - BaseCamera.last_access > 10 or routes.check == True:
                 frames_iterator.close()
                 print('Stopping camera thread due to inactivity.')
