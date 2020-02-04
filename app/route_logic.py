@@ -19,14 +19,16 @@ def instant_feed(motor, run):
     motor.spin(run)
 
 
-def check_feed(days, hour, minute):
+def check_feed():
     
     now = datetime.now()
-    now_weekday = datetime.now().weekday()
+    now_weekday = datetime.now().weekday() + 1
     format_now = now.strftime(str(now_weekday) +" %H %M")
     
-    for i, v in enumerate(days):  # i is the position in the string, v is the value in that position
-        result = v + " " + str(hour) + " " + str(minute)
+    resultQuery = attributes.query.filter_by(userID = 1).first()
+    print(str(resultQuery.feedDays))
+    for i, v in enumerate(str(resultQuery.feedDays)):  # i is the position in the string, v is the value in that position
+        result = v + " " + str(resultQuery.feedHour) + " " + str(resultQuery.feedMinute)
         if format_now == result:
             instant_feed(motor_pi.motor(), run=True)
 

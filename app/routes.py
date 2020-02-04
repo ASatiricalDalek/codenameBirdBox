@@ -151,19 +151,19 @@ def settings():
 
         feedDays = ""
         if form.feedDay_Monday.data:
-            feedDays = feedDays + "0"
-        if form.feedDay_Tuesday.data:
             feedDays = feedDays + "1"
-        if form.feedDay_Wednesday.data:
+        if form.feedDay_Tuesday.data:
             feedDays = feedDays + "2"
-        if form.feedDay_Thursday.data:
+        if form.feedDay_Wednesday.data:
             feedDays = feedDays + "3"
-        if form.feedDay_Friday.data:
+        if form.feedDay_Thursday.data:
             feedDays = feedDays + "4"
-        if form.feedDay_Saturday.data:
+        if form.feedDay_Friday.data:
             feedDays = feedDays + "5"
-        if form.feedDay_Sunday.data:
+        if form.feedDay_Saturday.data:
             feedDays = feedDays + "6"
+        if form.feedDay_Sunday.data:
+            feedDays = feedDays + "7"
 
         attr.feedDays = feedDays
         attr.feedHour = form.feedHour.data

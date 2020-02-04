@@ -12,8 +12,6 @@ class schedule_feed(Thread):  # The scheduled feeder thread TODO: give this info
         
     def run(self):  # The code running in the thread     
         while True:
-            result = attributes.query.filter_by(userID = 1).first()
-            print(str(result.feedDays))
-            route_logic.check_feed(str(result.feedDays), str(result.feedHour), str(result.feedMinute))
+            route_logic.check_feed()
             time.sleep(60)
         
