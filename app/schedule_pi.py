@@ -1,5 +1,5 @@
 from app import motor_pi, route_logic, routes
-import schedule
+from app.models import *
 import time
 from threading import Thread
 
@@ -17,6 +17,7 @@ class schedule_feed(Thread):  # The scheduled feeder thread TODO: give this info
         #schedule.every(routes.minutes).minutes.do(job)  # Example: Every 1 minute spin the motor       
         while True:
             #schedule.run_pending()  # While the thread exists, keep checking every second if it is time to run the motor
-            route_logic.check_feed(routes.minutes)
+            result = attributes.query.filter_by(userID = 1).first()
+            route_logic.check_feed(result.feedDays, result.feedHour, result.feedMinute)
             time.sleep(60)
         
