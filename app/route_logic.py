@@ -1,4 +1,5 @@
 import time
+from app.models import *
 
 
 # This continuously captures images to feed the _thread function in BaseCamera.py
@@ -14,3 +15,18 @@ def gen(camera):
 def instant_feed(motor, run):
     motor.spin(run)
 
+
+def canView(uid):
+    usr = attributes.query.filter_by(userID=uid).first()
+    if usr.canView == 1:
+        return True
+    else:
+        return False
+
+
+def canFeed(uid):
+    usr = attributes.query.filter_by(userID=uid).first()
+    if usr.canFeed == 1:
+        return True
+    else:
+        return False

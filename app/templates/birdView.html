@@ -8,15 +8,26 @@
     <h1>Welcome {{ user.username }}</h1>
     <h2>Enjoy your beautiful bird</h2>
     <br>
-    <img src="{{ url_for('birdstream') }}">
+    <p>Can view is set to {{ can_view }}</p>
+    <p>Can feed is set to {{ can_feed }}</p>
+    <br>
+    {% if can_view %}
+        <img src="{{ url_for('birdstream') }}">
+    {% else %}
+        <p>Sorry, you don't have permission to view the bird</p>
+    {% endif %}
     <br>
     <br>
 
-<a href="#" id="feed">Feed</a>
-
-<form method = 'post'>
-<input type = 'submit' value='Change'>
-</form>
+    {% if can_feed %}
+        <a href="#" id="feed">Feed</a>
+    {% else %}
+        {{ can_feed }}
+        <p>Sorry, you don't have permission to feed the bird</p>
+    {% endif %}
+    <form method = 'post'>
+        <input type = 'submit' value='Change'>
+    </form>
 </body>
 {% endblock %}
 

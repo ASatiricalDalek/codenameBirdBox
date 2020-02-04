@@ -33,3 +33,4 @@ class attributes(db.Model):
 @loginManager.user_loader
 def load_user(id):
     return users.query.get(int(id))
+

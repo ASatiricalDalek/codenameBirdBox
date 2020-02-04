@@ -1,0 +1,32 @@
+{% extends 'foundation.html' %}
+
+{% block content %}
+    <p>Can View is set to {{ can_view }}</p>
+    <p>Can Feed is set to {{ can_feed }}</p>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+            <p>
+                {{ form.canFeed.label }}
+                <br>
+                {{ form.canFeed }}
+                <br>
+                {% for error in form.canFeed.errors %}
+                    <span class="formError">{{ error }}</span>
+                {% endfor %}
+                <br>
+                {{ form.canView.label }}
+                <br>
+                {{ form.canView }}
+                <br>
+                {% for error in form.canView.errors %}
+                    <span class="formError">{{ error }}</span>
+                {% endfor %}
+                <br>
+                {{ form.themes.label }}
+                <br>
+                {{ form.themes }}
+                <br>
+                {{ form.apply }}
+            </p>
+    </form>
+{% endblock %}
