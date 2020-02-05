@@ -152,16 +152,23 @@ def settings():
 @login_required
 @app.route('/schedule')
 def schedule():
+    # Get every field from the attributes table which has scheduledFeed = 1
+    # This amounts to every user who has a feed scheduled
     all_feeds = attributes.query.filter_by(scheduleFeed=1).all()
+    # Empty list which will be filled by feedTimeObjects
     feed_times = []
 
     for feed in all_feeds:
-        this_feed_time = feed_obj.FeedTimeObject
+        # Create a new empty FeedTimeObject
+        this_feed_time = feed_obj.FeedTimeObject()
 
         usr = users.query.filter_by(id=feed.userID).first()
-        this_feed_time.set_feed_creator(this_feed_time, usr.username)
-        this_feed_time.set_feed_days(this_feed_time, feed.feedDays)
-        this_feed_time.set_feed_time(this_feed_time, str(feed.feedHour) + ":" + str(feed.feedMinute))
+        # Fill the feed time object
+        this_feed_time.set_feed_creator(usr.username)
+        this_feed_time.set_feed_days(feed.feedDays)
+        this_feed_time.set_feed_time(str(feed.feedHour) + ":" + str(feed.feedMinute))
+        # Add the feed time object to the end of a list
         feed_times.append(this_feed_time)
 
+    # Pass the feed_times list of FeedTime Objects to the web page
     return render_template('feedSchedule.html', feed_times=feed_times)

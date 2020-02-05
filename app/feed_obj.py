@@ -3,15 +3,18 @@ from datetime import datetime
 
 class FeedTimeObject:
     def __init__(self):
+        # Allow creation of an empty object (to be filled later)
         self.feed_time = None
         self.feed_days = None
         self.feed_creator = None
 
     def set_feed_time(self, feed_time):
+        # Feed time in the DB is set in 24 hour time. This setter converts to 12 hr
         d = datetime.strptime(feed_time, "%H:%M")
         self.feed_time = d.strftime("%I:%M %p")
 
     def set_feed_days(self, feed_days):
+        # feed days are a string of number in the DB. This converts them to human readable dates
         nice_days = []
         for i, v in enumerate(str(feed_days)):
             if v == '1':
