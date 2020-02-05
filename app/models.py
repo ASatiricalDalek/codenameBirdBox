@@ -29,7 +29,7 @@ class attributes(db.Model):
     canView = db.Column(db.Integer)
     style = db.Column(db.String(32))
     scheduleFeed = db.Column(db.Integer)
-    # 0 Represents Monday - 6 For Sunday
+    # 1 Represents Monday - 7 For Sunday
     feedDays = db.Column(db.Integer)
     feedHour = db.Column(db.Integer)
     feedMinute = db.Column(db.Integer)

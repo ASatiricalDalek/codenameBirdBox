@@ -7,10 +7,6 @@
 <body>
     <h1>Welcome {{ user.username }}</h1>
     <h2>Enjoy your beautiful bird</h2>
-    <br>
-    <p>Can view is set to {{ can_view }}</p>
-    <p>Can feed is set to {{ can_feed }}</p>
-    <br>
     {% if can_view %}
         <img src="{{ url_for('birdstream') }}">
     {% else %}
@@ -22,7 +18,6 @@
     {% if can_feed %}
         <a href="#" id="feed">Feed</a>
     {% else %}
-        {{ can_feed }}
         <p>Sorry, you don't have permission to feed the bird</p>
     {% endif %}
     <form method = 'post'>

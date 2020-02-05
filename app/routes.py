@@ -86,11 +86,13 @@ def register():
 @app.route('/view/<username>', methods=['GET', 'POST'])
 @login_required
 def birdView(username):
-    can_feed = route_logic.canFeed(current_user.get_id())
-    can_view = route_logic.canView(current_user.get_id())
+    usr = users.query.filter_by(id=current_user.get_id()).first_or_404()
+    attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
+    # Convert the ints from the DB to bools
+    can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
+    can_view = route_logic.convert_can_view_from_db(attr.canView)
     if request.method == "GET":
         # Allows authenticated user to view the stream
-        usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr, can_feed=can_feed, can_view=can_view)
     if request.method == "POST":
         # Apply the selected filter and restart the stream
@@ -98,13 +100,7 @@ def birdView(username):
         filter = 'negative'
         global check  # Indicated we are referring the the global check
         check = True
-        usr = users.query.filter_by(username=username).first_or_404()
         return render_template('birdView.html', user=usr, can_feed=can_feed, can_view=can_view)
-
-    # Allows authenticated user to view the stream
-    # usr = users.query.filter_by(username=username).first_or_404()
-    # return render_template('birdView.html', user=usr, can_feed=can_feed, can_view=can_view)
-
 
 
 @app.route('/birdstream')
@@ -117,63 +113,37 @@ def birdstream():
 # Handles the jquery when pressing 'Feed' link/button on birdView.html
 @app.route('/_feed')
 def toFeed():
-
     # Call route logic to execute the motor spinning script
-
     route_logic.instant_feed(motor_pi.motor(), run=True)
     return ()
+
 
 @login_required
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
+    # TODO: Auto populate form based on current settings
     form = forms.changeSettings()
-    can_view = route_logic.canView(current_user.get_id())
-    can_feed = route_logic.canFeed(current_user.get_id())
+    # If the form passes validation and is submitted
     if form.validate_on_submit():
+        # Get the current user's ID and load the attributes table for that user (userID is FK with ID in users table)
         uid = current_user.get_id()
         attr = attributes.query.filter_by(userID=uid).first()
-        if form.canFeed.data == 'True':
-            attr.canFeed = 1
-        else:
-            attr.canFeed = 2
 
-        if form.canView.data == 'True':
-            attr.canView = 1
-        else:
-            attr.canView = 2
-
+        # Set the attributes in the attributes table to the values in the form
+        # Since SQLite does not have bools, some of this is passed to separate functions to convert bool to int
+        attr.canView = route_logic.convert_can_view_from_form(form.canView.data)
+        attr.canFeed = route_logic.convert_can_feed_from_form(form.canFeed.data)
         attr.style = form.themes.data
-
-        if form.scheduledFeed.data == True:
-            attr.scheduleFeed = 1
-        else:
-            attr.scheduleFeed = 0
-
-        feedDays = ""
-        if form.feedDay_Monday.data:
-            feedDays = feedDays + "1"
-        if form.feedDay_Tuesday.data:
-            feedDays = feedDays + "2"
-        if form.feedDay_Wednesday.data:
-            feedDays = feedDays + "3"
-        if form.feedDay_Thursday.data:
-            feedDays = feedDays + "4"
-        if form.feedDay_Friday.data:
-            feedDays = feedDays + "5"
-        if form.feedDay_Saturday.data:
-            feedDays = feedDays + "6"
-        if form.feedDay_Sunday.data:
-            feedDays = feedDays + "7"
-
-        attr.feedDays = feedDays
+        attr.scheduleFeed = route_logic.convert_feed_from_form(form.scheduledFeed.data)
+        attr.feedDays = route_logic.get_feed_days(
+            form.feedDay_Monday.data, form.feedDay_Tuesday.data, form.feedDay_Wednesday.data,
+            form.feedDay_Thursday.data, form.feedDay_Friday.data, form.feedDay_Saturday.data, form.feedDay_Sunday.data
+        )
         attr.feedHour = form.feedHour.data
         attr.feedMinute = form.feedMinute.data
 
-
+        # write changes to DB and flash a message to users
         db.session.commit()
         flash("Settings updated")
-        return render_template('settings.html', form=form, can_feed=can_feed, can_view=can_view)
-    return render_template('settings.html', form=form, can_feed=can_feed, can_view=can_view)
-
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0')
+        return render_template('settings.html', form=form)
+    return render_template('settings.html', form=form)
