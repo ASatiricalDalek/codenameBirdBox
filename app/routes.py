@@ -6,6 +6,7 @@ from app import forms, db, camera_pi, base_camera, route_logic, motor_pi, schedu
 from app.forms import register
 from app.models import users
 from app.models import *
+from app import feed_obj
 
 
 # Global variables to control the camera filter
@@ -147,3 +148,20 @@ def settings():
         flash("Settings updated")
         return render_template('settings.html', form=form)
     return render_template('settings.html', form=form)
+
+@login_required
+@app.route('/schedule')
+def schedule():
+    all_feeds = attributes.query.filter_by(scheduleFeed=1).all()
+    feed_times = []
+
+    for feed in all_feeds:
+        this_feed_time = feed_obj.FeedTimeObject
+
+        usr = users.query.filter_by(id=feed.userID).first()
+        this_feed_time.set_feed_creator(this_feed_time, usr.username)
+        this_feed_time.set_feed_days(this_feed_time, feed.feedDays)
+        this_feed_time.set_feed_time(this_feed_time, str(feed.feedHour) + ":" + str(feed.feedMinute))
+        feed_times.append(this_feed_time)
+
+    return render_template('feedSchedule.html', feed_times=feed_times)

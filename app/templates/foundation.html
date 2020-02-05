@@ -18,6 +18,7 @@
             <a href="{{ url_for('register') }}">Register</a>
         {% else %}
             <a href="{{ url_for('logout') }}">Log Out</a>
+            <a href="{{ url_for('schedule') }}">Feeding Schedule</a>
             <!-- dynamically generate the view bird url based on the current user -->
             <a href="{{ url_for('birdView', username=current_user.username) }}">View Bird</a>
             <a href="{{ url_for('settings', username=current_user.username) }}">Settings</a>
