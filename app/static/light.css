@@ -34,7 +34,6 @@
 
 input[type=submit] {
 
-
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -55,9 +54,9 @@ input[type=submit] {
 
   }
 #signInBtn{
-    padding: 15px;
-      background-color: black;
-      color: #ebf2f2;
+      padding: 15px;
+      background-color: #f2f5f5;
+      color: black;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -84,7 +83,7 @@ font-family: Arial, Helvetica, sans-serif;
   }
 
   body {
-      background-color: darkgray;
+      background-color: white;
 
   }
 
@@ -95,9 +94,9 @@ font-family: Arial, Helvetica, sans-serif;
 
   }
   #topMenu a{
-      padding: 15px;
-      background-color: black;
-      color: #97fce8;
+       padding: 15px;
+      background-color: #f2f5f5;
+      color: black;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -114,8 +113,8 @@ font-family: Arial, Helvetica, sans-serif;
 
 #reg{
         padding: 15px;
-      background-color: black;
-      color: #97fce8;
+      background-color: #f2f5f5;
+      color: black;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -125,8 +124,8 @@ font-family: Arial, Helvetica, sans-serif;
 }
 #feed{
         padding: 15px;
-      background-color: black;
-      color: #97fce8;
+      background-color: #f2f5f5;
+      color: black;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;

@@ -34,7 +34,6 @@
 
 input[type=submit] {
 
-
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -55,9 +54,9 @@ input[type=submit] {
 
   }
 #signInBtn{
-    padding: 15px;
-      background-color: black;
-      color: #ebf2f2;
+      padding: 15px;
+      background-color: darkgray;
+      color: #2d3636;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -76,15 +75,20 @@ input[type=submit] {
 
   h1 {
 font-family: Arial, Helvetica, sans-serif;
-
+color: white;
+  }
+  h2{
+      font-family: Arial, Helvetica, sans-serif;
+color: white;
   }
 
   P{
 font-family: Arial, Helvetica, sans-serif;
+      color: white;
   }
 
   body {
-      background-color: darkgray;
+      background-color: #1f2121;
 
   }
 
@@ -95,9 +99,9 @@ font-family: Arial, Helvetica, sans-serif;
 
   }
   #topMenu a{
-      padding: 15px;
-      background-color: black;
-      color: #97fce8;
+       padding: 15px;
+      background-color: darkgray;
+      color: #2d3636;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -113,9 +117,9 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 #reg{
-        padding: 15px;
-      background-color: black;
-      color: #97fce8;
+      padding: 15px;
+      background-color: darkgray;
+      color: #2d3636;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -124,9 +128,9 @@ font-family: Arial, Helvetica, sans-serif;
 
 }
 #feed{
-        padding: 15px;
-      background-color: black;
-      color: #97fce8;
+      padding: 15px;
+      background-color: darkgray;
+      color: #2d3636;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -134,4 +138,16 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
 
+}
+label{
+    color: white;
+
+}
+#minutes{
+    font-family: Arial, Helvetica, sans-serif;
+color: white;
+}
+#seconds{
+    font-family: Arial, Helvetica, sans-serif;
+color: white;
 }
