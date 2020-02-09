@@ -3,6 +3,46 @@
       margin-right: auto;
   }
 
+  input[type=text], select {
+
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+  #password{
+       padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  }
+
+  #confPassword{
+       padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  }
+
+
+input[type=submit] {
+
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
 
 
   li a:hover {
@@ -14,15 +54,29 @@
 
   }
 #signInBtn{
-    padding: 15px;
-      background-color: black;
-      color: #97fce8;
+       padding: 15px;
+      background-color: darkgray;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #97fce8;
+      border: 3px solid #0071bc;
       text-decoration: none;
 }
+/*
+#signInBtn:hover{
+       padding: 15px;
+      background-color: green;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+}
+
+*/
+
 
   article {
 
@@ -35,15 +89,20 @@
 
   h1 {
 font-family: Arial, Helvetica, sans-serif;
-
+color: #0071bc;
+  }
+  h2{
+      font-family: Arial, Helvetica, sans-serif;
+color: #0071bc;
   }
 
   P{
 font-family: Arial, Helvetica, sans-serif;
+      color: #0071bc;
   }
 
   body {
-      background-color: darkgray;
+      background-color: #ffffff;
 
   }
 
@@ -55,15 +114,16 @@ font-family: Arial, Helvetica, sans-serif;
   }
   #topMenu a{
       padding: 15px;
-      background-color: black;
-      color: #97fce8;
+      background-color: darkgray;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #97fce8;
+      border: 3px solid #0071bc;
       text-decoration: none;
 
   }
+
 .container-fluid {
      text-align: center;
      margin-left: auto;
@@ -71,3 +131,38 @@ font-family: Arial, Helvetica, sans-serif;
 
 }
 
+#reg{
+      padding: 15px;
+      background-color: darkgray;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+
+}
+#feed{
+       padding: 15px;
+      background-color: darkgray;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+
+
+}
+label{
+    color: #0071bc;
+
+}
+#minutes{
+    font-family: Arial, Helvetica, sans-serif;
+color: #0071bc;
+}
+#seconds{
+    font-family: Arial, Helvetica, sans-serif;
+color: #0071bc;
+}

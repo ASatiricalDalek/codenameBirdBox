@@ -4,7 +4,10 @@
     <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <p>
-                {{ form.username.label }}
+            Please enter a Username and Password
+                <br>
+            Any label with a * is a required field<br><br>
+                {{ form.username.label }} *
                 <br>
                 {{ form.username(size=32) }}
                 <br>
@@ -12,7 +15,7 @@
                     <span class="formError">{{ error }}</span>
                 {% endfor %}
                 <br>
-                {{ form.password.label }}
+                {{ form.password.label }} *
                 <br>
                 {{ form.password(size=32) }}
                 <br>
@@ -20,7 +23,7 @@
                     <span class="formError">{{ error }}</span>
                 {% endfor %}
                 <br>
-                {{ form.confPassword.label }}
+                {{ form.confPassword.label }}  *
                 <br>
                 {{ form.confPassword(size=32) }}
                 <br>
