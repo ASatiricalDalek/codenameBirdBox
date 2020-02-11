@@ -52,7 +52,7 @@ class changeSettings(FlaskForm):
                                             ['23', '11 PM']))
     # Associated minute for the hour
     feedMinute = SelectField('Minute', choices=(
-        ['0', '0'], ['5', '5'], ['10', '10'], ['15', '15'], ['20', '20'], ['25, 25'], ['30', '30'], ['35', '35'],
+        ['0', '0'], ['5', '5'], ['10', '10'], ['15', '15'], ['20', '20'], ['25', '25'], ['30', '30'], ['35', '35'],
         ['40', '40'], ['45', '45'], ['50', '50'], ['55', '55']))
     apply = SubmitField('Apply Settings')
 

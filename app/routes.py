@@ -12,7 +12,7 @@ from app import feed_obj
 # Global variables to control the camera filter
 # and whether the thread needs to be restarted
 global filter
-filter = 'colorswap'
+filter = 'none'
 global check
 check = False
 
