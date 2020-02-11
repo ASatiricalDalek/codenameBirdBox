@@ -80,6 +80,19 @@ which was invaluable in getting our boilerplate code and basic authentication cr
    > 2. Navigating to your project directory (cd C:\Your\Project\Directory\Here)
    > 3. Running ./stop
 
+# Database Migration
+Codename BirdBox uses the Flask DB Migrate library as well as SQL Alchemy to make database 
+operations easier. The structure of the database can be defined in Python, and then the Flask
+DB Migration tool will convert the Python classes to SQL tables. 
+
+The opposite is also true. So queries from the database can be returned and manipulated as Python
+objects. To make changes to the database:
+
+1. Modify the appropriate class in models.py. Each class represents a table
+2. Run flask db migrate -m "commit message here" to build the migration file
+3. Run flask db upgrade to modify the database based on the migration file just created
+
+Optionally, you can run flask db downgrade to revert the DB to where it was before 
    ***
 
    

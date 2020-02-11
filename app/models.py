@@ -10,6 +10,7 @@ class users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     password = db.Column(db.String(128))
+    email = db.Column(db.String(64))
 
     # This built-in function tells Python how to print these objects for debugging purposes
     def __repr__(self):
@@ -25,8 +26,8 @@ class users(UserMixin, db.Model):
 class attributes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, db.ForeignKey(users.id))
+    isAdmin = db.Column(db.Integer)
     canFeed = db.Column(db.Integer)
-    canView = db.Column(db.Integer)
     style = db.Column(db.String(32))
     scheduleFeed = db.Column(db.Integer)
     # 1 Represents Monday - 7 For Sunday

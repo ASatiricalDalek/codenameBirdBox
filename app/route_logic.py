@@ -40,7 +40,7 @@ def check_feed():
             # Create a string to match above in format Day Hour Minute. Hour and Minute pulled from DB entry directly
             result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
         else:
-            print("Time Feed: "+result)
+            print("Time Feed: "+ result)
             # If the current time == the time in the DB run the motor
         if format_now == result:
             instant_feed(motor_pi.motor(), run=True)
@@ -86,22 +86,6 @@ def convert_feed_from_db(feed_query):
         return True
     else:
         return False
-
-
-# Radio buttons return string values
-def convert_can_view_from_form(view_radio):
-    if view_radio == 'True':
-        return 1
-    else:
-        return 0
-
-
-def convert_can_view_from_db(can_view_query):
-    if can_view_query == 1:
-        return True
-    else:
-        return False
-
 
 # Radio buttons return string values
 def convert_can_feed_from_form(feed_radio):

@@ -7,11 +7,7 @@
 <body>
     <h1>Welcome {{ user.username }}</h1>
     <h2>Enjoy your beautiful bird</h2>
-    {% if can_view %}
-        <img src="{{ url_for('birdstream') }}">
-    {% else %}
-        <p>Sorry, you don't have permission to view the bird</p>
-    {% endif %}
+    <img src="{{ url_for('birdstream') }}">
     <br>
     <br>
 

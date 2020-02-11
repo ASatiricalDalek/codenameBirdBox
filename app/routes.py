@@ -69,13 +69,14 @@ def register():
     registrationForm = forms.register()
     if registrationForm.validate_on_submit():
         uname = registrationForm.username.data
-        usr = users(username=uname)
+        email = registrationForm.email.data
+        usr = users(username=uname, email=email)
         usr.set_password(registrationForm.password.data)
         db.session.add(usr)
         db.session.commit()
         committedUser = users.query.filter_by(username=uname).first()
         uid = committedUser.id
-        attr = attributes(userID=uid, canFeed=1, canView=1, style='light')
+        attr = attributes(userID=uid, canFeed=1, isAdmin=1, style='light')
         db.session.add(attr)
         db.session.commit()
         flash("User Registered")
@@ -91,17 +92,16 @@ def birdView(username):
     attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
     # Convert the ints from the DB to bools
     can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
-    can_view = route_logic.convert_can_view_from_db(attr.canView)
     if request.method == "GET":
         # Allows authenticated user to view the stream
-        return render_template('birdView.html', user=usr, can_feed=can_feed, can_view=can_view)
+        return render_template('birdView.html', user=usr, can_feed=can_feed)
     if request.method == "POST":
         # Apply the selected filter and restart the stream
         global filter  # Indicates we are referring the the global filter
         filter = 'negative'
         global check  # Indicated we are referring the the global check
         check = True
-        return render_template('birdView.html', user=usr, can_feed=can_feed, can_view=can_view)
+        return render_template('birdView.html', user=usr, can_feed=can_feed)
 
 
 @app.route('/birdstream')
@@ -121,33 +121,41 @@ def toFeed():
 
 @login_required
 @app.route('/settings', methods=['GET', 'POST'])
-def settings():
+def adminSettings():
     # TODO: Auto populate form based on current settings
-    form = forms.changeSettings()
+    feed_settings = forms.feedSettings()
+    theme_settings = forms.themeSettings()
     # If the form passes validation and is submitted
-    if form.validate_on_submit():
+    if feed_settings.validate_on_submit():
         # Get the current user's ID and load the attributes table for that user (userID is FK with ID in users table)
         uid = current_user.get_id()
         attr = attributes.query.filter_by(userID=uid).first()
 
         # Set the attributes in the attributes table to the values in the form
         # Since SQLite does not have bools, some of this is passed to separate functions to convert bool to int
-        attr.canView = route_logic.convert_can_view_from_form(form.canView.data)
-        attr.canFeed = route_logic.convert_can_feed_from_form(form.canFeed.data)
-        attr.style = form.themes.data
-        attr.scheduleFeed = route_logic.convert_feed_from_form(form.scheduledFeed.data)
+        attr.canFeed = route_logic.convert_can_feed_from_form(feed_settings.canFeed.data)
+        attr.scheduleFeed = route_logic.convert_feed_from_form(feed_settings.scheduledFeed.data)
         attr.feedDays = route_logic.get_feed_days(
-            form.feedDay_Monday.data, form.feedDay_Tuesday.data, form.feedDay_Wednesday.data,
-            form.feedDay_Thursday.data, form.feedDay_Friday.data, form.feedDay_Saturday.data, form.feedDay_Sunday.data
+            feed_settings.feedDay_Monday.data, feed_settings.feedDay_Tuesday.data, feed_settings.feedDay_Wednesday.data,
+            feed_settings.feedDay_Thursday.data, feed_settings.feedDay_Friday.data, feed_settings.feedDay_Saturday.data,
+            feed_settings.feedDay_Sunday.data
         )
-        attr.feedHour = form.feedHour.data
-        attr.feedMinute = form.feedMinute.data
+        attr.feedHour = feed_settings.feedHour.data
+        attr.feedMinute = feed_settings.feedMinute.data
 
         # write changes to DB and flash a message to users
         db.session.commit()
-        flash("Settings updated")
-        return render_template('settings.html', form=form)
-    return render_template('settings.html', form=form)
+        flash("Feed Settings updated")
+        return render_template('settings.html', feed_settings=feed_settings, theme_settings=theme_settings)
+
+    if theme_settings.validate_on_submit():
+        uid = current_user.get_id()
+        attr = attributes.query.filter_by(userID=uid).first()
+        attr.style = theme_settings.themes.data
+        db.session.commit()
+        flash('Theme Updated')
+
+    return render_template('settings.html', feed_settings=feed_settings, theme_settings=theme_settings)
 
 @login_required
 @app.route('/schedule')
