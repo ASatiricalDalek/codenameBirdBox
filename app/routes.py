@@ -2,12 +2,13 @@ from app import app
 from flask import render_template, flash, redirect, url_for, request, Response, Flask, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app import forms, db, camera_pi, base_camera, route_logic, motor_pi, schedule_pi
+from app import forms, db, camera_pi, base_camera, route_logic, motor_pi, schedule_pi, feed_obj
 from app.forms import register
 from app.models import users
 from app.models import *
-from app import feed_obj
-
+from app.bbLog import bbLog
+''' Uses the same logging driver created in bbLog so that 
+log file is consistent per session !!IMPORT THIS ANYWHERE LOGGING OCCURS'''
 
 # Global variables to control the camera filter
 # and whether the thread needs to be restarted
@@ -31,6 +32,7 @@ def startPage():
 def login():
     # if a logged in user tries to view the login page, send them home
     if current_user.is_authenticated:
+        bbLog.info(("Login: "+str(current_user)+" is already logged in."))
         return redirect(url_for('startPage'))
 
     login = forms.signIn()
@@ -40,6 +42,7 @@ def login():
         usr = users.query.filter_by(username=login.username.data).first()
         if usr is None or not usr.check_password(login.password.data):
             flash("Incorrect Username or Password")
+            bbLog.info("Login: User entered invalid credentials.")
             # Refresh page to show the flashed message
             return redirect(url_for('login'))
         login_user(usr, remember=login.remember.data)
@@ -48,6 +51,7 @@ def login():
         # if that page required login and kicked them back to this page
         # .netloc ensures that the URL actually exists in the app and hasn't been injected
         if not next_page or url_parse(next_page).netloc != '':
+            bbLog.info("Login: "+str(current_user)+" has logged in.")
             next_page = url_for('startPage')
         return redirect(next_page)
     return render_template('login.html', form=login)
@@ -56,6 +60,7 @@ def login():
 # The page rendered after the user logs out
 @app.route('/logout')
 def logout():
+    bbLog.info("Logout: " + str(current_user) + " has logged out.")
     logout_user()
     return redirect(url_for('startPage'))
 
@@ -64,6 +69,7 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
+        bbLog.info("Registration: " + str(current_user) + " has already successfully registered.")
         return redirect(url_for('startPage'))
 
     registrationForm = forms.register()
@@ -79,7 +85,9 @@ def register():
         db.session.add(attr)
         db.session.commit()
         flash("User Registered")
+        bbLog.info("Registration: " + str(current_user) + " has successfully registered.")
         return redirect(url_for('login'))
+    bbLog.info("Registration: Error occurred during registration.")
     return render_template('register.html', form=registrationForm)
 
 
@@ -101,6 +109,7 @@ def birdView(username):
         filter = 'negative'
         global check  # Indicated we are referring the the global check
         check = True
+        bbLog.info("View: Applying changes.")
         return render_template('birdView.html', user=usr, can_feed=can_feed, can_view=can_view)
 
 
