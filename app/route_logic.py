@@ -25,6 +25,12 @@ def instant_feed(motor, run):
     except:
         bbLog.info("An error occurred with the motor.")
     else:
+        now = datetime.now()
+        now_weekday = datetime.now().weekday() + 1
+        format_now = now.strftime(str(now_weekday) + " %H %M")
+        addFeed = feedTimes(userID=current_user.get_id(), feed_time=format_now, feed_type='instant')
+        db.session.add(addFeed)
+        db.session.commit()
         bbLog.info("Motor function was successful.")
 
 
@@ -48,6 +54,9 @@ def check_feed():
                 result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
                 # If the current time == the time in the DB run the motor
                 if format_now == result:
+                    addFeed = feedTimes(userID=current_user.get_id(), feed_time=result, feed_type='scheduled')
+                    db.session.add(addFeed)
+                    db.session.commit()
                     instant_feed(motor_pi.motor(), run=True)
                 else:
                     bbLog.info("    Time Feed: "+result)
