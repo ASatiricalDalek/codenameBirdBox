@@ -2,35 +2,34 @@
 
 {% block content %}
     <form method="POST">
-        {{ theme_settings.label }}
-        <br>
-        {{ theme_settings.themes }}
-        <br>
-        {{ theme_settings.apply }}
-        {{ feed_settings.hidden_tag() }}
+        {{ form.hidden_tag() }}
             <p>
-                {{ feed_settings.canFeed.label }}
+                {{ form.canFeed.label }}
                 <br>
-                {{ feed_settings.canFeed }}
+                {{ form.canFeed }}
                 <br>
-                {% for error in feed_settings.canFeed.errors %}
+                {% for error in form.canFeed.errors %}
                     <span class="formError">{{ error }}</span>
                 {% endfor %}
                 <br>
+                {{ form.themes.label }}
+                <br>
+                {{ form.themes }}
+                <br>
                 <h2>Schedule Feed Settings</h2>
-                {{ feed_settings.scheduledFeed }}{{ feed_settings.scheduledFeed.label }}
+                {{ form.scheduledFeed }}{{ form.scheduledFeed.label }}
                 <br>
-                {{ feed_settings.feedDay_Monday }}{{ feed_settings.feedDay_Monday.label }}
-                {{ feed_settings.feedDay_Tuesday }}{{ feed_settings.feedDay_Tuesday.label }}
-                {{ feed_settings.feedDay_Wednesday }}{{ feed_settings.feedDay_Wednesday.label }}
-                {{ feed_settings.feedDay_Thursday }}{{ feed_settings.feedDay_Thursday.label }}
-                {{ feed_settings.feedDay_Friday }}{{ feed_settings.feedDay_Friday.label }}
-                {{ feed_settings.feedDay_Saturday }}{{ feed_settings.feedDay_Saturday.label }}
-                {{ feed_settings.feedDay_Sunday }}{{ feed_settings.feedDay_Sunday.label }}
+                {{ form.feedDay_Monday }}{{ form.feedDay_Monday.label }}
+                {{ form.feedDay_Tuesday }}{{ form.feedDay_Tuesday.label }}
+                {{ form.feedDay_Wednesday }}{{ form.feedDay_Wednesday.label }}
+                {{ form.feedDay_Thursday }}{{ form.feedDay_Thursday.label }}
+                {{ form.feedDay_Friday }}{{ form.feedDay_Friday.label }}
+                {{ form.feedDay_Saturday }}{{ form.feedDay_Saturday.label }}
+                {{ form.feedDay_Sunday }}{{ form.feedDay_Sunday.label }}
                 <br>
-                {{ feed_settings.feedHour }}{{ feed_settings.feedMinute }}
+                {{ form.feedHour }}{{ form.feedMinute }}
                 <br>
-                {{ feed_settings.apply }}
+                {{ form.apply }}
             </p>
     </form>
 {% endblock %}

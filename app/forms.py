@@ -32,7 +32,7 @@ class register(FlaskForm):
             raise ValidationError('Account with this email already exists!')
 
 
-class feedSettings(FlaskForm):
+class changeSettings(FlaskForm):
     # Radio buttons for if the user can feed the bird, or view the bird (tuple format: ['value', 'label']
     canFeed = RadioField('User can Feed Bird', choices=[('True', 'Yes'), ('False', 'No')], validators=[DataRequired()],
                          default=True)
@@ -60,9 +60,8 @@ class feedSettings(FlaskForm):
                                                 ['40', '40'], ['45', '45'], ['50', '50'], ['55', '55']))
     apply = SubmitField('Apply Settings')
 
-class themeSettings(FlaskForm):
     # Dropdown box for the theme selector
     themes = SelectField('Birdbox Theme',
                          choices=(['light', 'Light Theme'], ['dark', 'Dark Theme'], ['contrast', 'High Contrast']),
                          validators=[DataRequired()])
-    apply = SubmitField('Apply Theme')
+

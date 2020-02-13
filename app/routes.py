@@ -97,10 +97,9 @@ def birdView(username):
     attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
     # Convert the ints from the DB to bools
     can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
-    can_view = route_logic.convert_can_view_from_db(attr.canView)
     if request.method == "GET":
         # Allows authenticated user to view the stream
-        return render_template('birdView.html', user=usr, can_feed=can_feed, can_view=can_view)
+        return render_template('birdView.html', user=usr, can_feed=can_feed)
     if request.method == "POST":
         # Apply the selected filter and restart the stream
         global filter  # Indicates we are referring the the global filter
@@ -108,7 +107,7 @@ def birdView(username):
         global check  # Indicated we are referring the the global check
         check = True
         bbLog.info("View: Applying changes.")
-        return render_template('birdView.html', user=usr, can_feed=can_feed, can_view=can_view)
+        return render_template('birdView.html', user=usr, can_feed=can_feed)
 
 
 @app.route('/birdstream')
@@ -140,7 +139,6 @@ def settings():
 
         # Set the attributes in the attributes table to the values in the form
         # Since SQLite does not have bools, some of this is passed to separate functions to convert bool to int
-        attr.canView = route_logic.convert_can_view_from_form(form.canView.data)
         attr.canFeed = route_logic.convert_can_feed_from_form(form.canFeed.data)
         attr.style = form.themes.data
         attr.scheduleFeed = route_logic.convert_feed_from_form(form.scheduledFeed.data)

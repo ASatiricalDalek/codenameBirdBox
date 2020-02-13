@@ -96,21 +96,6 @@ def convert_feed_from_db(feed_query):
 
 
 # Radio buttons return string values
-def convert_can_view_from_form(view_radio):
-    if view_radio == 'True':
-        return 1
-    else:
-        return 0
-
-
-def convert_can_view_from_db(can_view_query):
-    if can_view_query == 1:
-        return True
-    else:
-        return False
-
-
-# Radio buttons return string values
 def convert_can_feed_from_form(feed_radio):
     if feed_radio == 'True':
         return 1
