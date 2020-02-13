@@ -5,12 +5,12 @@ import shutil
 
 
 def log_path():
-    if os.path.isdir(str(os.getcwd())+'\log'):
-        shutil.rmtree(str(os.getcwd())+'\log')  # removes log directory and files contained within
-        os.mkdir(str(os.getcwd())+'\log')  # Created log directory for the log file associated with the current session
+    if os.path.isdir(str(os.getcwd())+'/log'):
+        shutil.rmtree(str(os.getcwd())+'/log')  # removes log directory and files contained within
+        os.mkdir(str(os.getcwd())+'/log')  # Created log directory for the log file associated with the current session
         log_format()  # define log format
     else:
-        os.mkdir(str(os.getcwd()) + '\log')  # Create the log directory if it did not already exist
+        os.mkdir(str(os.getcwd()) + '/log')  # Create the log directory if it did not already exist
         log_format()  # define log format
 
 

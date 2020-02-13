@@ -14,7 +14,7 @@ def gen(camera):
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
     except:
-        bbLog.info("An error occurred with the camera feed")
+        bbLog.info("The camera feed is loading or an error has occured.")
 
 
 # This executes the motor spin script in motor_pi.py
