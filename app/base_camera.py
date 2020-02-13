@@ -2,6 +2,7 @@
 import time
 import threading
 from app import routes
+from app.bb_log import bbLog
 
 try:
     from greenlet import getcurrent as get_ident
@@ -90,7 +91,7 @@ class BaseCamera(object):
     @classmethod
     def _thread(cls):
         """Camera background thread."""
-        print('Starting camera thread.')     
+        bbLog.info("Starting camera thread.")
         frames_iterator = cls.frames()  # This references the frames function in camera_pi.py
 
         for frame in frames_iterator:
@@ -103,7 +104,7 @@ class BaseCamera(object):
             # then stop the thread
             if time.time() - BaseCamera.last_access > 10 or routes.check == True:
                 frames_iterator.close()
-                print('Stopping camera thread due to inactivity.')
+                bbLog.info("Stopping camera thread due to inactivity.")
                 routes.check = False
                 break
         BaseCamera.thread = None

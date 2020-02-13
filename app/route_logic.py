@@ -1,7 +1,7 @@
 import time
 from datetime import datetime
 from app import motor_pi
-from app.bbLog import bbLog
+from app.bb_log import bbLog
 from app.models import *
 
 
@@ -32,32 +32,28 @@ def check_feed():
     # Gets the current time and converts it to a string we can do comparison against
     now = datetime.now()
     now_weekday = datetime.now().weekday() + 1
-    format_now = now.strftime(str(now_weekday) +" %H %M")
+    format_now = now.strftime(str(now_weekday) + " %H %M")
 
-    resultQuery = attributes.query.filter_by(scheduleFeed = 1).all()
+    resultQuery = attributes.query.filter_by(scheduleFeed=1).all()
     try:
-        # Query the DB and get the days the feeder should run. This will be returned as a string of numbers, w/ 1 being Mon
+        bbLog.info("Time now: " + format_now)
+        # Query the DB and get days the feeder should run. This will be returned as a string of numbers, w/ 1 being Mon
         # Ex: Feeder is supposed to run M W F. String from DB would be 135
         # i is the position in the string, v is the value in that position
         for query in resultQuery:
-            #print(str(users.query.filter_by(id = query.userID).first()))
-            bbLog.info(str(users.query.filter_by(id = query.userID).first()))
-            #print("Time now: "+format_now)
-            bbLog.info("Time now: "+format_now)
+            bbLog.info(str(users.query.filter_by(id=query.userID).first()))
             for i, v in enumerate(str(query.feedDays)):
-                # Create a string to match above in format Day Hour Minute. Hour and Minute pulled from DB entry directly
+                # Create string to match above in format Day Hour Minute. Hour and Minute pulled from DB entry directly
                 result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
                 # If the current time == the time in the DB run the motor
                 if format_now == result:
                     instant_feed(motor_pi.motor(), run=True)
                 else:
-                    bbLog.info("Time Feed: "+result)
-                    print("Time Feed: "+result)
+                    bbLog.info("    Time Feed: "+result)
     except:
         bbLog.info("An error occurred while checking the scheduled feed.")
     else:
         bbLog.info("Successfully checked the scheduled feed.")
-
 
 
 # DB stores feed days as a string of integers, with 1 representing Monday, 2 representing Tuesday and so on
