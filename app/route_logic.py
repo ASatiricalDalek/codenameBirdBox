@@ -48,13 +48,14 @@ def check_feed():
         # Ex: Feeder is supposed to run M W F. String from DB would be 135
         # i is the position in the string, v is the value in that position
         for query in resultQuery:
+            user = users.query.filter_by(id=query.userID).first()
             bbLog.info(str(users.query.filter_by(id=query.userID).first()))
             for i, v in enumerate(str(query.feedDays)):
                 # Create string to match above in format Day Hour Minute. Hour and Minute pulled from DB entry directly
                 result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
                 # If the current time == the time in the DB run the motor
                 if format_now == result:
-                    addFeed = feedTimes(userID=current_user.get_id(), feed_time=result, feed_type='scheduled')
+                    addFeed = feedTimes(userID=user.id, feed_time=result, feed_type='scheduled')
                     db.session.add(addFeed)
                     db.session.commit()
                     instant_feed(motor_pi.motor(), run=True)
