@@ -5,6 +5,7 @@ from werkzeug.urls import url_parse
 from app import forms, camera_pi, route_logic, motor_pi, feed_obj
 from app.models import *
 from app.bb_log import bbLog
+import random as r
 ''' Uses the same logging driver created in bbLog so that 
 log file is consistent per session !!IMPORT THIS ANYWHERE LOGGING OCCURS'''
 
@@ -17,7 +18,7 @@ check = False
 
 
 # The default page which will be rendered
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def startPage():
     id = None
     feed_times = route_logic.get_Feed_Schedule()
@@ -26,6 +27,16 @@ def startPage():
     times = feedTimes.query.filter_by().all()
     if current_user.is_authenticated:
         id = current_user.get_id()
+    if request.method == "POST":
+        fTime = str(r.randint(0,7)) + " " + str(r.randint(0, 24)) + " " + str(r.randint(0, 59))
+        addFeed = feedTimes(userID=current_user.get_id(), feed_time = fTime, feed_type = 'instant')
+        db.session.add(addFeed)
+        db.session.commit()
+        feed_times = route_logic.get_Feed_Schedule()
+        attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
+        can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
+        times = feedTimes.query.filter_by().all()
+        return render_template('start.html', id=id, feed_times=feed_times, can_feed=can_feed, feeds=times)
     return render_template('start.html', id=id, feed_times=feed_times, can_feed=can_feed, feeds=times)
 
 
@@ -126,6 +137,16 @@ def birdstream():
 def toFeed():
     # Call route logic to execute the motor spinning script
     route_logic.instant_feed(motor_pi.motor(), run=True)
+    return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
+
+
+@app.route('/_log')
+def toLog():
+    # Call route logic to execute to write feeds to db
+    fTime = str(r.randint(0, 7)) + " " + str(r.randint(0, 24)) + " " + str(r.randint(0, 59))
+    addFeed = feedTimes(userID=current_user.get_id(), feed_time=fTime, feed_type='instant')
+    db.session.add(addFeed)
+    db.session.commit()
     return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
         
 

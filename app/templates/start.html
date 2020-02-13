@@ -1,8 +1,12 @@
 {% extends "foundation.html" %}
+{% block content %}
 <head>
     <script src="{{ url_for('static', filename='js/feeder.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/log.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/feedlog.js') }}"></script>
+
 </head>
-{% block content %}
+
 <div id="welcome">
 {% if current_user.is_authenticated %}
     <p>Hello {{current_user.username}}</p>
@@ -22,7 +26,10 @@
     {% endif %}
     <form method = 'post'>
         <input type = 'submit' value='Change'>
+        <a href="#" id="log">log</a>
     </form>
+
+
 </div>
 <div id="FeedSchedule">
     <table class="bb_table">

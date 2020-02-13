@@ -24,8 +24,8 @@ def log_format():
 log_path()
 bbLog = logging.getLogger('bbLog')
 # Logging will ignore flask related server messaging
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+# log = logging.getLogger('werkzeug')
+# log.setLevel(logging.ERROR)
 
 bbLog.info("Creating session. Ignoring server messaging.")
 
