@@ -1,8 +1,8 @@
 {% extends "foundation.html" %}
+{% block content %}
 <head>
     <script src="{{ url_for('static', filename='js/feeder.js') }}"></script>
 </head>
-{% block content %}
 <div id="welcome">
 {% if current_user.is_authenticated %}
     <p>Hello {{current_user.username}}</p>
