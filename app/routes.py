@@ -28,14 +28,14 @@ def startPage():
     if current_user.is_authenticated:
         id = current_user.get_id()
     if request.method == "POST":
-        fTime = str(r.randint(0,7)) + " " + str(r.randint(0, 24)) + " " + str(r.randint(0, 59))
-        addFeed = feedTimes(userID=current_user.get_id(), feed_time = fTime, feed_type = 'instant')
-        db.session.add(addFeed)
-        db.session.commit()
-        feed_times = route_logic.get_Feed_Schedule()
-        attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
-        can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
-        times = feedTimes.query.filter_by().all()
+        # fTime = str(r.randint(0,7)) + " " + str(r.randint(0, 24)) + " " + str(r.randint(0, 59))
+        #         # addFeed = feedTimes(userID=current_user.get_id(), feed_time = fTime, feed_type = 'instant')
+        #         # db.session.add(addFeed)
+        #         # db.session.commit()
+        #         # feed_times = route_logic.get_Feed_Schedule()
+        #         # attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
+        #         # can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
+        #         # times = feedTimes.query.filter_by().all()
         return render_template('start.html', id=id, feed_times=feed_times, can_feed=can_feed, feeds=times)
     return render_template('start.html', id=id, feed_times=feed_times, can_feed=can_feed, feeds=times)
 
@@ -140,15 +140,15 @@ def toFeed():
     return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
 
 
-@app.route('/_log')
-def toLog():
-    # Call route logic to execute to write feeds to db
-    fTime = str(r.randint(0, 7)) + " " + str(r.randint(0, 24)) + " " + str(r.randint(0, 59))
-    addFeed = feedTimes(userID=current_user.get_id(), feed_time=fTime, feed_type='instant')
-    db.session.add(addFeed)
-    db.session.commit()
-    return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
-        
+# @app.route('/_log')
+# def toLog():
+#     # Call route logic to execute to write feeds to db
+#     fTime = str(r.randint(0, 7)) + " " + str(r.randint(0, 24)) + " " + str(r.randint(0, 59))
+#     addFeed = feedTimes(userID=current_user.get_id(), feed_time=fTime, feed_type='instant')
+#     db.session.add(addFeed)
+#     db.session.commit()
+#     return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
+
 
 
 @login_required
