@@ -1,12 +1,10 @@
 from app import app
-from flask import render_template, flash, redirect, url_for, request, Response, Flask, jsonify
+from flask import render_template, flash, redirect, url_for, request, Response, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app import forms, db, camera_pi, base_camera, route_logic, motor_pi, schedule_pi, feed_obj
-from app.forms import register
-from app.models import users
+from app import forms, camera_pi, route_logic, motor_pi, feed_obj
 from app.models import *
-from app.bbLog import bbLog
+from app.bb_log import bbLog
 ''' Uses the same logging driver created in bbLog so that 
 log file is consistent per session !!IMPORT THIS ANYWHERE LOGGING OCCURS'''
 
@@ -125,7 +123,7 @@ def birdstream():
 def toFeed():
     # Call route logic to execute the motor spinning script
     route_logic.instant_feed(motor_pi.motor(), run=True)
-    return jsonify() # return empty json since the function expects a return, but we don't need to give it anything in this case
+    return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
         
 
 
@@ -156,6 +154,7 @@ def settings():
         # write changes to DB and flash a message to users
         db.session.commit()
         flash("Settings updated")
+        bbLog.info(str(current_user) + " successfully updated their settings.")
         return render_template('settings.html', form=form)
     return render_template('settings.html', form=form)
 

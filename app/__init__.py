@@ -16,9 +16,10 @@ loginManager = LoginManager(app)
 # Allow for "Login Required Decorator
 loginManager.login_view = 'login'
 from app import routes, models, schedule_pi
-
+from app.bb_log import bbLog
         
 schedule_pi.schedule_feed()  # Scheduled feed thread initalization
+bbLog.info("Scheduled feed thread established.")
 
 
     
