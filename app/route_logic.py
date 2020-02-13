@@ -21,16 +21,16 @@ def gen(camera):
 # This executes the motor spin script in motor_pi.py
 def instant_feed(motor, run):
     try:
-        motor.spin(run)
-    except:
-        bbLog.info("An error occurred with the motor.")
-    else:
         now = datetime.now()
         now_weekday = datetime.now().weekday() + 1
         format_now = now.strftime(str(now_weekday) + " %H %M")
         addFeed = feedTimes(userID=current_user.get_id(), feed_time=format_now, feed_type='instant')
         db.session.add(addFeed)
         db.session.commit()
+        motor.spin(run)
+    except:
+        bbLog.info("An error occurred with the motor.")
+    else:
         bbLog.info("Motor function was successful.")
 
 
