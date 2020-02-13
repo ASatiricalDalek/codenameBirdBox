@@ -1,0 +1,10 @@
+2020-02-13 13:30:07 INFO     Creating session. Ignoring server messaging.
+2020-02-13 13:30:07 INFO     Scheduled feed thread established.
+2020-02-13 13:30:07 INFO     Time now: 4 13 30
+2020-02-13 13:30:07 INFO     <User cjmcnamara>
+2020-02-13 13:30:07 INFO         Time Feed: 2 12 20
+2020-02-13 13:30:07 INFO     <User rkazirut>
+2020-02-13 13:30:07 INFO         Time Feed: 2 12 15
+2020-02-13 13:30:07 INFO         Time Feed: 3 12 15
+2020-02-13 13:30:07 INFO         Time Feed: 4 12 15
+2020-02-13 13:30:07 INFO     Successfully checked the scheduled feed.

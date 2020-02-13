@@ -1,22 +1,30 @@
 import time
 from datetime import datetime
 from app import motor_pi
-
+from app.bb_log import bbLog
 from app.models import *
 
 
 # This continuously captures images to feed the _thread function in BaseCamera.py
 def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        time.sleep(.12)
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    try:
+        while True:
+            frame = camera.get_frame()
+            time.sleep(.12)
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+    except:
+        bbLog.info("The camera feed is loading or an error has occured.")
 
 
 # This executes the motor spin script in motor_pi.py
 def instant_feed(motor, run):
-    motor.spin(run)
+    try:
+        motor.spin(run)
+    except:
+        bbLog.info("An error occurred with the motor.")
+    else:
+        bbLog.info("Motor function was successful.")
 
 
 def check_feed():
@@ -24,29 +32,28 @@ def check_feed():
     # Gets the current time and converts it to a string we can do comparison against
     now = datetime.now()
     now_weekday = datetime.now().weekday() + 1
-    format_now = now.strftime(str(now_weekday) +" %H %M")
+    format_now = now.strftime(str(now_weekday) + " %H %M")
 
-    # TODO: Query the entire database, not just one user
-    resultQuery = attributes.query.filter_by(scheduleFeed = 1).all()
-    # TODO: Remove this print which is here for debug (leaving for now in case we need it later)
-    #print(str(resultQuery.feedDays))
-    # Query the DB and get the days the feeder should run. This will be returned as a string of numbers, w/ 1 being Mon
-    # Ex: Feeder is supposed to run M W F. String from DB would be 135
-    # i is the position in the string, v is the value in that position
-    for query in resultQuery:
-        print(str(query))
-        print("Time now: "+format_now)
-        for i, v in enumerate(str(query.feedDays)):
-            # Create a string to match above in format Day Hour Minute. Hour and Minute pulled from DB entry directly
-            result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
-        else:
-            print("Time Feed: "+ result)
-            # If the current time == the time in the DB run the motor
-        if format_now == result:
-            instant_feed(motor_pi.motor(), run=True)
-    
-    
-    
+    resultQuery = attributes.query.filter_by(scheduleFeed=1).all()
+    try:
+        bbLog.info("Time now: " + format_now)
+        # Query the DB and get days the feeder should run. This will be returned as a string of numbers, w/ 1 being Mon
+        # Ex: Feeder is supposed to run M W F. String from DB would be 135
+        # i is the position in the string, v is the value in that position
+        for query in resultQuery:
+            bbLog.info(str(users.query.filter_by(id=query.userID).first()))
+            for i, v in enumerate(str(query.feedDays)):
+                # Create string to match above in format Day Hour Minute. Hour and Minute pulled from DB entry directly
+                result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
+                # If the current time == the time in the DB run the motor
+                if format_now == result:
+                    instant_feed(motor_pi.motor(), run=True)
+                else:
+                    bbLog.info("    Time Feed: "+result)
+    except:
+        bbLog.info("An error occurred while checking the scheduled feed.")
+    else:
+        bbLog.info("Successfully checked the scheduled feed.")
 
 
 # DB stores feed days as a string of integers, with 1 representing Monday, 2 representing Tuesday and so on
@@ -86,6 +93,22 @@ def convert_feed_from_db(feed_query):
         return True
     else:
         return False
+
+
+# Radio buttons return string values
+def convert_can_view_from_form(view_radio):
+    if view_radio == 'True':
+        return 1
+    else:
+        return 0
+
+
+def convert_can_view_from_db(can_view_query):
+    if can_view_query == 1:
+        return True
+    else:
+        return False
+
 
 # Radio buttons return string values
 def convert_can_feed_from_form(feed_radio):
