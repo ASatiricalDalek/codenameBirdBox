@@ -20,9 +20,13 @@ check = False
 @app.route('/')
 def startPage():
     id = None
+    feed_times = route_logic.get_Feed_Schedule()
+    attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
+    can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
+    times = feedTimes.query.filter_by().all()
     if current_user.is_authenticated:
         id = current_user.get_id()
-    return render_template('start.html', id=id)
+    return render_template('start.html', id=id, feed_times=feed_times, can_feed=can_feed, feeds=times)
 
 
 # The page rendered for user login

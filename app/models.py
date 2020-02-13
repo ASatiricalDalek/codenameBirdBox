@@ -36,6 +36,12 @@ class attributes(db.Model):
     feedMinute = db.Column(db.Integer)
 
 
+class feedTimes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    userID = db.Column(db.Integer, db.ForeignKey(users.id))
+    feed_time = db.Column(db.String)
+    feed_type = db.Column(db.String)
+
 @loginManager.user_loader
 def load_user(id):
     return users.query.get(int(id))

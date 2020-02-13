@@ -1,8 +1,9 @@
 import time
 from datetime import datetime
-from app import motor_pi
+from app import motor_pi, feed_obj
 from app.bb_log import bbLog
 from app.models import *
+from flask_login import current_user
 
 
 # This continuously captures images to feed the _thread function in BaseCamera.py
@@ -110,3 +111,26 @@ def convert_can_feed_from_db(can_feed_query):
         return False
 
 # End Settings Conversion Functions #
+
+
+def get_Feed_Schedule():
+# Get every field from the attributes table which has scheduledFeed = 1
+    # This amounts to every user who has a feed scheduled
+    all_feeds = attributes.query.filter_by(scheduleFeed=1).all()
+    # Empty list which will be filled by feedTimeObjects
+    feed_times = []
+
+    for feed in all_feeds:
+        # Create a new empty FeedTimeObject
+        this_feed_time = feed_obj.FeedTimeObject()
+
+        usr = users.query.filter_by(id=feed.userID).first()
+        # Fill the feed time object
+        this_feed_time.set_feed_creator(usr.username)
+        this_feed_time.set_feed_days(feed.feedDays)
+        this_feed_time.set_feed_time(str(feed.feedHour) + ":" + str(feed.feedMinute))
+        # Add the feed time object to the end of a list
+        feed_times.append(this_feed_time)
+
+    # Pass the feed_times list of FeedTime Objects to the web page
+    return feed_times
