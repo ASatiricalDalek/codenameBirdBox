@@ -125,7 +125,8 @@ def birdstream():
 def toFeed():
     # Call route logic to execute the motor spinning script
     route_logic.instant_feed(motor_pi.motor(), run=True)
-    return ()
+    return jsonify() # return empty json since the function expects a return, but we don't need to give it anything in this case
+        
 
 
 @login_required
