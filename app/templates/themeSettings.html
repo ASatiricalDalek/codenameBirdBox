@@ -1,0 +1,19 @@
+{% extends 'foundation.html' %}
+{% block content %}
+    <h2>Theme Settings</h2>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.themes.label }}
+        <br>
+        {{ form.themes }}
+        <br>
+        {% for error in form.themes.errors %}
+            <span class="formError">{{ error }}</span>
+        {% endfor %}
+        <br>
+        {{ form.apply }}
+        {% for error in form.apply.errors %}
+            <span class="formError">{{ error }}</span>
+        {% endfor %}
+    </p>
+{% endblock %}

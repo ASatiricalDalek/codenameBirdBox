@@ -4,18 +4,6 @@
     <form method="POST">
         {{ form.hidden_tag() }}
             <p>
-                {{ form.canFeed.label }}
-                <br>
-                {{ form.canFeed }}
-                <br>
-                {% for error in form.canFeed.errors %}
-                    <span class="formError">{{ error }}</span>
-                {% endfor %}
-                <br>
-                {{ form.themes.label }}
-                <br>
-                {{ form.themes }}
-                <br>
                 <h2>Schedule Feed Settings</h2>
                 {{ form.scheduledFeed }}{{ form.scheduledFeed.label }}
                 <br>

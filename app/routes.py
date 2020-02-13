@@ -17,15 +17,16 @@ check = False
 
 
 # The default page which will be rendered
-@app.route('/')
+@login_required
+@app.route('/main')
 def startPage():
     id = None
-    feed_times = route_logic.get_Feed_Schedule()
-    attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
-    can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
-    times = feedTimes.query.filter_by().all()
     if current_user.is_authenticated:
         id = current_user.get_id()
+        feed_times = route_logic.get_Feed_Schedule()
+        attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
+        can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
+        times = feedTimes.query.filter_by().all()
     return render_template('start.html', id=id, feed_times=feed_times, can_feed=can_feed, feeds=times)
 
 
@@ -129,12 +130,11 @@ def toFeed():
     return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
         
 
-
 @login_required
-@app.route('/settings', methods=['GET', 'POST'])
-def settings():
+@app.route('/schedule_settings', methods=['GET', 'POST'])
+def schedule_settings():
     # TODO: Auto populate form based on current settings
-    form = forms.changeSettings()
+    form = forms.feed_schedule()
     # If the form passes validation and is submitted
     if form.validate_on_submit():
         # Get the current user's ID and load the attributes table for that user (userID is FK with ID in users table)
@@ -143,8 +143,6 @@ def settings():
 
         # Set the attributes in the attributes table to the values in the form
         # Since SQLite does not have bools, some of this is passed to separate functions to convert bool to int
-        attr.canFeed = route_logic.convert_can_feed_from_form(form.canFeed.data)
-        attr.style = form.themes.data
         attr.scheduleFeed = route_logic.convert_feed_from_form(form.scheduledFeed.data)
         attr.feedDays = route_logic.get_feed_days(
             form.feedDay_Monday.data, form.feedDay_Tuesday.data, form.feedDay_Wednesday.data,
@@ -155,10 +153,26 @@ def settings():
 
         # write changes to DB and flash a message to users
         db.session.commit()
-        flash("Settings updated")
-        bbLog.info(str(current_user) + " successfully updated their settings.")
-        return render_template('settings.html', form=form)
-    return render_template('settings.html', form=form)
+        flash("Schedule Updated")
+        bbLog.info(str(current_user) + " successfully updated their scheduled feed.")
+        return render_template('scheduledFeedSettings.html', form=form)
+    return render_template('scheduledFeedSettings.html', form=form)
+
+
+@login_required
+@app.route('/theme_settings', methods=['GET', 'POST'])
+def theme_settings():
+    form = forms.theme_settings()
+    if form.validate_on_submit():
+        uid = current_user.get_id()
+        attr = attributes.query.filter_by(userID=uid).first()
+        attr.style = form.themes.data()
+        db.session.commit()
+        flash("Theme Updated!")
+        bbLog.info(str(current_user) + " successfully updated their theme")
+        return render_template('themeSettings.html', form=form)
+    return render_template('themeSettings.html', form=form)
+
 
 @login_required
 @app.route('/schedule')

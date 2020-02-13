@@ -31,11 +31,13 @@ class register(FlaskForm):
         if user is not None:
             raise ValidationError('Account with this email already exists!')
 
-
-class changeSettings(FlaskForm):
+class admin_settings(FlaskForm):
     # Radio buttons for if the user can feed the bird, or view the bird (tuple format: ['value', 'label']
     canFeed = RadioField('User can Feed Bird', choices=[('True', 'Yes'), ('False', 'No')], validators=[DataRequired()],
                          default=True)
+
+
+class feed_schedule(FlaskForm):
     # Checkbox for turning on scheduled feed
     # TODO: Enable the rest of this form only if this box is checked
     scheduledFeed = BooleanField('Enable Scheduled Feeding?', default=True)
@@ -60,8 +62,9 @@ class changeSettings(FlaskForm):
                                                 ['40', '40'], ['45', '45'], ['50', '50'], ['55', '55']))
     apply = SubmitField('Apply Settings')
 
+
+class theme_settings(FlaskForm):
     # Dropdown box for the theme selector
     themes = SelectField('Birdbox Theme',
-                         choices=(['light', 'Light Theme'], ['dark', 'Dark Theme'], ['contrast', 'High Contrast']),
-                         validators=[DataRequired()])
-
+                         choices=(['light', 'Light Theme'], ['dark', 'Dark Theme'], ['contrast', 'High Contrast']))
+    apply = SubmitField('Apply Theme')
