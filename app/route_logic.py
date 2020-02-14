@@ -18,15 +18,24 @@ def gen(camera):
         bbLog.info("The camera feed is loading or an error has occured.")
 
 
+# Gets the current time and converts it to a string we can do comparison against
+def format_time():
+    now = datetime.now()
+    now_weekday = datetime.now().weekday() + 1
+    return now.strftime(str(now_weekday) + " %H %M")
+
+
+# Writes feed actions to table for the feed log on the viewing page
+def db_write_log(uid, fTime, fType):
+    addFeed = feedTimes(userID=uid, feed_time=fTime, feed_type=fType)
+    db.session.add(addFeed)
+    db.session.commit()
+
+
 # This executes the motor spin script in motor_pi.py
 def instant_feed(motor, run):
     try:
-        now = datetime.now()
-        now_weekday = datetime.now().weekday() + 1
-        format_now = now.strftime(str(now_weekday) + " %H %M")
-        addFeed = feedTimes(userID=current_user.get_id(), feed_time=format_now, feed_type='instant')
-        db.session.add(addFeed)
-        db.session.commit()
+        db_write_log(current_user.get_id(), format_time(), 'instant')
         motor.spin(run)
     except:
         bbLog.info("An error occurred with the motor.")
@@ -34,13 +43,9 @@ def instant_feed(motor, run):
         bbLog.info("Motor function was successful.")
 
 
+# This function is called every minute from a thread started in __init__
 def check_feed():
-    # This function is called every minute from a thread started in __init__
-    # Gets the current time and converts it to a string we can do comparison against
-    now = datetime.now()
-    now_weekday = datetime.now().weekday() + 1
-    format_now = now.strftime(str(now_weekday) + " %H %M")
-
+    format_now = format_time()  # Gets the current time and converts it to a string we can do comparison against
     resultQuery = attributes.query.filter_by(scheduleFeed=1).all()
     try:
         bbLog.info("Time now: " + format_now)
@@ -55,9 +60,7 @@ def check_feed():
                 result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
                 # If the current time == the time in the DB run the motor
                 if format_now == result:
-                    addFeed = feedTimes(userID=user.id, feed_time=result, feed_type='scheduled')
-                    db.session.add(addFeed)
-                    db.session.commit()
+                    db_write_log(user.id, result, 'scheduled')
                     instant_feed(motor_pi.motor(), run=True)
                 else:
                     bbLog.info("    Time Feed: "+result)
