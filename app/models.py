@@ -35,6 +35,18 @@ class attributes(db.Model):
     feedHour = db.Column(db.Integer)
     feedMinute = db.Column(db.Integer)
 
+    def check_admin(self):
+        if self.isAdmin == 1:
+            return True
+        else:
+            return False
+
+    def check_feed_right(self):
+        if self.canFeed == 1:
+            return True
+        else:
+            return False
+
 
 class feedTimes(db.Model):
     id = db.Column(db.Integer, primary_key=True)

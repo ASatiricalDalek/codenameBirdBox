@@ -10,6 +10,10 @@
     <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
+    {# Added another block section for header content #}
+    {% block header %}
+
+    {% endblock %}
 </head>
 <body>
     <div id="topMenu">
@@ -17,6 +21,7 @@
             <a href="{{ url_for('login') }}">Log In</a>
             <a href="{{ url_for('register') }}">Register</a>
         {% else %}
+            <a href="{{ url_for('startPage') }}">Home</a>
             <a href="{{ url_for('logout') }}">Log Out</a>
             <a href="{{ url_for('schedule') }}">Feeding Schedule</a>
             <!-- dynamically generate the view bird url based on the current user -->
@@ -24,7 +29,6 @@
             <a href="{{ url_for('schedule_settings', username=current_user.username) }}">Schedule Settings</a>
             <a href="{{ url_for('theme_settings', username=current_user.username) }}">Theme Settings</a>
         {% endif %}
-        <a href="{{ url_for('startPage') }}">Home</a>
     </div>
     <!-- Get messages passed with flask's "flash" function -->
     {% with messages = get_flashed_messages() %}

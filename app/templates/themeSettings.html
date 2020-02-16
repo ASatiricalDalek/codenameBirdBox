@@ -1,6 +1,7 @@
 {% extends 'foundation.html' %}
 {% block content %}
     <h2>Theme Settings</h2>
+    <form method="POST">
     {{ form.hidden_tag() }}
     <p>
         {{ form.themes.label }}
@@ -16,4 +17,5 @@
             <span class="formError">{{ error }}</span>
         {% endfor %}
     </p>
+    </form>
 {% endblock %}

@@ -16,6 +16,14 @@ global check
 check = False
 
 
+@app.route('/')
+def router():
+    if current_user.is_authenticated:
+        return redirect(url_for('startPage'))
+    else:
+        return redirect(url_for('login'))
+
+
 # The default page which will be rendered
 @login_required
 @app.route('/main')
@@ -65,7 +73,7 @@ def login():
 def logout():
     bbLog.info("Logout: " + str(current_user) + " has logged out.")
     logout_user()
-    return redirect(url_for('startPage'))
+    return redirect(url_for('login'))
 
 
 # The page rendered when the user registers
@@ -166,7 +174,7 @@ def theme_settings():
     if form.validate_on_submit():
         uid = current_user.get_id()
         attr = attributes.query.filter_by(userID=uid).first()
-        attr.style = form.themes.data()
+        attr.style = form.themes.data
         db.session.commit()
         flash("Theme Updated!")
         bbLog.info(str(current_user) + " successfully updated their theme")
