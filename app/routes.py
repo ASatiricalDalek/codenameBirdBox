@@ -243,24 +243,25 @@ def schedule_settings():
             bbLog.info(str(current_user) + " successfully updated their scheduled feed.")
             return render_template('scheduledFeedSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
 
-        # Auto populate form based on current settings
-        feeds = route_logic.get_Feed_Schedule(current_user.get_id())
-        if 'Mon' in feeds[0].feed_days:
-            form.feedDay_Monday.data = True
-        if 'Tues' in feeds[0].feed_days:
-            form.feedDay_Tuesday.data = True
-        if 'Wed' in feeds[0].feed_days:
-            form.feedDay_Wednesday.data = True
-        if 'Thur' in feeds[0].feed_days:
-            form.feedDay_Thursday.data = True
-        if 'Fri' in feeds[0].feed_days:
-            form.feedDay_Friday.data = True
-        if 'Sat' in feeds[0].feed_days:
-            form.feedDay_Saturday.data = True
-        if 'Sun' in feeds[0].feed_days:
-            form.feedDay_Sunday.data = True
-        form.feedHour.data = feeds[0].feed_hour
-        form.feedMinute.data = feeds[0].feed_minute
+        if attr.scheduleFeed:
+            # Auto populate form based on current settings
+            feeds = route_logic.get_Feed_Schedule(current_user.get_id())
+            if 'Mon' in feeds[0].feed_days:
+                form.feedDay_Monday.data = True
+            if 'Tues' in feeds[0].feed_days:
+                form.feedDay_Tuesday.data = True
+            if 'Wed' in feeds[0].feed_days:
+                form.feedDay_Wednesday.data = True
+            if 'Thur' in feeds[0].feed_days:
+                form.feedDay_Thursday.data = True
+            if 'Fri' in feeds[0].feed_days:
+                form.feedDay_Friday.data = True
+            if 'Sat' in feeds[0].feed_days:
+                form.feedDay_Saturday.data = True
+            if 'Sun' in feeds[0].feed_days:
+                form.feedDay_Sunday.data = True
+            form.feedHour.data = feeds[0].feed_hour
+            form.feedMinute.data = feeds[0].feed_minute
     else:
         # users that are logged in but do not have rights to view this page (and have navigated directly via URL)
         # Are bounced back to the starting page.

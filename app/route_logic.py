@@ -111,8 +111,9 @@ def get_feed_days(mon, tue, wed, thur, fri, sat, sun):
 
 
 # Radio buttons return string values
-def convert_can_feed_from_form(feed_radio):
-    if feed_radio == 'True':
+def convert_can_feed_from_form(feed_option):
+    # Radio buttons return strings while check boxes return actual booleans
+    if feed_option == 'True' or feed_option == True:
         return 1
     else:
         return 0

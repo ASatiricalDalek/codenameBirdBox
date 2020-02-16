@@ -89,10 +89,10 @@ Optionally, you can run flask db downgrade to revert the DB to where it was befo
 
 
 >Current Version: Version 1.0  
->Date Last Updated: 01/14/2020  
->Last Updated By: Robert Kazirut  
+>Date Last Updated: 02/16/2020  
+>Last Updated By: Connor McNamara  
 >Approved By: Connor McNamara  
->Approved Date: 01/15/2020
+>Approved Date: 02/18/2020
 
 ***
 #1. Introduction
