@@ -114,24 +114,32 @@ def convert_can_feed_from_db(can_feed_query):
 # End Settings Conversion Functions #
 
 
-def get_Feed_Schedule():
+def get_Feed_Schedule(userID):
 # Get every field from the attributes table which has scheduledFeed = 1
     # This amounts to every user who has a feed scheduled
-    all_feeds = attributes.query.filter_by(scheduleFeed=1).all()
+    if userID == 'all':
+        all_feeds = attributes.query.filter_by(scheduleFeed=1).all()
+    else:
+        all_feeds = attributes.query.filter_by(userID=userID).all()
     # Empty list which will be filled by feedTimeObjects
-    feed_times = []
+    if all_feeds is not None:
+        feed_times = []
 
-    for feed in all_feeds:
-        # Create a new empty FeedTimeObject
-        this_feed_time = feed_obj.FeedTimeObject()
+        for feed in all_feeds:
+            # Create a new empty FeedTimeObject
+            this_feed_time = feed_obj.FeedTimeObject()
 
-        usr = users.query.filter_by(id=feed.userID).first()
-        # Fill the feed time object
-        this_feed_time.set_feed_creator(usr.username)
-        this_feed_time.set_feed_days(feed.feedDays)
-        this_feed_time.set_feed_time(str(feed.feedHour) + ":" + str(feed.feedMinute))
-        # Add the feed time object to the end of a list
-        feed_times.append(this_feed_time)
+            usr = users.query.filter_by(id=feed.userID).first()
+            # Fill the feed time object
+            this_feed_time.set_feed_creator(usr.username)
+            this_feed_time.set_feed_days(feed.feedDays)
+            this_feed_time.feed_hour = str(feed.feedHour)
+            this_feed_time.feed_minute = str(feed.feedMinute)
+            this_feed_time.set_feed_time(str(feed.feedHour) + ":" + str(feed.feedMinute))
+            # Add the feed time object to the end of a list
+            feed_times.append(this_feed_time)
 
-    # Pass the feed_times list of FeedTime Objects to the web page
-    return feed_times
+        # Pass the feed_times list of FeedTime Objects to the web page
+        return feed_times
+    else:
+        return None

@@ -4,6 +4,8 @@ from datetime import datetime
 class FeedTimeObject:
     def __init__(self):
         # Allow creation of an empty object (to be filled later)
+        self.feed_hour = None
+        self.feed_minute = None
         self.feed_time = None
         self.feed_days = None
         self.feed_creator = None

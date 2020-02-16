@@ -2,7 +2,7 @@ from app import app
 from flask import render_template, flash, redirect, url_for, request, Response, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app import forms, camera_pi, route_logic, motor_pi
+from app import forms, camera_pi, route_logic, motor_pi, feed_obj
 from app.models import *
 from app.bb_log import bbLog
 ''' Uses the same logging driver created in bbLog so that 
@@ -30,7 +30,7 @@ def router():
 def startPage():
     if current_user.is_authenticated:
         id = current_user.get_id()
-        feed_times = route_logic.get_Feed_Schedule()
+        feed_times = route_logic.get_Feed_Schedule('all')
         attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
         can_feed = attr.check_feed()
         is_admin = attr.check_admin()
@@ -145,7 +145,6 @@ def toFeed():
 @login_required
 @app.route('/schedule_settings', methods=['GET', 'POST'])
 def schedule_settings():
-    # TODO: Auto populate form based on current settings
     form = forms.feed_schedule()
     attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
     can_feed = attr.check_feed()
@@ -178,6 +177,25 @@ def schedule_settings():
             flash("Schedule Updated")
             bbLog.info(str(current_user) + " successfully updated their scheduled feed.")
             return render_template('scheduledFeedSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
+
+        # Auto populate form based on current settings
+        feeds = route_logic.get_Feed_Schedule(current_user.get_id())
+        if 'Mon' in feeds[0].feed_days:
+            form.feedDay_Monday.data = True
+        if 'Tues' in feeds[0].feed_days:
+            form.feedDay_Tuesday.data = True
+        if 'Wed' in feeds[0].feed_days:
+            form.feedDay_Wednesday.data = True
+        if 'Thur' in feeds[0].feed_days:
+            form.feedDay_Thursday.data = True
+        if 'Fri' in feeds[0].feed_days:
+            form.feedDay_Friday.data = True
+        if 'Sat' in feeds[0].feed_days:
+            form.feedDay_Saturday.data = True
+        if 'Sun' in feeds[0].feed_days:
+            form.feedDay_Sunday.data = True
+        form.feedHour.data = feeds[0].feed_hour
+        form.feedMinute.data = feeds[0].feed_minute
     else:
         # users that are logged in but do not have rights to view this page (and have navigated directly via URL)
         # Are bounced back to the starting page.
