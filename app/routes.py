@@ -18,10 +18,45 @@ check = False
 # root of the app routes users either to the login page, if they're logged out, or the main page if they're logged in
 @app.route('/')
 def router():
+    # If the user is logged in already, take them to the main page
     if current_user.is_authenticated:
         return redirect(url_for('startPage'))
+    # if there are no administrators on the system, go to the out of box experience to create a new admin
+    elif attributes.query.filter_by(isAdmin=1).first() is None:
+        return redirect(url_for('oobe'))
+    # Otherwise, redirect the user to the login page
     else:
         return redirect(url_for('login'))
+
+
+@app.route('/oobe', methods=['GET', 'POST'])
+def oobe():
+    if current_user.is_authenticated:
+        bbLog.info("Registration: " + str(current_user) + " has already successfully registered.")
+        return redirect(url_for('startPage'))
+    # Disallow access to the OOBE page if an admin already exists for security reasons
+    if attributes.query.filter_by(isAdmin=1).first():
+        bbLog.info("Out of Box Experience cannot be accessed if there is an existing administrator account")
+        return redirect(url_for('login'))
+
+    # Register a new user as administrator
+    registrationForm = forms.register()
+    if registrationForm.validate_on_submit():
+        uname = registrationForm.username.data
+        usr = users(username=uname)
+        usr.set_password(registrationForm.password.data)
+        db.session.add(usr)
+        db.session.commit()
+        committedUser = users.query.filter_by(username=uname).first()
+        uid = committedUser.id
+        attr = attributes(userID=uid, canFeed=1, style='light', isAdmin=1)
+        db.session.add(attr)
+        db.session.commit()
+        flash("User Registered")
+        bbLog.info("Registration: " + str(current_user) + " has successfully registered.")
+        return redirect(url_for('login'))
+    bbLog.info("Registration: Error occurred during first admin registration.")
+    return render_template('oobe.html', form=registrationForm)
 
 
 # The default page which will be rendered
