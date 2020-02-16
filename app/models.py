@@ -41,7 +41,7 @@ class attributes(db.Model):
         else:
             return False
 
-    def check_feed_right(self):
+    def check_feed(self):
         if self.canFeed == 1:
             return True
         else:

@@ -19,6 +19,25 @@ class register(FlaskForm):
     confPassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     reg = SubmitField('Register')
 
+    # https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-v-user-logins
+    def validate_username(self, username):
+        usr = users.query.filter_by(username=username.data).first()
+        if usr is not None:
+            raise ValidationError('This username already exists! Please choose another.')
+
+    def validate_email(self, email):
+        user = users.query.filter_by(email=email.data).first()
+        if user is not None:
+            raise ValidationError('Account with this email already exists!')
+
+
+class admin_register(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confPassword = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    isAdmin = BooleanField('User is administrator?')
+    reg = SubmitField('Register')
 
     # https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-v-user-logins
     def validate_username(self, username):
@@ -31,10 +50,28 @@ class register(FlaskForm):
         if user is not None:
             raise ValidationError('Account with this email already exists!')
 
+
 class admin_settings(FlaskForm):
+    existing_Username = None
+    existing_Email = None
     # Radio buttons for if the user can feed the bird, or view the bird (tuple format: ['value', 'label']
-    canFeed = RadioField('User can Feed Bird', choices=[('True', 'Yes'), ('False', 'No')], validators=[DataRequired()],
+    canFeed = RadioField(' can feed bird', choices=[('True', 'Yes'), ('False', 'No')], validators=[DataRequired()],
                          default=True)
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    apply = SubmitField('Apply Settings')
+
+    # Existing username and email are passed from routes. Validation only fails if you changed the username or email...
+    # To another user's email or uname, not if you didn't change yours at all
+    def validate_username(self, username):
+        usr = users.query.filter_by(username=username.data).first()
+        if usr is not None and usr.username is not self.existing_Username:
+            raise ValidationError('This username already exists! Please choose another.')
+
+    def validate_email(self, email):
+        email = users.query.filter_by(email=email.data).first()
+        if email is not None and email.email is not self.existing_Email:
+            raise ValidationError('Account with this email already exists!')
 
 
 class feed_schedule(FlaskForm):

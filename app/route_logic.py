@@ -82,18 +82,19 @@ def get_feed_days(mon, tue, wed, thur, fri, sat, sun):
 
 # Settings Page Conversion Functions #
 # These functions are for converting bools to ints for the form to the database, or vice versa for db to python logic
-def convert_feed_from_form(feed_checkbox):
-    if feed_checkbox:
-        return 1
-    else:
-        return 0
-
-
-def convert_feed_from_db(feed_query):
-    if feed_query == 1:
-        return True
-    else:
-        return False
+# TODO: Look into moving these inside the classes in models
+# def convert_feed_from_form(feed_checkbox):
+#     if feed_checkbox:
+#         return 1
+#     else:
+#         return 0
+#
+#
+# def convert_feed_from_db(feed_query):
+#     if feed_query == 1:
+#         return True
+#     else:
+#         return False
 
 
 # Radio buttons return string values
