@@ -74,6 +74,32 @@ class admin_settings(FlaskForm):
             raise ValidationError('Account with this email already exists!')
 
 
+class user_settings(FlaskForm):
+    existing_Username = None
+    existing_Email = None
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    currentPassword = PasswordField('Current Password')
+    newPassword = PasswordField('New Password')
+    newPassword2 = PasswordField('Repeat New Password', validators=[EqualTo('newPassword')])
+    # Dropdown box for the theme selector
+    themes = SelectField('Birdbox Theme',
+                         choices=(['light', 'Light Theme'], ['dark', 'Dark Theme'], ['contrast', 'High Contrast']))
+    apply = SubmitField('Apply Settings')
+
+    # Existing username and email are passed from routes. Validation only fails if you changed the username or email...
+    # To another user's email or uname, not if you didn't change yours at all
+    def validate_username(self, username):
+        usr = users.query.filter_by(username=username.data).first()
+        if usr is not None and usr.username is not self.existing_Username:
+            raise ValidationError('This username already exists! Please choose another.')
+
+    def validate_email(self, email):
+        email = users.query.filter_by(email=email.data).first()
+        if email is not None and email.email is not self.existing_Email:
+            raise ValidationError('Account with this email already exists!')
+
+
 class feed_schedule(FlaskForm):
     # Checkbox for turning on scheduled feed
     # TODO: Enable the rest of this form only if this box is checked
@@ -94,7 +120,7 @@ class feed_schedule(FlaskForm):
                                             ['19', '7 PM'], ['20', '8 PM'], ['21', '9 PM'], ['22', '10 PM'],
                                             ['23', '11 PM']))
     # Associated minute for the hour
-    feedMinute = SelectField('Minute', choices=(['0', '0'], ['5', '5'], ['10', '10'], ['15', '15'], ['20', '20'],
+    feedMinute = SelectField('Minute', choices=(['0', '0'], ['05', '5'], ['10', '10'], ['15', '15'], ['20', '20'],
                                                 ['25', '25'], ['30', '30'], ['35', '35'],
                                                 ['40', '40'], ['45', '45'], ['50', '50'], ['55', '55']))
     apply = SubmitField('Apply Settings')

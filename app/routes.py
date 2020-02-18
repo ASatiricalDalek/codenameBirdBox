@@ -252,16 +252,21 @@ def schedule_settings():
             bbLog.info(str(current_user) + " successfully updated their scheduled feed.")
             return render_template('scheduledFeedSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
 
-        else:
+        # if the form validates but the "schedule feed" checkbox is unchecked, disable scheduled feeding
+        elif form.validate_on_submit():
             attr.scheduleFeed = None
             attr.feedDays = None
             attr.feedHour = None
             attr.feedMinute = None
+            flash('Scheduled feeding disabled')
+            bbLog.info(str(current_user.username) + " disabled their scheduled feed")
             db.session.commit()
 
         if attr.scheduleFeed:
             # Auto populate form based on current settings
+            bbLog.info("Populating " + current_user.username + " settings on feed schedule page")
             feeds = route_logic.get_Feed_Schedule(current_user.get_id())
+            form.scheduledFeed.data = True
             if 'Mon' in feeds[0].feed_days:
                 form.feedDay_Monday.data = True
             if 'Tues' in feeds[0].feed_days:
@@ -287,21 +292,44 @@ def schedule_settings():
 
 
 @login_required
-@app.route('/theme_settings', methods=['GET', 'POST'])
-def theme_settings():
-    form = forms.theme_settings()
+@app.route('/user_settings', methods=['GET', 'POST'])
+def user_settings():
+    theme_form = forms.theme_settings()
+    user_settings_form = forms.user_settings()
     attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
+    usr = users.query.filter_by(id=current_user.get_id()).first()
+    # Tell the form what this user's current username and email are
+    user_settings_form.existing_Email = usr.email
+    user_settings_form.existing_Username = usr.username
     can_feed = attr.check_feed()
     is_admin = attr.check_admin()
-    if form.validate_on_submit():
-        uid = current_user.get_id()
-        attr = attributes.query.filter_by(userID=uid).first()
-        attr.style = form.themes.data
+
+    if user_settings_form.validate_on_submit():
+        usr.email = user_settings_form.email.data
+        usr.username = user_settings_form.username.data
+        attr.style = user_settings_form.themes.data
+        # If user attempts to change their password
+        if usr.check_password(user_settings_form.currentPassword.data) and user_settings_form.newPassword.data is not None:
+            usr.set_password(user_settings_form.newPassword.data)
+            flash("Password Updated")
+            db.session.commit()
+            return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
+                                   user_settings_form=user_settings_form)
+        elif usr.check_password(user_settings_form.currentPassword.data) == False and user_settings_form.newPassword.data is not None:
+            flash('Current Password incorrect; password not updated')
+            return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
+                                   user_settings_form=user_settings_form)
         db.session.commit()
-        flash("Theme Updated!")
-        bbLog.info(str(current_user) + " successfully updated their theme")
-        return render_template('themeSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
-    return render_template('themeSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
+        flash("User settings updated!")
+        return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
+                               user_settings_form=user_settings_form)
+
+    # Pre-fill current settings
+    user_settings_form.username.data = usr.username
+    user_settings_form.email.data = usr.email
+    user_settings_form.themes.data = attr.style
+    return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
+                           user_settings_form=user_settings_form)
 
 @login_required
 @app.route('/admin_settings', methods=['GET', 'POST'])

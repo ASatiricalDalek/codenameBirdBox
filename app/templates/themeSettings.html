@@ -1,21 +1,60 @@
 {% extends 'foundation.html' %}
 {% block content %}
+    <form method="post">
     <h2>Theme Settings</h2>
-    <form method="POST">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.themes.label }}
-        <br>
-        {{ form.themes }}
-        <br>
-        {% for error in form.themes.errors %}
-            <span class="formError">{{ error }}</span>
-        {% endfor %}
-        <br>
-        {{ form.apply }}
-        {% for error in form.apply.errors %}
-            <span class="formError">{{ error }}</span>
-        {% endfor %}
-    </p>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ user_settings_form.themes.label }}
+            <br>
+            {{ user_settings_form.themes }}
+            <br>
+            {% for error in form.themes.errors %}
+                <span class="formError">{{ error }}</span>
+            {% endfor %}
+            <br>
+        <h2>User Settings</h2>
+        <p>
+            {{ user_settings_form.username.label }}
+            <br>
+            {{ user_settings_form.username }}
+            <br>
+            {% for error in user_settings_form.username.errors %}
+                <span class="formError">{{ error }}</span>
+            {% endfor %}
+            <br>
+            {{ user_settings_form.email.label }}
+            <br>
+            {{ user_settings_form.email }}
+            <br>
+            {% for error in user_settings_form.email.errors %}
+                <span class="formError">{{ error }}</span>
+            {% endfor %}
+            <br>
+            {{ user_settings_form.currentPassword.label }}
+            <br>
+            {{ user_settings_form.currentPassword }}
+            <br>
+            {% for error in user_settings_form.currentPassword.errors %}
+                <span class="formError">{{ error }}</span>
+            {% endfor %}
+            <br>
+            {{ user_settings_form.newPassword.label }}
+            <br>
+            {{ user_settings_form.newPassword }}
+            <br>
+            {% for error in user_settings_form.newPassword.errors %}
+                <span class="formError">{{ error }}</span>
+            {% endfor %}
+            <br>
+            {{ user_settings_form.newPassword2.label }}
+            <br>
+            {{ user_settings_form.newPassword2 }}
+            <br>
+            {% for error in user_settings_form.newPassword2.errors %}
+                <span class="formError">{{ error }}</span>
+            {% endfor %}
+            <br>
+            {{ user_settings_form.apply }}
+        </p>
     </form>
 {% endblock %}
