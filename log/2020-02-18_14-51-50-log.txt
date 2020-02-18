@@ -1,0 +1,24 @@
+2020-02-18 14:51:50 INFO     Creating session. Ignoring server messaging.
+2020-02-18 14:51:50 INFO     Scheduled feed thread established.
+2020-02-18 14:51:51 INFO     Time now: 2 14 51
+2020-02-18 14:51:51 INFO     <User cjmcnamara>
+2020-02-18 14:51:51 INFO         Time Feed: 2 14 20
+2020-02-18 14:51:51 INFO     <User tbuza>
+2020-02-18 14:51:51 INFO         Time Feed: 2 14 25
+2020-02-18 14:51:51 INFO     Successfully checked the scheduled feed.
+2020-02-18 14:52:14 INFO     Starting camera thread.
+2020-02-18 14:52:18 INFO     The camera feed is loading or an error has occured.
+2020-02-18 14:52:26 INFO     Motor function was successful.
+2020-02-18 14:52:34 INFO     Motor function was successful.
+2020-02-18 14:52:51 INFO     Time now: 2 14 52
+2020-02-18 14:52:51 INFO     <User cjmcnamara>
+2020-02-18 14:52:51 INFO         Time Feed: 2 14 20
+2020-02-18 14:52:51 INFO     <User tbuza>
+2020-02-18 14:52:51 INFO         Time Feed: 2 14 25
+2020-02-18 14:52:51 INFO     Successfully checked the scheduled feed.
+2020-02-18 14:53:52 INFO     Time now: 2 14 53
+2020-02-18 14:53:52 INFO     <User cjmcnamara>
+2020-02-18 14:53:52 INFO         Time Feed: 2 14 20
+2020-02-18 14:53:52 INFO     <User tbuza>
+2020-02-18 14:53:52 INFO         Time Feed: 2 14 25
+2020-02-18 14:53:52 INFO     Successfully checked the scheduled feed.

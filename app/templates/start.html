@@ -2,6 +2,7 @@
 {% block header %}
     <script src="{{ url_for('static', filename='js/feeder.js') }}"></script>
     <script src="{{ url_for('static', filename='js/feedlog.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/clearlog.js') }}"></script>
 {% endblock %}
 {% block content %}
 <div id="welcome">
@@ -23,7 +24,6 @@
     {% endif %}
     <form method = 'post'>
         <input type = 'submit' value='Change'>
-{#        <a href="#" id="log">log</a>#}
     </form>
 
 
@@ -63,8 +63,11 @@
             </tr>
         {% endfor %}
     </table>
-    {% if is_admin %}
-        <a href="{{ url_for('_clear_feed') }}">Clear Feed Log</a>
-    {% endif %}
+
 </div>
+<div id="clearFeed">
+    {% if is_admin %}
+        <a href="#" id="clear">Clear Log</a>
+    {% endif %}
+</div>      
 {% endblock %}
