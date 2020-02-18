@@ -10,6 +10,15 @@
     <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
+    {% if theme == 'dark' %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+    {% elif theme == 'contrast' %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='ada.css') }}">
+    {% else %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='light.css') }}">
+    {% endif %}
+
     {# Added another block section for header content #}
     {% block header %}
 

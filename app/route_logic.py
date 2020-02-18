@@ -157,3 +157,8 @@ def get_Feed_Schedule(userID):
         return feed_times
     else:
         return None
+
+
+def get_user_theme():
+    attr = attributes.query.filter_by(userID=current_user.get_id()).first()
+    return attr.style
