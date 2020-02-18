@@ -34,7 +34,6 @@
 
 input[type=submit] {
 
-
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -43,20 +42,28 @@ input[type=submit] {
   cursor: pointer;
 }
 
+
+
+
+  li a:hover {
+
+  }
+
   footer {
 
 
   }
 #signInBtn{
-    padding: 15px;
-      background-color: black;
-      color: #63c3ef;
+       padding: 15px;
+      background-color: darkgray;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #63c3ef;
+      border: 3px solid #0071bc;
       text-decoration: none;
 }
+
 #signInBtn:hover{
        padding: 15px;
       background-color: white;
@@ -64,9 +71,13 @@ input[type=submit] {
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #63c3ef;
+      border: 3px solid #0071bc;
       text-decoration: none;
 }
+
+
+
+
   article {
 
   }
@@ -78,15 +89,20 @@ input[type=submit] {
 
   h1 {
 font-family: Arial, Helvetica, sans-serif;
-
+color: #0071bc;
+  }
+  h2{
+      font-family: Arial, Helvetica, sans-serif;
+color: #0071bc;
   }
 
   P{
 font-family: Arial, Helvetica, sans-serif;
+      color: #0071bc;
   }
 
   body {
-      background-color: darkgray;
+      background-color: #ffffff;
 
   }
 
@@ -98,25 +114,26 @@ font-family: Arial, Helvetica, sans-serif;
   }
   #topMenu a{
       padding: 15px;
-      background-color: black;
-      color: #63c3ef;
+      background-color: darkgray;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #63c3ef;
+      border: 3px solid #0071bc;
       text-decoration: none;
 
   }
-  #topmenu a:hover{
+  #topMenu a:hover{
        padding: 15px;
       background-color: white;
       color: black;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #63c3ef;
+      border: 3px solid #0071bc;
       text-decoration: none;
 }
+
 .container-fluid {
      text-align: center;
      margin-left: auto;
@@ -125,13 +142,13 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 #reg{
-        padding: 15px;
-      background-color: black;
-      color: #63c3ef;
+      padding: 15px;
+      background-color: darkgray;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #63c3ef;
+      border: 3px solid #0071bc;
       text-decoration: none;
 
 }
@@ -142,17 +159,17 @@ font-family: Arial, Helvetica, sans-serif;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #63c3ef;
+      border: 3px solid #0071bc;
       text-decoration: none;
 }
 #feed{
-        padding: 15px;
-      background-color: black;
-      color: #63c3ef;
+       padding: 15px;
+      background-color: darkgray;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #63c3ef;
+      border: 3px solid #0071bc;
       text-decoration: none;
 
 
@@ -164,6 +181,18 @@ font-family: Arial, Helvetica, sans-serif;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #63c3ef;
+      border: 3px solid #0071bc;
       text-decoration: none;
+}
+label{
+    color: #0071bc;
+
+}
+#minutes{
+    font-family: Arial, Helvetica, sans-serif;
+color: #0071bc;
+}
+#seconds{
+    font-family: Arial, Helvetica, sans-serif;
+color: #0071bc;
 }
