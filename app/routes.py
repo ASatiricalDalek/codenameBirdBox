@@ -66,7 +66,6 @@ def oobe():
 @app.route('/main', methods=['GET', 'POST'])
 def startPage():
     if current_user.is_authenticated:
-        theme = route_logic.get_user_theme()
         id = current_user.get_id()
         feed_times = route_logic.get_Feed_Schedule('all')
         attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
@@ -74,7 +73,7 @@ def startPage():
         is_admin = attr.check_admin()
         times = feedTimes.query.filter_by().all()
         return render_template('start.html', id=id, feed_times=feed_times,
-                           can_feed=can_feed, feeds=times, is_admin=is_admin, theme=theme)
+                           can_feed=can_feed, feeds=times, is_admin=is_admin)
     else:
         # if a user tries to navigate here without logging in via the URL, take them back to the login page
         return redirect(url_for('login'))
@@ -169,6 +168,27 @@ def register():
         return redirect(url_for('oobe'))
 
 
+# # The page rendered when the registered user clicks the view bird option
+# @app.route('/view/<username>', methods=['GET', 'POST'])
+# @login_required
+# def birdView(username):
+#     usr = users.query.filter_by(id=current_user.get_id()).first_or_404()
+#     attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
+#     # Convert the ints from the DB to bools
+#     can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
+#     if request.method == "GET":
+#         # Allows authenticated user to view the stream
+#         return render_template('birdView.html', user=usr, can_feed=can_feed)
+#     if request.method == "POST":
+#         # Apply the selected filter and restart the stream
+#         global filter  # Indicates we are referring the the global filter
+#         filter = 'negative'
+#         global check  # Indicated we are referring the the global check
+#         check = True
+#         bbLog.info("View: Applying changes.")
+#         return render_template('birdView.html', user=usr, can_feed=can_feed)
+
+
 @app.route('/birdstream')
 def birdstream():
     # Handles the live stream to the img element on the live stream page
@@ -185,6 +205,17 @@ def toFeed():
     return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
 
 
+# @app.route('/_log')
+# def toLog():
+#     # Call route logic to execute to write feeds to db
+#     fTime = str(r.randint(0, 7)) + " " + str(r.randint(0, 24)) + " " + str(r.randint(0, 59))
+#     addFeed = feedTimes(userID=current_user.get_id(), feed_time=fTime, feed_type='instant')
+#     db.session.add(addFeed)
+#     db.session.commit()
+#     return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
+
+
+
 @login_required
 @app.route('/schedule_settings', methods=['GET', 'POST'])
 def schedule_settings():
@@ -192,7 +223,6 @@ def schedule_settings():
     attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
     can_feed = attr.check_feed()
     is_admin = attr.check_admin()
-    theme = route_logic.get_user_theme()
     # Ensure the user has permission to view this form
     if can_feed:
         # If the form passes validation and is submitted
@@ -220,24 +250,18 @@ def schedule_settings():
             db.session.commit()
             flash("Schedule Updated")
             bbLog.info(str(current_user) + " successfully updated their scheduled feed.")
-            return render_template('scheduledFeedSettings.html', form=form, can_feed=can_feed, is_admin=is_admin,
-                                   theme=theme)
+            return render_template('scheduledFeedSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
 
-        # if the form validates but the "schedule feed" checkbox is unchecked, disable scheduled feeding
-        elif form.validate_on_submit():
+        else:
             attr.scheduleFeed = None
             attr.feedDays = None
             attr.feedHour = None
             attr.feedMinute = None
-            flash('Scheduled feeding disabled')
-            bbLog.info(str(current_user.username) + " disabled their scheduled feed")
             db.session.commit()
 
         if attr.scheduleFeed:
             # Auto populate form based on current settings
-            bbLog.info("Populating " + current_user.username + " settings on feed schedule page")
             feeds = route_logic.get_Feed_Schedule(current_user.get_id())
-            form.scheduledFeed.data = True
             if 'Mon' in feeds[0].feed_days:
                 form.feedDay_Monday.data = True
             if 'Tues' in feeds[0].feed_days:
@@ -259,54 +283,29 @@ def schedule_settings():
         # Are bounced back to the starting page.
         return redirect(url_for('startPage'))
     # If form fails to validate, reload the page (this could be a first time visit, no form submission attempted)
-    return render_template('scheduledFeedSettings.html', form=form, can_feed=can_feed, is_admin=is_admin, theme=theme)
+    return render_template('scheduledFeedSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
 
 
 @login_required
-@app.route('/user_settings', methods=['GET', 'POST'])
-def user_settings():
-    theme_form = forms.theme_settings()
-    user_settings_form = forms.user_settings()
+@app.route('/theme_settings', methods=['GET', 'POST'])
+def theme_settings():
+    form = forms.theme_settings()
     attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
-    usr = users.query.filter_by(id=current_user.get_id()).first()
-    theme = route_logic.get_user_theme()
-    # Tell the form what this user's current username and email are
-    user_settings_form.existing_Email = usr.email
-    user_settings_form.existing_Username = usr.username
     can_feed = attr.check_feed()
     is_admin = attr.check_admin()
-
-    if user_settings_form.validate_on_submit():
-        usr.email = user_settings_form.email.data
-        usr.username = user_settings_form.username.data
-        attr.style = user_settings_form.themes.data
-        # Check if the user is trying to change their password or not
-        if usr.check_password(user_settings_form.currentPassword.data) and user_settings_form.newPassword.data is not "":
-            usr.set_password(user_settings_form.newPassword.data)
-            flash("Password Updated")
-            db.session.commit()
-            return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
-                                   user_settings_form=user_settings_form, theme=theme)
-        elif usr.check_password(user_settings_form.currentPassword.data) == False and user_settings_form.newPassword.data is not "":
-            flash('Current Password incorrect; password not updated')
-            return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
-                                   user_settings_form=user_settings_form, theme=theme)
+    if form.validate_on_submit():
+        uid = current_user.get_id()
+        attr = attributes.query.filter_by(userID=uid).first()
+        attr.style = form.themes.data
         db.session.commit()
-        flash("User settings updated!")
-        return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
-                               user_settings_form=user_settings_form, theme=theme)
-
-    # Pre-fill current settings
-    user_settings_form.username.data = usr.username
-    user_settings_form.email.data = usr.email
-    user_settings_form.themes.data = attr.style
-    return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
-                           user_settings_form=user_settings_form, theme=theme)
+        flash("Theme Updated!")
+        bbLog.info(str(current_user) + " successfully updated their theme")
+        return render_template('themeSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
+    return render_template('themeSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
 
 @login_required
 @app.route('/admin_settings', methods=['GET', 'POST'])
 def admin_settings():
-    theme = route_logic.get_user_theme()
     attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
     can_feed = attr.check_feed()
     is_admin = attr.check_admin()
@@ -329,15 +328,13 @@ def admin_settings():
         db.session.commit()
         flash("User Registered")
         bbLog.info("Registration: " + str(current_user) + " has successfully registered.")
-        return redirect(url_for('admin_settings'))
-    return render_template('adminSettings.html', accounts=accounts, can_feed=can_feed, is_admin=is_admin, form=form,
-                           theme=theme)
+        return redirect(url_for('login'))
+    return render_template('adminSettings.html', accounts=accounts, can_feed=can_feed, is_admin=is_admin, form=form)
 
 
 @login_required
 @app.route('/admin_users_settings/<uid>', methods=['GET', 'POST'])
 def admin_users_settings(uid):
-    theme = route_logic.get_user_theme()
     # Instantiate the form and determine the current user's access level
     form = forms.admin_settings()
     cur_attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
@@ -356,14 +353,11 @@ def admin_users_settings(uid):
             user.username = form.username.data
             user.email = form.email.data
             attr.canFeed = route_logic.convert_can_feed_from_form(form.canFeed.data)
-            # If the admin did not enter anything into the pw box, don't try and update the pw
-            if form.newPassword.data is not "":
-                user.set_password(form.newPassword.data)
 
             db.session.commit()
             flash(user.username + ' settings updated')
             return render_template('adminUserSettings.html',
-                                   username=user.username, can_feed=can_feed, is_admin=is_admin, form=form, theme=theme)
+                                   username=user.username, can_feed=can_feed, is_admin=is_admin, form=form)
         # If the user has permission to view this page, but has not submitted the form...
         # Pre-fill the form with the current settings of the user in question
         form.username.data = user.username
@@ -374,11 +368,35 @@ def admin_users_settings(uid):
         # Kick non-admins who try and access this page via URL to the homepage
         return redirect(url_for('startPage'))
     return render_template('adminUserSettings.html',
-                           username=user.username, can_feed=can_feed, is_admin=is_admin, form=form, theme=theme)
+                           username=user.username, can_feed=can_feed, is_admin=is_admin, form=form)
 
 
-@app.route('/_clear_feed')
-def _clear_feed():
+@app.route('/_clearfeed')
+def clear_feed():
     feedTimes.query.delete()
     db.session.commit()
-    return redirect(url_for('startPage'))
+    return jsonify()
+
+# @login_required
+# @app.route('/schedule')
+# def schedule():
+#     # Get every field from the attributes table which has scheduledFeed = 1
+#     # This amounts to every user who has a feed scheduled
+#     all_feeds = attributes.query.filter_by(scheduleFeed=1).all()
+#     # Empty list which will be filled by feedTimeObjects
+#     feed_times = []
+#
+#     for feed in all_feeds:
+#         # Create a new empty FeedTimeObject
+#         this_feed_time = feed_obj.FeedTimeObject()
+#
+#         usr = users.query.filter_by(id=feed.userID).first()
+#         # Fill the feed time object
+#         this_feed_time.set_feed_creator(usr.username)
+#         this_feed_time.set_feed_days(feed.feedDays)
+#         this_feed_time.set_feed_time(str(feed.feedHour) + ":" + str(feed.feedMinute))
+#         # Add the feed time object to the end of a list
+#         feed_times.append(this_feed_time)
+#
+#     # Pass the feed_times list of FeedTime Objects to the web page
+#     return render_template('feedSchedule.html', feed_times=feed_times)
