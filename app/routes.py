@@ -143,12 +143,12 @@ def register():
 
     registrationForm = forms.register()
     if registrationForm.validate_on_submit():
-        uname = registrationForm.username.data
-        usr = users(username=uname)
+        usr = users(username=registrationForm.username.data)
         usr.set_password(registrationForm.password.data)
+        usr.email = registrationForm.email.data
         db.session.add(usr)
         db.session.commit()
-        committedUser = users.query.filter_by(username=uname).first()
+        committedUser = users.query.filter_by(username=registrationForm.username.data).first()
         uid = committedUser.id
         attr = attributes(userID=uid, canFeed=1, style='light', isAdmin=0)
         db.session.add(attr)
@@ -296,12 +296,12 @@ def admin_settings():
     accounts = users.query.all()
     form = forms.admin_register()
     if form.validate_on_submit():
-        uname = form.username.data
-        usr = users(username=uname)
+        usr = users(username=form.username.data)
         usr.set_password(form.password.data)
+        usr.email = form.email.data
         db.session.add(usr)
         db.session.commit()
-        committedUser = users.query.filter_by(username=uname).first()
+        committedUser = users.query.filter_by(username=form.username.data).first()
         uid = committedUser.id
         if form.isAdmin.data:
             isAdmin = 1
