@@ -1,13 +1,26 @@
 {% extends 'foundation.html' %}
-
 {% block content %}
-    <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
+    <h2>Other User's Attached to {{ current_user.username }}'s Bird Box</h2>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Edit</th>
+        </tr>
+        {% for account in accounts %}
+            <tr>
+                <td>{{account.username}}</td>
+                <td>{{account.email}}</td>
+                <td><a href="{{ url_for('admin_users_settings', uid=account.id) }}">Edit</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <h2>Create a new user</h2>
+    <form method="post">
+        {{ form.hidden_tag() }}
             <p>
-            Please enter a Username and Password
-                <br>
-            Any label with a * is a required field<br><br>
-                {{ form.username.label }} *
+                {{ form.username.label }}
                 <br>
                 {{ form.username(size=32) }}
                 <br>
@@ -16,7 +29,7 @@
                     <span class="formError">{{ error }}</span>
                 {% endfor %}
                 <br>
-                {{ form.password.label }} *
+                {{ form.password.label }}
                 <br>
                 {{ form.password(size=32) }}
                 <br>
@@ -24,7 +37,7 @@
                     <span class="formError">{{ error }}</span>
                 {% endfor %}
                 <br>
-                {{ form.confPassword.label }}  *
+                {{ form.confPassword.label }}
                 <br>
                 {{ form.confPassword(size=32) }}
                 <br>
@@ -40,8 +53,9 @@
                     <span class="formError">{{ error }}</span>
                 {% endfor %}
                 <br>
+                {{ form.isAdmin.label }} {{ form.isAdmin }}
                 <br>
                 {{ form.reg }}
             </p>
-        </form>
+    </form>
 {% endblock %}

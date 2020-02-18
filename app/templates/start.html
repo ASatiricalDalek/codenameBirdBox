@@ -1,11 +1,69 @@
 {% extends "foundation.html" %}
-
+{% block header %}
+    <script src="{{ url_for('static', filename='js/feeder.js') }}"></script>
+       <script src="{{ url_for('static', filename='js/feeder.js') }}"></script>
+{#    <script src="{{ url_for('static', filename='js/log.js') }}"></script>#}
+    <script src="{{ url_for('static', filename='js/feedlog.js') }}"></script>
+{% endblock %}
 {% block content %}
-<div>
-    {% if current_user.is_authenticated %}
-        <p>Hello {{current_user.username}}</p>
+<div id="welcome">
+{% if current_user.is_authenticated %}
+    <p>Hello {{current_user.username}}</p>
+{% else %}
+    <p>Welcome to Codename: BirdBox</p>
+{% endif %}
+</div>
+<div id="birdView">
+    <h2>Enjoy your beautiful bird</h2>
+    <img src="{{ url_for('birdstream') }}">
+    <br>
+    <br>
+    {% if can_feed %}
+        <a href="#" id="feed">Feed</a>
     {% else %}
-        <p>Welcome to Codename: BirdBox</p>
+        <p>Sorry, you don't have permission to feed the bird</p>
     {% endif %}
+    <form method = 'post'>
+        <input type = 'submit' value='Change'>
+{#        <a href="#" id="log">log</a>#}
+    </form>
+
+
+</div>
+<div id="FeedSchedule">
+    <table class="bb_table">
+        <tr>
+            <th>User</th>
+            <th>Days</th>
+            <th>Time</th>
+        </tr>
+        {% for feeding in feed_times %}
+        <tr>
+            <td>{{ feeding.feed_creator }}</td>
+            <td>
+                {% for day in feeding.feed_days %}
+                    {{ day }}
+                {% endfor %}
+            </td>
+            <td>{{ feeding.feed_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div id="feedLog">
+    <table class="bb_table">
+        <tr>
+            <th>Users</th>
+            <th>Feed Time</th>
+            <th>Feed Type</th>
+        </tr>
+        {% for feed in feeds %}
+            <tr>
+                <td>{{ feed.userID }}</td>
+                <td>{{ feed.feed_time }}</td>
+                <td>{{ feed.feed_type }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 </div>
 {% endblock %}

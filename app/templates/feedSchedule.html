@@ -1,0 +1,21 @@
+{% extends 'foundation.html' %}
+{% block content %}
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Days</th>
+            <th>Time</th>
+        </tr>
+        {% for feeding in feed_times %}
+        <tr>
+            <td>{{ feeding.feed_creator }}</td>
+            <td>
+                {% for day in feeding.feed_days %}
+                    {{ day }}
+                {% endfor %}
+            </td>
+            <td>{{ feeding.feed_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

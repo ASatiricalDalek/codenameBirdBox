@@ -2,37 +2,23 @@
 
 {% block content %}
 <head>
-    <script type="text/javascript">
-        var sec = 0;
-        function pad ( val ) { return val > 9 ? val : "0" + val; }
-        setInterval( function(){
-            document.getElementById("seconds").innerHTML=pad(++sec%60);
-            document.getElementById("minutes").innerHTML=pad(parseInt(sec/60,10));
-        }, 1000);
-    </script>
+    <script src="{{ url_for('static', filename='js/feeder.js') }}"></script>
 </head>
 <body>
     <h1>Welcome {{ user.username }}</h1>
     <h2>Enjoy your beautiful bird</h2>
-    <br>
     <img src="{{ url_for('birdstream') }}">
     <br>
     <br>
 
-        <form actions="" method="post">
-            <input type="submit" id ="feed" name="feed" value="Feed">
-        </form>
-
-<div class="block" style="text-align: center;>
-<div>
-</div>
-<span id="count"></span>
-<br>
-<span id="minutes"></span>:<span id="seconds"></span>
-<br>
-<label>&nbsptotal time watching.</label>  
-</div>
-
+    {% if can_feed %}
+        <a href="#" id="feed">Feed</a>
+    {% else %}
+        <p>Sorry, you don't have permission to feed the bird</p>
+    {% endif %}
+    <form method = 'post'>
+        <input type = 'submit' value='Change'>
+    </form>
 </body>
 {% endblock %}
 

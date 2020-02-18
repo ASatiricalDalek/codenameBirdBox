@@ -1,13 +1,12 @@
 {% extends 'foundation.html' %}
 
 {% block content %}
+    <h2>Welcome to your new Bird Box</h2>
+    <p>Please create your administrator account</p>
     <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <p>
-            Please enter a Username and Password
-                <br>
-            Any label with a * is a required field<br><br>
-                {{ form.username.label }} *
+                {{ form.username.label }}
                 <br>
                 {{ form.username(size=32) }}
                 <br>
@@ -16,7 +15,7 @@
                     <span class="formError">{{ error }}</span>
                 {% endfor %}
                 <br>
-                {{ form.password.label }} *
+                {{ form.password.label }}
                 <br>
                 {{ form.password(size=32) }}
                 <br>
@@ -24,7 +23,7 @@
                     <span class="formError">{{ error }}</span>
                 {% endfor %}
                 <br>
-                {{ form.confPassword.label }}  *
+                {{ form.confPassword.label }}
                 <br>
                 {{ form.confPassword(size=32) }}
                 <br>

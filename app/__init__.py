@@ -3,6 +3,8 @@ from config import configObject
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+
+
 app = Flask(__name__)
 # Load our configuration from the config.py file for CSRF form security
 app.config.from_object(configObject)
@@ -14,4 +16,18 @@ migrate = Migrate(app, db)
 loginManager = LoginManager(app)
 # Allow for "Login Required Decorator
 loginManager.login_view = 'login'
-from app import routes, models
+from app import routes, models, schedule_pi
+from app.bb_log import bbLog
+        
+schedule_pi.schedule_feed()  # Scheduled feed thread initalization
+bbLog.info("Scheduled feed thread established.")
+
+
+    
+
+
+
+
+
+
+

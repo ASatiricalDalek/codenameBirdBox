@@ -1,6 +1,9 @@
 # https://github.com/miguelgrinberg/flask-video-streaming
 import time
 import threading
+from app import routes
+from app.bb_log import bbLog
+
 try:
     from greenlet import getcurrent as get_ident
 except ImportError:
@@ -74,7 +77,6 @@ class BaseCamera(object):
     def get_frame(self):
         """Return the current camera frame."""
         BaseCamera.last_access = time.time()
-
         # wait for a signal from the camera thread
         BaseCamera.event.wait()
         BaseCamera.event.clear()
@@ -89,17 +91,20 @@ class BaseCamera(object):
     @classmethod
     def _thread(cls):
         """Camera background thread."""
-        print('Starting camera thread.')
-        frames_iterator = cls.frames()
+        bbLog.info("Starting camera thread.")
+        frames_iterator = cls.frames()  # This references the frames function in camera_pi.py
+
         for frame in frames_iterator:
             BaseCamera.frame = frame
             BaseCamera.event.set()  # send signal to clients
             time.sleep(0)
 
             # if there hasn't been any clients asking for frames in
-            # the last 10 seconds then stop the thread
-            if time.time() - BaseCamera.last_access > 10:
+            # the last 10 seconds OR if the post request has set global check to True
+            # then stop the thread
+            if time.time() - BaseCamera.last_access > 10 or routes.check == True:
                 frames_iterator.close()
-                print('Stopping camera thread due to inactivity.')
+                bbLog.info("Stopping camera thread due to inactivity.")
+                routes.check = False
                 break
         BaseCamera.thread = None

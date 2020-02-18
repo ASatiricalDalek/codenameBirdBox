@@ -10,6 +10,7 @@ class users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     password = db.Column(db.String(128))
+    email = db.Column(db.String(64))
 
     # This built-in function tells Python how to print these objects for debugging purposes
     def __repr__(self):
@@ -25,11 +26,35 @@ class users(UserMixin, db.Model):
 class attributes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, db.ForeignKey(users.id))
+    isAdmin = db.Column(db.Integer)
     canFeed = db.Column(db.Integer)
-    canView = db.Column(db.Integer)
     style = db.Column(db.String(32))
+    scheduleFeed = db.Column(db.Integer)
+    # 1 Represents Monday - 7 For Sunday
+    feedDays = db.Column(db.Integer)
+    feedHour = db.Column(db.Integer)
+    feedMinute = db.Column(db.Integer)
 
+    def check_admin(self):
+        if self.isAdmin == 1:
+            return True
+        else:
+            return False
+
+    def check_feed(self):
+        if self.canFeed == 1:
+            return True
+        else:
+            return False
+
+
+class feedTimes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    userID = db.Column(db.Integer, db.ForeignKey(users.id))
+    feed_time = db.Column(db.String)
+    feed_type = db.Column(db.String)
 
 @loginManager.user_loader
 def load_user(id):
     return users.query.get(int(id))
+
