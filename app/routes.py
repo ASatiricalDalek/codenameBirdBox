@@ -46,6 +46,7 @@ def oobe():
         uname = registrationForm.username.data
         usr = users(username=uname)
         usr.set_password(registrationForm.password.data)
+        usr.email = registrationForm.email.data
         db.session.add(usr)
         db.session.commit()
         committedUser = users.query.filter_by(username=uname).first()
@@ -99,31 +100,35 @@ def startPage():
 # The page rendered for user login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # if a logged in user tries to view the login page, send them home
-    if current_user.is_authenticated:
-        bbLog.info(("Login: "+str(current_user)+" is already logged in."))
-        return redirect(url_for('startPage'))
+    # If the user somehow makes it to the login page without going through OOBE to make admin acct. Redirect them
+    if attributes.query.filter_by(isAdmin=1).first():
+        # if a logged in user tries to view the login page, send them home
+        if current_user.is_authenticated:
+            bbLog.info(("Login: "+str(current_user)+" is already logged in."))
+            return redirect(url_for('startPage'))
 
-    login = forms.signIn()
-    # Only run this when the form is submitted, not on page load
-    if login.validate_on_submit():
-        # Query DB to get user
-        usr = users.query.filter_by(username=login.username.data).first()
-        if usr is None or not usr.check_password(login.password.data):
-            flash("Incorrect Username or Password")
-            bbLog.info("Login: User entered invalid credentials.")
-            # Refresh page to show the flashed message
-            return redirect(url_for('login'))
-        login_user(usr, remember=login.remember.data)
-        next_page = request.args.get('next')
-        # 'next' will take the user to the last page they tried to visit before logging in
-        # if that page required login and kicked them back to this page
-        # .netloc ensures that the URL actually exists in the app and hasn't been injected
-        if not next_page or url_parse(next_page).netloc != '':
-            bbLog.info("Login: "+str(current_user)+" has logged in.")
-            next_page = url_for('startPage')
-        return redirect(next_page)
-    return render_template('login.html', form=login)
+        login = forms.signIn()
+        # Only run this when the form is submitted, not on page load
+        if login.validate_on_submit():
+            # Query DB to get user
+            usr = users.query.filter_by(username=login.username.data).first()
+            if usr is None or not usr.check_password(login.password.data):
+                flash("Incorrect Username or Password")
+                bbLog.info("Login: User entered invalid credentials.")
+                # Refresh page to show the flashed message
+                return redirect(url_for('login'))
+            login_user(usr, remember=login.remember.data)
+            next_page = request.args.get('next')
+            # 'next' will take the user to the last page they tried to visit before logging in
+            # if that page required login and kicked them back to this page
+            # .netloc ensures that the URL actually exists in the app and hasn't been injected
+            if not next_page or url_parse(next_page).netloc != '':
+                bbLog.info("Login: "+str(current_user)+" has logged in.")
+                next_page = url_for('startPage')
+            return redirect(next_page)
+        return render_template('login.html', form=login)
+    else:
+        return redirect(url_for('oobe'))
 
 
 # The page rendered after the user logs out
@@ -137,27 +142,30 @@ def logout():
 # The page rendered when the user registers
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.is_authenticated:
-        bbLog.info("Registration: " + str(current_user) + " has already successfully registered.")
-        return redirect(url_for('startPage'))
+    if attributes.query.filter_by(isAdmin=1).first():
+        if current_user.is_authenticated:
+            bbLog.info("Registration: " + str(current_user) + " has already successfully registered.")
+            return redirect(url_for('startPage'))
 
-    registrationForm = forms.register()
-    if registrationForm.validate_on_submit():
-        usr = users(username=registrationForm.username.data)
-        usr.set_password(registrationForm.password.data)
-        usr.email = registrationForm.email.data
-        db.session.add(usr)
-        db.session.commit()
-        committedUser = users.query.filter_by(username=registrationForm.username.data).first()
-        uid = committedUser.id
-        attr = attributes(userID=uid, canFeed=1, style='light', isAdmin=0)
-        db.session.add(attr)
-        db.session.commit()
-        flash("User Registered")
-        bbLog.info("Registration: " + str(current_user) + " has successfully registered.")
-        return redirect(url_for('login'))
-    bbLog.info("Registration: Error occurred during registration.")
-    return render_template('register.html', form=registrationForm)
+        registrationForm = forms.register()
+        if registrationForm.validate_on_submit():
+            usr = users(username=registrationForm.username.data)
+            usr.set_password(registrationForm.password.data)
+            usr.email = registrationForm.email.data
+            db.session.add(usr)
+            db.session.commit()
+            committedUser = users.query.filter_by(username=registrationForm.username.data).first()
+            uid = committedUser.id
+            attr = attributes(userID=uid, canFeed=1, style='light', isAdmin=0)
+            db.session.add(attr)
+            db.session.commit()
+            flash("User Registered")
+            bbLog.info("Registration: " + str(current_user) + " has successfully registered.")
+            return redirect(url_for('login'))
+        bbLog.info("Registration: Error occurred during registration.")
+        return render_template('register.html', form=registrationForm)
+    else:
+        return redirect(url_for('oobe'))
 
 
 # # The page rendered when the registered user clicks the view bird option
@@ -218,7 +226,7 @@ def schedule_settings():
     # Ensure the user has permission to view this form
     if can_feed:
         # If the form passes validation and is submitted
-        if form.validate_on_submit():
+        if form.scheduledFeed.data and form.validate_on_submit():
             # Get the current user's ID and load the attributes table for that usr (userID is FK with ID in users table)
             uid = current_user.get_id()
             attr = attributes.query.filter_by(userID=uid).first()
@@ -243,6 +251,13 @@ def schedule_settings():
             flash("Schedule Updated")
             bbLog.info(str(current_user) + " successfully updated their scheduled feed.")
             return render_template('scheduledFeedSettings.html', form=form, can_feed=can_feed, is_admin=is_admin)
+
+        else:
+            attr.scheduleFeed = None
+            attr.feedDays = None
+            attr.feedHour = None
+            attr.feedMinute = None
+            db.session.commit()
 
         if attr.scheduleFeed:
             # Auto populate form based on current settings
@@ -354,6 +369,14 @@ def admin_users_settings(uid):
         return redirect(url_for('startPage'))
     return render_template('adminUserSettings.html',
                            username=user.username, can_feed=can_feed, is_admin=is_admin, form=form)
+
+
+@app.route('/_clear_feed')
+def _clear_feed():
+    feedTimes.query.delete()
+    db.session.commit()
+    return redirect(url_for('startPage'))
+
 # @login_required
 # @app.route('/schedule')
 # def schedule():

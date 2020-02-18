@@ -63,5 +63,8 @@
             </tr>
         {% endfor %}
     </table>
+    {% if is_admin %}
+        <a href="{{ url_for('_clear_feed') }}">Clear Feed Log</a>
+    {% endif %}
 </div>
 {% endblock %}

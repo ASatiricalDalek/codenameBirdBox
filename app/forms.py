@@ -77,7 +77,7 @@ class admin_settings(FlaskForm):
 class feed_schedule(FlaskForm):
     # Checkbox for turning on scheduled feed
     # TODO: Enable the rest of this form only if this box is checked
-    scheduledFeed = BooleanField('Enable Scheduled Feeding?', default=True)
+    scheduledFeed = BooleanField('Enable Scheduled Feeding?')
     # Checkboxes for each day
     feedDay_Monday = BooleanField('Monday')
     feedDay_Tuesday = BooleanField('Tuesday')
