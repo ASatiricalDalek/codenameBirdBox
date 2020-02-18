@@ -192,6 +192,7 @@ def birdstream():
 @app.route('/_feed')
 def toFeed():
     # Call route logic to execute the motor spinning script
+    route_logic.db_write_log(current_user.username, route_logic.format_time(), 'instant')
     route_logic.instant_feed(motor_pi.motor(), run=True)
     return jsonify() # return empty json since the function expects return, but don't need to give anything in this case
 

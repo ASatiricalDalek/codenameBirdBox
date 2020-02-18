@@ -35,10 +35,10 @@ def db_write_log(uid, fTime, fType):
 # This executes the motor spin script in motor_pi.py
 def instant_feed(motor, run):
     try:
-        db_write_log(current_user.get_id(), format_time(), 'instant')
         motor.spin(run)
-    except:
+    except Exception as e:
         bbLog.info("An error occurred with the motor.")
+        bbLog.info(e)
     else:
         bbLog.info("Motor function was successful.")
 
@@ -60,7 +60,7 @@ def check_feed():
                 result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
                 # If the current time == the time in the DB run the motor
                 if format_now == result:
-                    db_write_log(user.id, result, 'scheduled')
+                    db_write_log(user.username, result, 'scheduled')
                     instant_feed(motor_pi.motor(), run=True)
                 else:
                     bbLog.info("    Time Feed: "+result)
