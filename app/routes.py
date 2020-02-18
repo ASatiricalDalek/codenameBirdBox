@@ -371,11 +371,11 @@ def admin_users_settings(uid):
                            username=user.username, can_feed=can_feed, is_admin=is_admin, form=form)
 
 
-@app.route('/_clear_feed')
-def _clear_feed():
+@app.route('/_clearfeed')
+def clear_feed():
     feedTimes.query.delete()
     db.session.commit()
-    return redirect(url_for('startPage'))
+    return jsonify()
 
 # @login_required
 # @app.route('/schedule')
