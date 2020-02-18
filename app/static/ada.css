@@ -63,11 +63,11 @@ input[type=submit] {
       border: 3px solid #0071bc;
       text-decoration: none;
 }
-/*
+
 #signInBtn:hover{
        padding: 15px;
-      background-color: green;
-      color: #0071bc;
+      background-color: white;
+      color: black;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -75,7 +75,7 @@ input[type=submit] {
       text-decoration: none;
 }
 
-*/
+
 
 
   article {
@@ -123,6 +123,16 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
   }
+  #topMenu a:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+}
 
 .container-fluid {
      text-align: center;
@@ -142,6 +152,16 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
 }
+#reg:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+}
 #feed{
        padding: 15px;
       background-color: darkgray;
@@ -153,6 +173,16 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
 
+}
+#feed:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
 }
 label{
     color: #0071bc;

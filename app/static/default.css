@@ -43,13 +43,6 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
-
-
-  li a:hover {
-
-  }
-
   footer {
 
 
@@ -57,14 +50,23 @@ input[type=submit] {
 #signInBtn{
     padding: 15px;
       background-color: black;
-      color: #ebf2f2;
+      color: #63c3ef;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #97fce8;
+      border: 3px solid #63c3ef;
       text-decoration: none;
 }
-
+#signInBtn:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+}
   article {
 
   }
@@ -97,14 +99,24 @@ font-family: Arial, Helvetica, sans-serif;
   #topMenu a{
       padding: 15px;
       background-color: black;
-      color: #97fce8;
+      color: #63c3ef;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #97fce8;
+      border: 3px solid #63c3ef;
       text-decoration: none;
 
   }
+  #topmenu a:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+}
 .container-fluid {
      text-align: center;
      margin-left: auto;
@@ -115,23 +127,43 @@ font-family: Arial, Helvetica, sans-serif;
 #reg{
         padding: 15px;
       background-color: black;
-      color: #97fce8;
+      color: #63c3ef;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #97fce8;
+      border: 3px solid #63c3ef;
       text-decoration: none;
 
+}
+#reg:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
 }
 #feed{
         padding: 15px;
       background-color: black;
-      color: #97fce8;
+      color: #63c3ef;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
-      border: 3px solid #97fce8;
+      border: 3px solid #63c3ef;
       text-decoration: none;
 
 
+}
+#feed:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
 }
