@@ -308,14 +308,14 @@ def user_settings():
         usr.email = user_settings_form.email.data
         usr.username = user_settings_form.username.data
         attr.style = user_settings_form.themes.data
-        # If user attempts to change their password
-        if usr.check_password(user_settings_form.currentPassword.data) and user_settings_form.newPassword.data is not None:
+        # Check if the user is trying to change their password or not
+        if usr.check_password(user_settings_form.currentPassword.data) and user_settings_form.newPassword.data is not "":
             usr.set_password(user_settings_form.newPassword.data)
             flash("Password Updated")
             db.session.commit()
             return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
                                    user_settings_form=user_settings_form)
-        elif usr.check_password(user_settings_form.currentPassword.data) == False and user_settings_form.newPassword.data is not None:
+        elif usr.check_password(user_settings_form.currentPassword.data) == False and user_settings_form.newPassword.data is not "":
             flash('Current Password incorrect; password not updated')
             return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
                                    user_settings_form=user_settings_form)
@@ -356,7 +356,7 @@ def admin_settings():
         db.session.commit()
         flash("User Registered")
         bbLog.info("Registration: " + str(current_user) + " has successfully registered.")
-        return redirect(url_for('login'))
+        return redirect(url_for('admin_settings'))
     return render_template('adminSettings.html', accounts=accounts, can_feed=can_feed, is_admin=is_admin, form=form)
 
 
@@ -381,6 +381,9 @@ def admin_users_settings(uid):
             user.username = form.username.data
             user.email = form.email.data
             attr.canFeed = route_logic.convert_can_feed_from_form(form.canFeed.data)
+            # If the admin did not enter anything into the pw box, don't try and update the pw
+            if form.newPassword.data is not "":
+                user.set_password(form.newPassword.data)
 
             db.session.commit()
             flash(user.username + ' settings updated')

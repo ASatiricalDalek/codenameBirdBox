@@ -59,6 +59,8 @@ class admin_settings(FlaskForm):
                          default=True)
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
+    newPassword = PasswordField('New Password')
+    newPassword2 = PasswordField('Repeat Password', validators=[EqualTo('newPassword')])
     apply = SubmitField('Apply Settings')
 
     # Existing username and email are passed from routes. Validation only fails if you changed the username or email...
@@ -102,7 +104,6 @@ class user_settings(FlaskForm):
 
 class feed_schedule(FlaskForm):
     # Checkbox for turning on scheduled feed
-    # TODO: Enable the rest of this form only if this box is checked
     scheduledFeed = BooleanField('Enable Scheduled Feeding?')
     # Checkboxes for each day
     feedDay_Monday = BooleanField('Monday')

@@ -20,6 +20,22 @@
                 <span class="formError">{{ error }}</span>
             {% endfor %}
             <br>
+            {{ form.newPassword.label }}
+            <br>
+            {{ form.newPassword }}
+            <br>
+            {% for error in form.newPassword.errors %}
+                <span class="formError">{{ error }}</span>
+            {% endfor %}
+            <br>
+            {{ form.newPassword2.label }}
+            <br>
+            {{ form.newPassword2 }}
+            <br>
+            {% for error in form.newPassword2.errors %}
+                <span class="formError">{{ error }}</span>
+            {% endfor %}
+            <br>
             {{ username }} {{ form.canFeed.label }}
             <br>
             {{ form.canFeed }}
