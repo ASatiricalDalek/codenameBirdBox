@@ -95,7 +95,7 @@ Optionally, you can run flask db downgrade to revert the DB to where it was befo
 >Approved Date: 02/18/2020
 
 ***
-#1. Introduction
+## 1. Introduction
 ### User Problem/Background to the Project
 
 Most people love their pets more than almost anything. 
