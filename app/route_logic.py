@@ -25,6 +25,11 @@ def format_time():
     return now.strftime(str(now_weekday) + " %H %M")
 
 
+def write_time():
+    now = datetime.now()
+    return now.strftime("%a %H:%M")
+
+
 # Writes feed actions to table for the feed log on the viewing page
 def db_write_log(uid, fTime, fType):
     addFeed = feedTimes(userID=uid, feed_time=fTime, feed_type=fType)
@@ -60,7 +65,7 @@ def check_feed():
                 result = v + " " + str(query.feedHour) + " " + str(query.feedMinute)
                 # If the current time == the time in the DB run the motor
                 if format_now == result:
-                    db_write_log(user.username, result, 'scheduled')
+                    db_write_log(user.username, write_time(), 'scheduled')
                     instant_feed(motor_pi.motor(), run=True)
                 else:
                     bbLog.info("    Time Feed: "+result)
