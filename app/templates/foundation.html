@@ -4,37 +4,49 @@
     <meta charset="UTF-8">
     <title>Codename: Bird Box</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='ada.css') }}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{
+            url_for('static', filename='jquery-3.4.1.min.js') }}">\x3C/script>')</script>
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    {# Added another block section for header content #}
+    {% block header %}
+
+    {% endblock %}
 </head>
 <body>
-    <img src="logo.jpg" alt="Codename Birdbox logo" width="727" height="279">
-    <div class="container-fluid">
     <div id="topMenu">
         {% if current_user.is_anonymous %}
-            <a href="{{ url_for('startPage') }}">Home</a>
             <a href="{{ url_for('login') }}">Log In</a>
             <a href="{{ url_for('register') }}">Register</a>
         {% else %}
             <a href="{{ url_for('startPage') }}">Home</a>
             <a href="{{ url_for('logout') }}">Log Out</a>
+{#            <a href="{{ url_for('schedule') }}">Feeding Schedule</a>#}
             <!-- dynamically generate the view bird url based on the current user -->
-            <a href="{{ url_for('birdView', username=current_user.username) }}">View Bird</a>
+{#            <a href="{{ url_for('birdView', username=current_user.username) }}">View Bird</a>#}
+            {% if can_feed %}
+                <a href="{{ url_for('schedule_settings', username=current_user.username) }}">Schedule Settings</a>
+            {% endif %}
+            {% if is_admin %}
+                <a href="{{ url_for('admin_settings', username=current_user.username) }}">Admin Settings</a>
+            {% endif %}
+            <a href="{{ url_for('theme_settings', username=current_user.username) }}">Theme Settings</a>
         {% endif %}
-
-    </div>
     </div>
     <!-- Get messages passed with flask's "flash" function -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-
+    <ul>
         {% for message in messages %}
-        <h1>{{ message }}</h1>
+        <li>{{ message }}</li>
         {% endfor %}
-
+    </ul>
     {% endif %}
     {% endwith %}
 
     {% block content %}
     {% endblock %}
-
 </body>
 </html>

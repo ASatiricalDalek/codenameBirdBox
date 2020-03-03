@@ -1,6 +1,5 @@
   button {
-  margin-left: auto;
-      margin-right: auto;
+
   }
 
   input[type=text], select {
@@ -34,6 +33,7 @@
 
 input[type=submit] {
 
+
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -42,19 +42,22 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
-
-
-  li a:hover {
-
-  }
-
   footer {
 
 
   }
 #signInBtn{
-      padding: 15px;
+     padding: 15px;
+      background-color: #97fce8;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+#signInBtn:hover{
+   padding: 15px;
       background-color: #f2f5f5;
       color: black;
       font-size: 32px;
@@ -63,7 +66,6 @@ input[type=submit] {
       border: 3px solid #97fce8;
       text-decoration: none;
 }
-
   article {
 
   }
@@ -95,7 +97,7 @@ font-family: Arial, Helvetica, sans-serif;
   }
   #topMenu a{
        padding: 15px;
-      background-color: #f2f5f5;
+      background-color: #97fce8;
       color: black;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
@@ -104,6 +106,16 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
   }
+  #topMenu a:hover{
+  padding: 15px;
+      background-color: #f2f5f5;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
 .container-fluid {
      text-align: center;
      margin-left: auto;
@@ -112,8 +124,8 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 #reg{
-        padding: 15px;
-      background-color: #f2f5f5;
+    padding: 15px;
+      background-color: #97fce8;
       color: black;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
@@ -122,8 +134,8 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
 }
-#feed{
-        padding: 15px;
+#reg:hover{
+   padding: 15px;
       background-color: #f2f5f5;
       color: black;
       font-size: 32px;
@@ -131,6 +143,89 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #97fce8;
       text-decoration: none;
+}
+#feed{
+    padding: 15px;
+      background-color: #97fce8;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
 
+
+}
+#feed:hover{
+  padding: 15px;
+      background-color: #f2f5f5;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+
+#FeedSchedule{
+
+    float: left;
+    color: black;
+}
+#feedLog{
+
+    color: black;
+}
+#change{
+    padding: 15px;
+      background-color: #97fce8;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+#change:hover{
+   padding: 15px;
+      background-color: #f2f5f5;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+#apply{
+   padding: 15px;
+      background-color: #97fce8;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+#apply:hover{
+   padding: 15px;
+      background-color: #f2f5f5;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+label{
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+#center{
+      background-color: white;
+      text-align: center;
+      border: 3px solid #97fce8;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 50px;
 
 }

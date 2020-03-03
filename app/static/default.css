@@ -1,6 +1,5 @@
   button {
-  margin-left: auto;
-      margin-right: auto;
+
   }
 
   input[type=text], select {
@@ -107,7 +106,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
   }
-  #topmenu a:hover{
+  #topMenu a:hover{
        padding: 15px;
       background-color: white;
       color: black;
@@ -166,4 +165,67 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+}
+
+#FeedSchedule{
+
+
+    color: black;
+}
+#feedLog{
+
+    color: black;
+}
+#change{
+    padding: 15px;
+      background-color: black;
+      color: #63c3ef;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+}
+#change:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+}
+#apply{
+    padding: 15px;
+      background-color: black;
+      color: #63c3ef;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+}
+#apply:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+}
+label{
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+#center{
+      background-color: white;
+      text-align: center;
+      border: 3px solid #63c3ef;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 50px;
+
 }
