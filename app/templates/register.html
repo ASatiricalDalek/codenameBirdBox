@@ -1,8 +1,10 @@
 {% extends 'foundation.html' %}
 
 {% block content %}
+
     <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
+      <div id="center">
             <p>
             Please enter a Username and Password
                 <br>
@@ -42,6 +44,8 @@
                 <br>
                 <br>
                 {{ form.reg }}
+              </div>
             </p>
         </form>
+
 {% endblock %}
