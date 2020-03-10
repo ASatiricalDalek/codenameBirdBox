@@ -173,7 +173,7 @@ font-family: Arial, Helvetica, sans-serif;
 
 #FeedSchedule{
 
-    float: left;
+
     color: white;
 }
 #feedLog{
@@ -239,4 +239,11 @@ color: black;
 
 #feedLog{
 color: black;
+}
+
+#birdView{
+  border: 3px solid #0071bc;
+        width:70%;
+     height: 400px;
+     position:absolute;
 }
