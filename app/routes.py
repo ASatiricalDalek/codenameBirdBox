@@ -293,6 +293,8 @@ def user_settings():
                                    user_settings_form=user_settings_form, theme=theme)
         db.session.commit()
         flash("User settings updated!")
+        # It's possible the user just changed the theme, so recheck the DB for any theme updates 
+        theme = route_logic.get_user_theme()
         return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
                                user_settings_form=user_settings_form, theme=theme)
 
