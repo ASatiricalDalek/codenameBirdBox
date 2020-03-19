@@ -157,6 +157,9 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
     display: inline-block;
    margin-left: 10px;
+    position: relative;
+    top: -20px;
+
 
 
 }
@@ -235,9 +238,13 @@ label{
     color: black;
 
      width: 50%;
+    position: relative;
+    padding: 15px;
+    right: -75px;
 
-	position: relative;
-    padding-top:725px;
+    display: inline-block;
+
+
 
 }
 #feedLog{
@@ -245,16 +252,20 @@ label{
 
     color: black;
     float: right;
-    width: auto;
-
+    width: available;
+   padding-right: 20px;
+     position: relative;
+    top: -250px;
 
 
 }
 #birdView{
      border: 3px solid #97fce8;
-     width:70%;
-     height: 700px;
-     position: absolute;
+     width:90%;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 50px;
 }
 
 table {
@@ -273,7 +284,27 @@ tr:nth-child(even) {
     background-color: #dddddd;
     color: black;
 }
-#change , #feed {
-display:inline-block;
-/**other codes**/
+
+#clear{
+    padding: 15px;
+      background-color: black;
+      color: #63c3ef;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+     margin-left: 10px;
+    position: relative;
+
+}
+#clear:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
 }

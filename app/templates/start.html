@@ -7,32 +7,38 @@
 {% block content %}
 <div id="welcome">
 {% if current_user.is_authenticated %}
-    <p>Hello {{current_user.username}}</p>
+    <p style="text-align: center; test"><b>Current User:</b> {{current_user.username}}</p>
 {% else %}
     <p>Welcome to Codename: BirdBox</p>
 {% endif %}
 </div>
-
-
+    <p style="text-align: center"><b>User has Administrative Privileges:</b>
+     {% if is_admin %}
+       Yes
+    {% else %}
+    No
+ {% endif %}
+</p>
 
 <div id="birdView">
     <h2>Enjoy your beautiful bird</h2>
 
-   <img src="{{ url_for('birdstream') }}">
-    <img src="/static/bird.jpg" width="680" height="480">
+   <img style="padding-left: 10px" src="{{ url_for('birdstream') }}">
+    <img style="padding-left: 10px" src="/static/bird.jpg" width="680" height="480">
     <br>
     <br>
+
+
     {% if can_feed %}
         <a href="#" id="feed">Feed</a>
     {% else %}
         <p>Sorry, you don't have permission to feed the bird</p>
     {% endif %}
-    <form style="display: inline-block" method = 'post'>
-        <input id="change" type = 'submit' value='Change'>
-    </form>
 
 
-</div>
+
+
+
 
 <div id="feedLog">
     <table class="bb_table">
@@ -77,5 +83,7 @@
     {% if is_admin %}
         <a href="#" id="clear">Clear Log</a>
     {% endif %}
-</div>      
+</div>
+
+    </div>
 {% endblock %}

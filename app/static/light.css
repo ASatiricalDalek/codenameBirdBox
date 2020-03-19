@@ -238,3 +238,31 @@ label{
     margin-top: 50px;
 
 }
+
+#birdView{
+    border: 3px solid #97fce8;
+}
+
+#clear{
+    padding: 15px;
+      background-color: #97fce8;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+     margin-left: 10px;
+    position: relative;
+
+}
+#clear:hover{
+       padding: 15px;
+      background-color: #f2f5f5;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
