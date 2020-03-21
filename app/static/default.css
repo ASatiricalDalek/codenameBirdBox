@@ -53,6 +53,7 @@ input[type=submit] {
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.5s;
 }
 #signInBtn:hover{
        padding: 15px;
@@ -63,6 +64,7 @@ input[type=submit] {
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
   article {
 
@@ -107,6 +109,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.5s;
 
   }
   #topMenu a:hover{
@@ -118,6 +121,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
 .container-fluid {
      text-align: center;
@@ -134,7 +138,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
-
+      transition: 0.5s;
 }
 #reg:hover{
        padding: 15px;
@@ -145,6 +149,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
 #feed{
 
@@ -155,9 +160,9 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
-    display: inline-block;
-   margin-left: 10px;
-
+      display: inline-block;
+      margin-left: 10px;
+      transition: 0.5s;
 
 }
 #feed:hover{
@@ -169,6 +174,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
 
 
@@ -182,7 +188,7 @@ font-family: Arial, Helvetica, sans-serif;
       border: 3px solid #63c3ef;
       text-decoration: none;
     display: inline-block;
-
+      transition: 0.5s;
 }
 
 #change:hover{
@@ -194,6 +200,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
 #apply{
     padding: 15px;
@@ -204,6 +211,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.5s;
 }
 #apply:hover{
        padding: 15px;
@@ -214,6 +222,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
 label{
 
@@ -257,10 +266,47 @@ label{
      position: absolute;
 }
 
+#userSettingsMenu{
+    border: 3px solid #97fce8;
+    width: 50%;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+#scheduledFeedMenu{
+    border: 3px solid #97fce8;
+    width: 50%;
+    height: 310px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+#adminSettingsMenu{
+    border: 3px solid #97fce8;
+    width: 50%;
+    height: 740px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
 table {
     font-family: arial, helvetica, sans-serif;
     border-collapse: collapse;
+}
 
+table.center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 td, th {

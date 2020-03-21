@@ -233,6 +233,40 @@ label{
     margin-top: 50px;
 
 }
+
+#userSettingsMenu{
+    border: 3px solid #0071bc;
+    width: 50%;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+#scheduledFeedMenu{
+    border: 3px solid #0071bc;
+    width: 50%;
+    height: 310px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+#adminSettingsMenu{
+    border: 3px solid #0071bc;
+    width: 50%;
+    height: 740px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
 #FeedSchedule{
 color: black;
 }

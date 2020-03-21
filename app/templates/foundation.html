@@ -47,11 +47,13 @@
     <!-- Get messages passed with flask's "flash" function -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
+    <div id = "center">
     <ul>
         {% for message in messages %}
         <li>{{ message }}</li>
         {% endfor %}
     </ul>
+    </div>
     {% endif %}
     {% endwith %}
 
