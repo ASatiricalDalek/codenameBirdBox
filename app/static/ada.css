@@ -272,12 +272,54 @@ color: black;
 }
 
 #feedLog{
-color: black;
+
+
+
 }
 
 #birdView{
-  border: 3px solid #0071bc;
-        width:70%;
-     height: 400px;
-     position:absolute;
+    border: 3px solid #0071bc;
+}
+
+tr{
+    color: black;
+}
+th{
+    color: black;
+}
+
+td, th {
+    border: 3px solid #0071bc;
+    text-align: left;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+    color: black;}
+
+
+
+#clear{
+    padding: 15px;
+      background-color: white;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+     margin-left: 10px;
+    position: relative;
+
+}
+#clear:hover{
+       padding: 15px;
+      background-color: black;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
 }

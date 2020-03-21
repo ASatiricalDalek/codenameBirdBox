@@ -232,9 +232,29 @@ color: white;
     color: white;
 
 }
-tr{
+tr, th, li,ul {
     color: white;
 }
-th{
-    color: white;
+
+
+#clear{
+      padding: 15px;
+      background-color: darkgray;
+      color: #2d3636;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+
+}
+#clear:hover{
+   padding: 15px;
+      background-color: #1f2121;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
 }

@@ -86,14 +86,6 @@ def startPage():
     if current_user.is_authenticated:
         id = current_user.get_id()
     if request.method == "POST":
-        # fTime = str(r.randint(0,7)) + " " + str(r.randint(0, 24)) + " " + str(r.randint(0, 59))
-        #         # addFeed = feedTimes(userID=current_user.get_id(), feed_time = fTime, feed_type = 'instant')
-        #         # db.session.add(addFeed)
-        #         # db.session.commit()
-        #         # feed_times = route_logic.get_Feed_Schedule()
-        #         # attr = attributes.query.filter_by(userID=current_user.get_id()).first_or_404()
-        #         # can_feed = route_logic.convert_can_feed_from_db(attr.canFeed)
-        #         # times = feedTimes.query.filter_by().all()
         return render_template('start.html', id=id, feed_times=feed_times, can_feed=can_feed, feeds=times)
     return render_template('start.html', id=id, feed_times=feed_times, can_feed=can_feed, feeds=times)
 
@@ -303,6 +295,7 @@ def user_settings():
     return render_template('themeSettings.html', form=theme_form, can_feed=can_feed, is_admin=is_admin,
                            user_settings_form=user_settings_form, theme=theme)
 
+
 @login_required
 @app.route('/admin_settings', methods=['GET', 'POST'])
 def admin_settings():
@@ -377,6 +370,7 @@ def admin_users_settings(uid):
                            username=user.username, can_feed=can_feed, is_admin=is_admin, form=form, theme=theme)
 
 
+# Clear the feed log on the viewing page
 @app.route('/_clearfeed')
 def clear_feed():
     feedTimes.query.delete()
