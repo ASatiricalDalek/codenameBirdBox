@@ -12,6 +12,7 @@
 #         with picamera.PiCamera() as camera:
 #             # Defines the camera resolution and filter for the camera
 #             camera.resolution = (640, 480)
+#             camera.rotation=180
 #             camera.image_effect = routes.filter  # References the global filter in routes.py
 #              # let camera warm up
 #             time.sleep(2)

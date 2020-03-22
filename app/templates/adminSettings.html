@@ -1,7 +1,8 @@
 {% extends 'foundation.html' %}
 {% block content %}
+    <div id="adminSettingsMenu">
     <h2>Other User's Attached to {{ current_user.username }}'s Bird Box</h2>
-    <table>
+    <table class="center">
         <tr>
             <th>Username</th>
             <th>Email</th>
@@ -58,4 +59,5 @@
                 {{ form.reg }}
             </p>
     </form>
+    </div>
 {% endblock %}

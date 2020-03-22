@@ -1,6 +1,5 @@
   button {
-  margin-left: auto;
-      margin-right: auto;
+
   }
 
   input[type=text], select {
@@ -34,6 +33,7 @@
 
 input[type=submit] {
 
+
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -42,19 +42,12 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
-
-
-  li a:hover {
-
-  }
-
   footer {
 
 
   }
 #signInBtn{
-      padding: 15px;
+    padding: 15px;
       background-color: darkgray;
       color: #2d3636;
       font-size: 32px;
@@ -63,7 +56,16 @@ input[type=submit] {
       border: 3px solid #97fce8;
       text-decoration: none;
 }
-
+#signInBtn:hover{
+  padding: 15px;
+      background-color: #1f2121;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
   article {
 
   }
@@ -77,10 +79,12 @@ input[type=submit] {
 font-family: Arial, Helvetica, sans-serif;
 color: white;
   }
-  h2{
-      font-family: Arial, Helvetica, sans-serif;
+
+    h2 {
+font-family: Arial, Helvetica, sans-serif;
 color: white;
   }
+
 
   P{
 font-family: Arial, Helvetica, sans-serif;
@@ -88,7 +92,7 @@ font-family: Arial, Helvetica, sans-serif;
   }
 
   body {
-      background-color: #1f2121;
+     background-color: #1f2121;
 
   }
 
@@ -99,7 +103,7 @@ font-family: Arial, Helvetica, sans-serif;
 
   }
   #topMenu a{
-       padding: 15px;
+      padding: 15px;
       background-color: darkgray;
       color: #2d3636;
       font-size: 32px;
@@ -109,6 +113,16 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
   }
+  #topMenu a:hover{
+    padding: 15px;
+      background-color: #1f2121;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
 .container-fluid {
      text-align: center;
      margin-left: auto;
@@ -127,8 +141,18 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 
 }
+#reg:hover{
+   padding: 15px;
+      background-color: #1f2121;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
 #feed{
-      padding: 15px;
+     padding: 15px;
       background-color: darkgray;
       color: #2d3636;
       font-size: 32px;
@@ -139,17 +163,98 @@ font-family: Arial, Helvetica, sans-serif;
 
 
 }
+#feed:hover{
+   padding: 15px;
+      background-color: #1f2121;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
 
+
+#change{
+      padding: 15px;
+      background-color: darkgray;
+      color: #2d3636;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+#change:hover{
+  padding: 15px;
+      background-color: #1f2121;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+#apply{
+    padding: 15px;
+      background-color: darkgray;
+      color: #2d3636;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
+#apply:hover{
+     padding: 15px;
+      background-color: #1f2121;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+}
 label{
-    font-family: Arial, Helvetica, sans-serif;
+
+font-family: Arial, Helvetica, sans-serif;
+color: white;
+
+
+}
+#center{
+      background-color: #1f2121;
+      text-align: center;
+      border: 3px solid #97fce8;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 50px;
     color: white;
 
 }
-#minutes{
-    font-family: Arial, Helvetica, sans-serif;
-color: white;
+tr, th, li,ul {
+    color: white;
 }
-#seconds{
-    font-family: Arial, Helvetica, sans-serif;
-color: white;
+
+
+#clear{
+      padding: 15px;
+      background-color: darkgray;
+      color: #2d3636;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
+
+}
+#clear:hover{
+   padding: 15px;
+      background-color: #1f2121;
+      color: white;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #97fce8;
+      text-decoration: none;
 }

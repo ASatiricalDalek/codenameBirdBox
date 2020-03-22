@@ -1,7 +1,4 @@
-  button {
-  margin-left: auto;
-      margin-right: auto;
-  }
+
 
   input[type=text], select {
 
@@ -39,7 +36,7 @@ input[type=submit] {
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
-  border-radius: 4px;
+
   cursor: pointer;
 }
 
@@ -56,6 +53,7 @@ input[type=submit] {
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.5s;
 }
 #signInBtn:hover{
        padding: 15px;
@@ -66,6 +64,7 @@ input[type=submit] {
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
   article {
 
@@ -89,11 +88,16 @@ font-family: Arial, Helvetica, sans-serif;
       background-color: darkgray;
 
   }
+      h2 {
+font-family: Arial, Helvetica, sans-serif;
+
+  }
 
   #topMenu{
   text-align: center;
      margin-left: auto;
     margin-right: auto;
+      margin-top: 20px;
 
   }
   #topMenu a{
@@ -105,9 +109,10 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.5s;
 
   }
-  #topmenu a:hover{
+  #topMenu a:hover{
        padding: 15px;
       background-color: white;
       color: black;
@@ -116,12 +121,12 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
 .container-fluid {
      text-align: center;
      margin-left: auto;
     margin-right: auto;
-
 }
 
 #reg{
@@ -133,7 +138,7 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
-
+      transition: 0.5s;
 }
 #reg:hover{
        padding: 15px;
@@ -144,9 +149,9 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
 }
 #feed{
-        padding: 15px;
       background-color: black;
       color: #63c3ef;
       font-size: 32px;
@@ -154,8 +159,10 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
-
-
+      display: inline-block;
+      margin-left: 10px;
+      transition: 0.5s;
+    position: relative;
 }
 #feed:hover{
        padding: 15px;
@@ -166,4 +173,186 @@ font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #63c3ef;
       text-decoration: none;
+      transition: 0.3s;
+}
+
+
+#change{
+      padding: 15px;
+      background-color: black;
+      color: #63c3ef;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+    display: inline-block;
+      transition: 0.5s;
+}
+
+#change:hover{
+      padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+      transition: 0.3s;
+}
+#apply{
+    padding: 15px;
+      background-color: black;
+      color: #63c3ef;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+      transition: 0.5s;
+}
+#apply:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+      transition: 0.3s;
+}
+label{
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+#center{
+      background-color: white;
+      text-align: center;
+      border: 3px solid #63c3ef;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 50px;
+
+}
+
+#FeedSchedule{
+    color: black;
+     width: available;
+    position: center;
+    padding: 15px;
+}
+#feedLog{
+    position: static;
+    top: -100px;
+
+
+
+    color: black;
+    
+
+    padding-left: 15px;
+    display: inline-block;
+
+}
+#birdView{
+    white-space: nowrap;
+     border: 3px solid #97fce8;
+     width:90%;
+    text-align: center;
+    position: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 50px;
+}
+
+#userSettingsMenu{
+    border: 3px solid #97fce8;
+    width: 50%;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+#scheduledFeedMenu{
+    border: 3px solid #97fce8;
+    width: 50%;
+    height: 310px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+#adminSettingsMenu{
+    border: 3px solid #97fce8;
+    width: 50%;
+    height: 740px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+table {
+    font-family: arial, helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.bb_table {
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td, th {
+    border: 3px solid #97fce8;
+    text-align: left;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+    color: black;
+}
+
+#clearFeed{
+    display: inline-block;
+}
+
+#clear{
+    padding: 15px;
+      background-color: black;
+      color: #63c3ef;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+     margin-left: 10px;
+    position: relative;
+     transition: 0.5s;
+
+}
+#clear:hover{
+       padding: 15px;
+      background-color: white;
+      color: black;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #63c3ef;
+      text-decoration: none;
+    transition: 0.3s;
 }

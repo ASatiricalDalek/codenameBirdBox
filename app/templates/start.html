@@ -7,27 +7,60 @@
 {% block content %}
 <div id="welcome">
 {% if current_user.is_authenticated %}
-    <p>Hello {{current_user.username}}</p>
+    <p style="text-align: center;"><b>Current User:</b> {{current_user.username}}</p>
 {% else %}
     <p>Welcome to Codename: BirdBox</p>
 {% endif %}
 </div>
+    <p style="text-align: center"><b>User has Administrative Privileges:</b>
+     {% if is_admin %}
+       Yes
+    {% else %}
+    No
+ {% endif %}
+</p>
+
 <div id="birdView">
     <h2>Enjoy your beautiful bird</h2>
-    <img src="{{ url_for('birdstream') }}">
+
+
+   <img style="padding-left: 10px; vertical-align: top;" src="{{ url_for('birdstream') }}">
+    <img style="padding-left: 10px; vertical-align: top;" src="/static/bird.jpg" width="680" height="480">
+
+<div id="feedLog">
+        <table class="bb_table">
+            <tr>
+                <th>Users</th>
+                <th>Feed Time</th>
+                <th>Feed Type</th>
+            </tr>
+            {% for feed in feeds %}
+                <tr>
+                    <td>{{ feed.userID }}</td>
+                    <td>{{ feed.feed_time }}</td>
+                    <td>{{ feed.feed_type }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
     <br>
     <br>
+
+
     {% if can_feed %}
         <a href="#" id="feed">Feed</a>
     {% else %}
         <p>Sorry, you don't have permission to feed the bird</p>
     {% endif %}
-    <form method = 'post'>
-        <input type = 'submit' value='Change'>
-    </form>
 
-
+<div id="clearFeed">
+    {% if is_admin %}
+        <a href="#" id="clear">Clear Log</a>
+    {% endif %}
 </div>
+
 <div id="FeedSchedule">
     <table class="bb_table">
         <tr>
@@ -48,26 +81,5 @@
         {% endfor %}
     </table>
 </div>
-<div id="feedLog">
-    <table class="bb_table">
-        <tr>
-            <th>Users</th>
-            <th>Feed Time</th>
-            <th>Feed Type</th>
-        </tr>
-        {% for feed in feeds %}
-            <tr>
-                <td>{{ feed.userID }}</td>
-                <td>{{ feed.feed_time }}</td>
-                <td>{{ feed.feed_type }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
 </div>
-<div id="clearFeed">
-    {% if is_admin %}
-        <a href="#" id="clear">Clear Log</a>
-    {% endif %}
-</div>      
 {% endblock %}

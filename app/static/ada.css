@@ -1,6 +1,5 @@
   button {
-  margin-left: auto;
-      margin-right: auto;
+
   }
 
   input[type=text], select {
@@ -34,6 +33,7 @@
 
 input[type=submit] {
 
+
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -42,20 +42,13 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
-
-
-  li a:hover {
-
-  }
-
   footer {
 
 
   }
 #signInBtn{
-       padding: 15px;
-      background-color: darkgray;
+    padding: 15px;
+      background-color: white;
       color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
@@ -63,21 +56,16 @@ input[type=submit] {
       border: 3px solid #0071bc;
       text-decoration: none;
 }
-
 #signInBtn:hover{
        padding: 15px;
-      background-color: white;
-      color: black;
+      background-color: black;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #0071bc;
       text-decoration: none;
 }
-
-
-
-
   article {
 
   }
@@ -89,16 +77,16 @@ input[type=submit] {
 
   h1 {
 font-family: Arial, Helvetica, sans-serif;
-color: #0071bc;
+
   }
-  h2{
-      font-family: Arial, Helvetica, sans-serif;
-color: #0071bc;
+
+      h2 {
+font-family: Arial, Helvetica, sans-serif;
+
   }
 
   P{
 font-family: Arial, Helvetica, sans-serif;
-      color: #0071bc;
   }
 
   body {
@@ -113,27 +101,25 @@ font-family: Arial, Helvetica, sans-serif;
 
   }
   #topMenu a{
-      padding: 15px;
-      background-color: darkgray;
+   padding: 15px;
+      background-color: white;
       color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #0071bc;
       text-decoration: none;
-
   }
   #topMenu a:hover{
-       padding: 15px;
-      background-color: white;
-      color: black;
+    padding: 15px;
+      background-color: black;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #0071bc;
       text-decoration: none;
 }
-
 .container-fluid {
      text-align: center;
      margin-left: auto;
@@ -143,7 +129,7 @@ font-family: Arial, Helvetica, sans-serif;
 
 #reg{
       padding: 15px;
-      background-color: darkgray;
+      background-color: white;
       color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
@@ -153,9 +139,9 @@ font-family: Arial, Helvetica, sans-serif;
 
 }
 #reg:hover{
-       padding: 15px;
-      background-color: white;
-      color: black;
+     padding: 15px;
+      background-color: black;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -163,8 +149,8 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 }
 #feed{
-       padding: 15px;
-      background-color: darkgray;
+      padding: 15px;
+      background-color: white;
       color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
@@ -175,9 +161,59 @@ font-family: Arial, Helvetica, sans-serif;
 
 }
 #feed:hover{
-       padding: 15px;
+  padding: 15px;
+      background-color: black;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+}
+
+#FeedSchedule{
+
+
+    color: white;
+}
+#feedLog{
+
+    color: white;
+}
+#change{
+    padding: 15px;
       background-color: white;
-      color: black;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+}
+#change:hover{
+      padding: 15px;
+      background-color: black;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+}
+#apply{
+    padding: 15px;
+      background-color: white;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+}
+#apply:hover{
+     padding: 15px;
+      background-color: black;
+      color: #0071bc;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -185,14 +221,105 @@ font-family: Arial, Helvetica, sans-serif;
       text-decoration: none;
 }
 label{
-    color: #0071bc;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+#center{
+      background-color: white;
+      text-align: center;
+      border: 3px solid #0071bc;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 50px;
 
 }
-#minutes{
-    font-family: Arial, Helvetica, sans-serif;
-color: #0071bc;
+
+#userSettingsMenu{
+    border: 3px solid #0071bc;
+    width: 50%;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
 }
-#seconds{
-    font-family: Arial, Helvetica, sans-serif;
-color: #0071bc;
+
+#scheduledFeedMenu{
+    border: 3px solid #0071bc;
+    width: 50%;
+    height: 310px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+#adminSettingsMenu{
+    border: 3px solid #0071bc;
+    width: 50%;
+    height: 740px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    position: center;
+    text-align: center;
+}
+
+#FeedSchedule{
+color: black;
+}
+
+#feedLog{
+
+
+
+}
+
+#birdView{
+    border: 3px solid #0071bc;
+}
+
+tr{
+    color: black;
+}
+th{
+    color: black;
+}
+
+td, th {
+    border: 3px solid #0071bc;
+    text-align: left;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+    color: black;}
+
+
+
+#clear{
+    padding: 15px;
+      background-color: white;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
+     margin-left: 10px;
+    position: relative;
+
+}
+#clear:hover{
+       padding: 15px;
+      background-color: black;
+      color: #0071bc;
+      font-size: 32px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      border: 3px solid #0071bc;
+      text-decoration: none;
 }
