@@ -22,6 +22,23 @@
 
 <div id="birdView">
     <h2>Enjoy your beautiful bird</h2>
+    <div id="feedLog">
+        <table class="bb_table">
+            <tr>
+                <th>Users</th>
+                <th>Feed Time</th>
+                <th>Feed Type</th>
+            </tr>
+            {% for feed in feeds %}
+                <tr>
+                    <td>{{ feed.userID }}</td>
+                    <td>{{ feed.feed_time }}</td>
+                    <td>{{ feed.feed_type }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
 
    <img style="padding-left: 10px" src="{{ url_for('birdstream') }}">
     <img style="padding-left: 10px" src="/static/bird.jpg" width="680" height="480">
@@ -35,27 +52,10 @@
         <p>Sorry, you don't have permission to feed the bird</p>
     {% endif %}
 
-
-
-
-
-
-<div id="feedLog">
-    <table class="bb_table">
-        <tr>
-            <th>Users</th>
-            <th>Feed Time</th>
-            <th>Feed Type</th>
-        </tr>
-        {% for feed in feeds %}
-            <tr>
-                <td>{{ feed.userID }}</td>
-                <td>{{ feed.feed_time }}</td>
-                <td>{{ feed.feed_type }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
+<div id="clearFeed">
+    {% if is_admin %}
+        <a href="#" id="clear">Clear Log</a>
+    {% endif %}
 </div>
 
 <div id="FeedSchedule">
@@ -78,12 +78,5 @@
         {% endfor %}
     </table>
 </div>
-
-<div id="clearFeed">
-    {% if is_admin %}
-        <a href="#" id="clear">Clear Log</a>
-    {% endif %}
 </div>
-
-    </div>
 {% endblock %}

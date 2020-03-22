@@ -152,7 +152,6 @@ font-family: Arial, Helvetica, sans-serif;
       transition: 0.3s;
 }
 #feed{
-
       background-color: black;
       color: #63c3ef;
       font-size: 32px;
@@ -164,10 +163,6 @@ font-family: Arial, Helvetica, sans-serif;
       margin-left: 10px;
       transition: 0.5s;
     position: relative;
-    top: -20px;
-
-
-
 }
 #feed:hover{
        padding: 15px;
@@ -243,36 +238,23 @@ label{
 }
 
 #FeedSchedule{
-
-
     color: black;
-
-     width: 50%;
-    position: relative;
+     width: available;
+    position: center;
     padding: 15px;
-    right: -75px;
-
-    display: inline-block;
-
-
-
 }
 #feedLog{
-
-
     color: black;
-    float: right;
     width: available;
-   padding-right: 20px;
-     position: relative;
-    top: -250px;
-
-
+    float: right;
+    padding: 15px;
+    display: inline-block;
 }
 #birdView{
      border: 3px solid #97fce8;
-     width:90%;
-
+     width:50%;
+    text-align: center;
+    position: center;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 50px;
@@ -321,6 +303,11 @@ table.center {
     margin-right: auto;
 }
 
+table.bb_table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 td, th {
     border: 3px solid #97fce8;
     text-align: left;
@@ -330,6 +317,10 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
     color: black;
+}
+
+#clearFeed{
+    display: inline-block;
 }
 
 #clear{
