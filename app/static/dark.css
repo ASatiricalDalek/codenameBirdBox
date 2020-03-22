@@ -236,6 +236,12 @@ tr, th, li,ul {
     color: white;
 }
 
+td > a
+{
+    color: #4c9884;
+    text-decoration: none;
+}
+
 
 #clear{
       padding: 15px;

@@ -8,16 +8,17 @@
 <div id="welcome">
 {% if current_user.is_authenticated %}
     <p style="text-align: center;"><b>Current User:</b> {{current_user.username}}</p>
-{% else %}
-    <p>Welcome to Codename: BirdBox</p>
-{% endif %}
-</div>
     <p style="text-align: center"><b>User has Administrative Privileges:</b>
      {% if is_admin %}
        Yes
     {% else %}
-    No
+        No
  {% endif %}
+{% else %}
+    <p>Welcome to Codename: BirdBox</p>
+{% endif %}
+</div>
+
 </p>
 
 <div id="birdView">

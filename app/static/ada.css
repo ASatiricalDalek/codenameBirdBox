@@ -59,21 +59,13 @@ input[type=submit] {
 #signInBtn:hover{
        padding: 15px;
       background-color: black;
-      color: #0071bc;
+      color: #ffffff;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
       border: 3px solid #0071bc;
       text-decoration: none;
 }
-  article {
-
-  }
-
-  section {
-
-  }
-
 
   h1 {
 font-family: Arial, Helvetica, sans-serif;
@@ -113,7 +105,7 @@ font-family: Arial, Helvetica, sans-serif;
   #topMenu a:hover{
     padding: 15px;
       background-color: black;
-      color: #0071bc;
+      color: #ffffff;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -141,7 +133,7 @@ font-family: Arial, Helvetica, sans-serif;
 #reg:hover{
      padding: 15px;
       background-color: black;
-      color: #0071bc;
+      color: #ffffff;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -163,7 +155,7 @@ font-family: Arial, Helvetica, sans-serif;
 #feed:hover{
   padding: 15px;
       background-color: black;
-      color: #0071bc;
+      color: #ffffff;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -172,8 +164,6 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 #FeedSchedule{
-
-
     color: white;
 }
 #feedLog{
@@ -193,7 +183,7 @@ font-family: Arial, Helvetica, sans-serif;
 #change:hover{
       padding: 15px;
       background-color: black;
-      color: #0071bc;
+      color: #ffffff;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -213,7 +203,7 @@ font-family: Arial, Helvetica, sans-serif;
 #apply:hover{
      padding: 15px;
       background-color: black;
-      color: #0071bc;
+      color: #ffffff;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;
@@ -226,55 +216,23 @@ label{
 }
 #center{
       background-color: white;
-      text-align: center;
       border: 3px solid #0071bc;
-    margin-left: 300px;
-    margin-right: 300px;
-    margin-top: 50px;
-
 }
 
 #userSettingsMenu{
     border: 3px solid #0071bc;
-    width: 50%;
-    height: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    position: center;
-    text-align: center;
 }
 
 #scheduledFeedMenu{
     border: 3px solid #0071bc;
-    width: 50%;
-    height: 310px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    position: center;
-    text-align: center;
 }
 
 #adminSettingsMenu{
     border: 3px solid #0071bc;
-    width: 50%;
-    height: 740px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    position: center;
-    text-align: center;
 }
 
 #FeedSchedule{
 color: black;
-}
-
-#feedLog{
-
-
-
 }
 
 #birdView{
@@ -316,7 +274,7 @@ tr:nth-child(even) {
 #clear:hover{
        padding: 15px;
       background-color: black;
-      color: #0071bc;
+      color: #ffffff;
       font-size: 32px;
       font-family: Arial, Helvetica, sans-serif;
       text-align: center;

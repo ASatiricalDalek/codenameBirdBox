@@ -1,6 +1,3 @@
-  button {
-
-  }
 
   input[type=text], select {
 
@@ -42,10 +39,6 @@ input[type=submit] {
   cursor: pointer;
 }
 
-  footer {
-
-
-  }
 #signInBtn{
      padding: 15px;
       background-color: #97fce8;
@@ -66,13 +59,11 @@ input[type=submit] {
       border: 3px solid #97fce8;
       text-decoration: none;
 }
-  article {
-
-  }
-
-  section {
-
-  }
+td > a
+{
+    color: #4c9884;
+    text-decoration: none;
+}
 
 
   h1 {
