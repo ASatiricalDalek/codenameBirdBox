@@ -7,7 +7,7 @@
 {% block content %}
 <div id="welcome">
 {% if current_user.is_authenticated %}
-    <p style="text-align: center; test"><b>Current User:</b> {{current_user.username}}</p>
+    <p style="text-align: center;"><b>Current User:</b> {{current_user.username}}</p>
 {% else %}
     <p>Welcome to Codename: BirdBox</p>
 {% endif %}
@@ -22,7 +22,12 @@
 
 <div id="birdView">
     <h2>Enjoy your beautiful bird</h2>
-    <div id="feedLog">
+
+
+   <img style="padding-left: 10px; vertical-align: top;" src="{{ url_for('birdstream') }}">
+    <img style="padding-left: 10px; vertical-align: top;" src="/static/bird.jpg" width="680" height="480">
+
+<div id="feedLog">
         <table class="bb_table">
             <tr>
                 <th>Users</th>
@@ -40,8 +45,6 @@
     </div>
 
 
-   <img style="padding-left: 10px" src="{{ url_for('birdstream') }}">
-    <img style="padding-left: 10px" src="/static/bird.jpg" width="680" height="480">
     <br>
     <br>
 

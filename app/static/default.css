@@ -244,15 +244,22 @@ label{
     padding: 15px;
 }
 #feedLog{
+    position: static;
+    top: -100px;
+
+
+
     color: black;
-    width: available;
-    float: right;
-    padding: 15px;
+    
+
+    padding-left: 15px;
     display: inline-block;
+
 }
 #birdView{
+    white-space: nowrap;
      border: 3px solid #97fce8;
-     width:50%;
+     width:90%;
     text-align: center;
     position: center;
     margin-left: auto;
@@ -304,6 +311,7 @@ table.center {
 }
 
 table.bb_table {
+
     margin-left: auto;
     margin-right: auto;
 }
@@ -334,6 +342,7 @@ tr:nth-child(even) {
       text-decoration: none;
      margin-left: 10px;
     position: relative;
+     transition: 0.5s;
 
 }
 #clear:hover{
