@@ -15,7 +15,7 @@ def gen(camera):
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
     except:
-        bbLog.info("The camera feed is loading or an error has occured.")
+        bbLog.info("The camera feed is loading or an error has occurred.")
 
 
 # Gets the current time and converts it to a string we can do comparison against
