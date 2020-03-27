@@ -240,7 +240,7 @@ input[type=submit] {
 #birdView{
     white-space: nowrap;
     border: 3px solid #97fce8;
-    width:90%;
+    width:50%;
     text-align: center;
     position: center;
     margin-left: auto;
@@ -374,4 +374,9 @@ td > a
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.oobePic
+{
+    width: 75%;
 }
