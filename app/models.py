@@ -32,8 +32,8 @@ class attributes(db.Model):
     scheduleFeed = db.Column(db.Integer)
     # 1 Represents Monday - 7 For Sunday
     feedDays = db.Column(db.Integer)
-    feedHour = db.Column(db.Integer)
-    feedMinute = db.Column(db.Integer)
+    feedHour = db.Column(db.Text)
+    feedMinute = db.Column(db.Text)
 
     def check_admin(self):
         if self.isAdmin == 1:

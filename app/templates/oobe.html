@@ -1,8 +1,19 @@
 {% extends 'foundation.html' %}
 
 {% block content %}
-    <h2>Welcome to your new Bird Box</h2>
-    <p>Please create your administrator account</p>
+    <div id="intro">
+        <h2>Welcome to your new Bird Box</h2>
+        <p>
+            Codename BirdBox is a revolutionary aviary monitoring system for the bird lover in us all! With your brand new
+            BirdBox, you'll be able to:
+        </p>
+        <ul>
+            <li>Remotely Monitor your bird via live video feed</li>
+            <li>Feed your bird with either the click of a button, or by scheduling feedings in advance</li>
+            <li>Create additional users with permissions configured by you, the administrator</li>
+        </ul>
+        <p>So what are you waiting for? Let's dive in! Start by creating your first administrator account</p>
+    </div>
     <form action="" method="post" novalidate>
             {{ form.hidden_tag() }}
             <p>

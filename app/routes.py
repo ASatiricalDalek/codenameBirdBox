@@ -206,7 +206,7 @@ def schedule_settings():
                 form.feedDay_Sunday.data
             )
             attr.feedHour = form.feedHour.data
-            attr.feedMinute = form.feedMinute.data
+            attr.feedMinute = str(form.feedMinute.data)
 
             # write changes to DB and flash a message to users
             db.session.commit()
