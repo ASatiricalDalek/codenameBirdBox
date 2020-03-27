@@ -358,3 +358,20 @@ td > a
 {
     text-align: center;
 }
+
+.logo_oobe
+{
+    width: 35%;
+}
+
+.logo
+{
+    width: 15%;
+}
+
+#logo_container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

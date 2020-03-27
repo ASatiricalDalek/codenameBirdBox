@@ -25,6 +25,15 @@
     {% endblock %}
 </head>
 <body>
+    <div id="logo_container">
+        {% if theme == 'dark' %}
+            <img class="logo" src={{ url_for('static', filename='images/cBBDarkTheme.png') }}>
+        {% elif theme == 'contrast' %}
+            <img class="logo" src={{ url_for('static', filename='images/cBBContrast.png') }}>
+        {% else %}
+            <img class="logo" src={{ url_for('static', filename='images/cBBWhite_Black.png') }}>
+        {% endif %}
+    </div>
     <div id="topMenu">
         {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Log In</a>

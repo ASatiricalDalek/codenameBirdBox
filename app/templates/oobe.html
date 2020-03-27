@@ -13,13 +13,7 @@ This is to avoid confusion with the login and register buttons appearing at the 
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='default.css') }}">
-    {% if theme == 'dark' %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
-    {% elif theme == 'contrast' %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='ada.css') }}">
-    {% else %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='light.css') }}">
-    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='light.css') }}">
 
     {# Added another block section for header content #}
     {% block header %}
@@ -27,7 +21,7 @@ This is to avoid confusion with the login and register buttons appearing at the 
     {% endblock %}
 </head>
     <div id="center">
-        <img src="/static/images/logo.jpg">
+        <img class="logo_oobe" src={{ url_for('static', filename='images/cBBWhite_Black.png') }}>
         <h1>Welcome to your new Bird Box</h1>
         <p>
             Codename BirdBox is a revolutionary aviary monitoring system for the bird lover in us all! With your brand new
@@ -35,11 +29,11 @@ This is to avoid confusion with the login and register buttons appearing at the 
         </p>
         <ul>
             <li><h3>Remotely Monitor your bird via live video feed (or classmates, in the absence of birds)</h3></li>
-            <li><img src="/static/images/BirdViewPic.png"></li>
+            <li><img src={{ url_for('static', filename='images/BirdViewPic.png') }}></li>
             <li><h3>Feed your bird with either the click of a button, or by scheduling feedings in advance. Complete with detailed logging</h3></li>
-            <li><img src="/static/images/ScheduleSettings.png"></li>
+            <li><img src={{ url_for('static', filename='images/ScheduleSettings.png') }}></li>
             <li><h3>Create additional users with permissions configured by you, the administrator</h3></li>
-            <li><img src="/static/images/UserSettings.png"></li>
+            <li><img src={{ url_for('static', filename='images/UserSettings.png') }}></li>
         </ul>
         <h1>So what are you waiting for? Let's dive in!</h1>
         <h2>Start by creating your first administrator account</h2>
