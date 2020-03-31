@@ -33,8 +33,6 @@ which was invaluable in getting our boilerplate code and basic authentication cr
 
 5. Paul Albrecht
 
-6. Harris Siddiqui
-
 ***
 
    ## BirdBox Links
